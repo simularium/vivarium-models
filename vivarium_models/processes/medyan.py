@@ -44,7 +44,7 @@ class MedyanProcess(Process):
     def __init__(self, parameters=None):
         super().__init__(parameters)
 
-        assert self.parameters["time_step"] > self.parameters["snapshot"]
+        assert self.parameters["time_step"] >= self.parameters["snapshot"]
 
     def ports_schema(self):
         return fibers_schema()

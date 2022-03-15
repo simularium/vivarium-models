@@ -8,13 +8,21 @@ from vivarium.processes.alternator import Alternator, PeriodicEvent
 from vivarium_models.processes.medyan import MedyanProcess
 from vivarium_models.processes.cytosim import CytosimProcess
 
-ALTERNATOR_PERIODS = [5.0, 5.0]
+ALTERNATOR_PERIODS = [2.0, 2.0]
 
 class FilamentAlternatives(Composer):
     defaults = {
         "periodic_event": {"periods": ALTERNATOR_PERIODS},
-        "medyan": {"time_step": 5.0, "_condition": ("choices", "medyan_active")},
-        "cytosim": {"time_step": 5.0, "_condition": ("choices", "cytosim_active")},
+        "medyan": {
+            "time_step": 1.0,
+            "_condition": ("choices", "medyan_active")},
+        "cytosim": {
+            "time_step": 1.0,
+            "_condition": ("choices", "cytosim_active"),
+            'confine': {
+                'side': 'inside',
+                'force': 100,
+                'space': 'cell'}},
         "alternator": {"choices": ["medyan_active", "cytosim_active"]},
     }
 
@@ -282,7 +290,7 @@ def test_filament_alternatives():
     
     medyan_config = {
         "medyan_executable": args.medyan_executable_path,  # "...../medyan/build/medyan"
-        "transform_points": [0, 0, 0],
+        "transform_points": [2000, 1000, 1000],
     }
 
     filament_alternatives_config = {'medyan': medyan_config}
@@ -301,7 +309,7 @@ def test_filament_alternatives():
 
     import ipdb; ipdb.set_trace()
 
-    engine.update(30)
+    engine.update(10)
     
     engine.emitter.get_data()
 

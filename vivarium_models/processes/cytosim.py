@@ -29,6 +29,7 @@ from simulariumio import InputFileData, DisplayData
 NAME = "CYTOSIM"
 
 RELATIVE_MICRON = 0.001
+BOUNDARY_BUFFER = 0.95
 
 def fiber_section(id, fiber):
     points = fiber['points']
@@ -103,18 +104,10 @@ class CytosimProcess(Process):
 
     def ports_schema(self):
         ports = fibers_schema()
-        ports['choices'] = {
-            'medyan_active': {
-                '_default': True,
-                '_emit': True},
-            'readdy_active': {
-                '_default': False,
-                '_emit': True}}
-
         return ports
 
-    def calculate_timestep(self, state):
-        return 0.1
+    # def calculate_timestep(self, state):
+    #     return 0.1
 
     def initial_state(self, config):
         return {}
@@ -125,7 +118,7 @@ class CytosimProcess(Process):
 
         fiber_sections = [fiber_section(id, fiber) for id, fiber in initial_fibers.items()]
 
-        box_extent = state['fibers_box_extent'] * RELATIVE_MICRON
+        box_extent = state['fibers_box_extent'] * RELATIVE_MICRON * BOUNDARY_BUFFER
 
         template = env.get_template(self.parameters['cytosim_template'])
         cytosim_config = template.render(
