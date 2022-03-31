@@ -109,6 +109,7 @@ class ReaddyActinProcess(Process):
         "nonspatial_polymerization": False,
         "verbose": False,
         "periodic_boundary": False,
+        "obstacle_radius": 0.0,
     }
 
     def __init__(self, parameters=None):

@@ -6,7 +6,7 @@ from vivarium.core.engine import Engine
 from vivarium.processes.alternator import Alternator, PeriodicEvent
 
 from vivarium_models.processes.readdy_actin_process import ReaddyActinProcess
-from vivarium_models.processes.medyan import MedyanProcess
+from vivarium_medyan import MedyanProcess
 from vivarium_models.processes.monomer_to_fiber import MonomerToFiber
 from vivarium_models.processes.fiber_to_monomer import FiberToMonomer
 

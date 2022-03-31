@@ -39,8 +39,10 @@ dev_requirements = [
 
 requirements = [
     "vivarium-core",
-    "simularium_models_util[viz] @ git+https://github.com/allen-cell-animated/simularium-models-util.git",
-    "Jinja2",
+    "vivarium_medyan @ git+https://github.com/vivarium-collective/vivarium-MEDYAN.git",
+    "vivarium_cytosim @ git+https://github.com/vivarium-collective/vivarium-cytosim.git",
+    "simularium_models_util @ git+https://github.com/allen-cell-animated/simularium-models-util.git",
+    "simulariumio>=1.5.0",
 ]
 
 extra_requirements = {
@@ -55,14 +57,14 @@ extra_requirements = {
 
 setup(
     author="Blair Lyons",
-    author_email="blairl@alleninstitute.org",
+    author_email="blair208@gmail.com",
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Intended Audience :: Developers",
-        "License :: Free for non-commercial use",
+        "License :: OSI Approved :: Apache Software License",
         "Natural Language :: English",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
     description="Simularium prototypes of connecting models in Vivarium",
     entry_points={
@@ -78,7 +80,7 @@ setup(
     keywords="vivarium_models",
     name="vivarium_models",
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*"]),
-    python_requires=">=3.7",
+    python_requires=">=3.8",
     setup_requires=setup_requirements,
     test_suite="vivarium_models/tests",
     tests_require=test_requirements,

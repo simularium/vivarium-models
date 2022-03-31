@@ -268,7 +268,7 @@ class SimulariumEmitter(Emitter):
             then subsequent frames according the the simulator that ran 
             right before that time point"""
             if prev_simulator == "medyan":
-                print(f"  visualize medyan")
+                print("  visualize medyan")
                 if box_dimensions is None:
                     box_dimensions = np.array(state["fibers_box_extent"])
                 trajectory = self.get_simularium_fibers(
@@ -280,7 +280,7 @@ class SimulariumEmitter(Emitter):
                 )
                 vizualize_time_index += 1
             if prev_simulator == "readdy":
-                print(f"  visualize readdy")
+                print("  visualize readdy")
                 trajectory = self.get_simularium_monomers(
                     vizualize_time_index,
                     state["monomers"],
@@ -291,7 +291,7 @@ class SimulariumEmitter(Emitter):
                 vizualize_time_index += 1
             if prev_simulator != current_simulator:
                 if current_simulator == "medyan":
-                    print(f"  visualize medyan")
+                    print("  visualize medyan")
                     if box_dimensions is None:
                         box_dimensions = np.array(state["fibers_box_extent"])
                     trajectory = self.get_simularium_fibers(
@@ -303,7 +303,7 @@ class SimulariumEmitter(Emitter):
                     )
                     vizualize_time_index += 1
                 if current_simulator == "readdy":
-                    print(f"  visualize readdy")
+                    print("  visualize readdy")
                     trajectory = self.get_simularium_monomers(
                         vizualize_time_index,
                         state["monomers"],

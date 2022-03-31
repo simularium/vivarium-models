@@ -5,24 +5,21 @@ from vivarium.core.composer import Composer
 from vivarium.core.engine import Engine
 from vivarium.processes.alternator import Alternator, PeriodicEvent
 
-from vivarium_models.processes.medyan import MedyanProcess
-from vivarium_models.processes.cytosim import CytosimProcess
+from vivarium_medyan import MedyanProcess
+from vivarium_cytosim import CytosimProcess
 
 ALTERNATOR_PERIODS = [2.0, 2.0]
+
 
 class FilamentAlternatives(Composer):
     defaults = {
         "periodic_event": {"periods": ALTERNATOR_PERIODS},
-        "medyan": {
-            "time_step": 1.0,
-            "_condition": ("choices", "medyan_active")},
+        "medyan": {"time_step": 1.0, "_condition": ("choices", "medyan_active")},
         "cytosim": {
             "time_step": 1.0,
             "_condition": ("choices", "cytosim_active"),
-            'confine': {
-                'side': 'inside',
-                'force': 100,
-                'space': 'cell'}},
+            "confine": {"side": "inside", "force": 100, "space": "cell"},
+        },
         "alternator": {"choices": ["medyan_active", "cytosim_active"]},
     }
 
@@ -32,7 +29,7 @@ class FilamentAlternatives(Composer):
     def generate_processes(self, config):
         periodic_event = PeriodicEvent(config["periodic_event"])
         medyan = MedyanProcess(config["medyan"])
-        cytosim = CytosimProcess(config['cytosim'])
+        cytosim = CytosimProcess(config["cytosim"])
         alternator = Alternator(config["alternator"])
 
         return {
@@ -64,6 +61,7 @@ class FilamentAlternatives(Composer):
                 },
             },
         }
+
 
 def test_filament_alternatives():
     parser = argparse.ArgumentParser(description="Run a MEDYAN simulation")
@@ -287,17 +285,17 @@ def test_filament_alternatives():
             },
         },
     }
-    
+
     medyan_config = {
         "medyan_executable": args.medyan_executable_path,  # "...../medyan/build/medyan"
         "transform_points": [2000, 1000, 1000],
     }
 
-    filament_alternatives_config = {'medyan': medyan_config}
+    filament_alternatives_config = {"medyan": medyan_config}
     filament_alternatives = FilamentAlternatives(filament_alternatives_config)
 
     composite = filament_alternatives.generate()
-    composite['initial_state'] = initial_state
+    composite["initial_state"] = initial_state
 
     engine = Engine(
         processes=composite["processes"],
@@ -307,12 +305,12 @@ def test_filament_alternatives():
         emit_processes=True,
     )
 
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
 
     engine.update(10)
-    
+
     engine.emitter.get_data()
+
 
 if __name__ == "__main__":
     test_filament_alternatives()
-    
