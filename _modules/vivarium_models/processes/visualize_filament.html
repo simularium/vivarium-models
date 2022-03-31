@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vivarium_models.processes.visualize_filament &mdash; vivarium-models 0.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> vivarium-models
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../vivarium_models.html">vivarium_models package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.composites.html">vivarium_models.composites package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.experiments.html">vivarium_models.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.library.html">vivarium_models.library package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.processes.html">vivarium_models.processes package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">vivarium-models</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../vivarium_models.html">vivarium_models</a> &raquo;</li>
+      <li>vivarium_models.processes.visualize_filament</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for vivarium_models.processes.visualize_filament</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">vivarium.core.process</span> <span class="kn">import</span> <span class="n">Deriver</span>
+<span class="kn">from</span> <span class="nn">vivarium.core.engine</span> <span class="kn">import</span> <span class="n">Engine</span><span class="p">,</span> <span class="n">pf</span>
+<span class="kn">from</span> <span class="nn">simularium_models_util.actin</span> <span class="kn">import</span> <span class="n">ActinTestData</span>
+<span class="kn">from</span> <span class="nn">simulariumio</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TrajectoryConverter</span><span class="p">,</span>
+    <span class="n">TrajectoryData</span><span class="p">,</span>
+    <span class="n">AgentData</span><span class="p">,</span>
+    <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">UnitData</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="VisualizeFilament"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.visualize_filament.VisualizeFilament">[docs]</a><span class="k">class</span> <span class="nc">VisualizeFilament</span><span class="p">(</span><span class="n">Deriver</span><span class="p">):</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VisualizeFilament.ports_schema"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.visualize_filament.VisualizeFilament.ports_schema">[docs]</a>    <span class="k">def</span> <span class="nf">ports_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;filaments&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="p">},</span>
+                    <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="p">[],</span>
+                        <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;simularium_json&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="VisualizeFilament.next_update"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.visualize_filament.VisualizeFilament.next_update">[docs]</a>    <span class="k">def</span> <span class="nf">next_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
+        <span class="n">filaments</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;filaments&quot;</span><span class="p">]</span>
+
+        <span class="n">box_size</span> <span class="o">=</span> <span class="mf">150.0</span>
+        <span class="n">actin_radius</span> <span class="o">=</span> <span class="mf">3.0</span>
+        <span class="n">n_agents</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">unique_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">type_names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">n_subpoints</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">subpoints</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">filament_id</span> <span class="ow">in</span> <span class="n">filaments</span><span class="p">:</span>
+            <span class="n">filament</span> <span class="o">=</span> <span class="n">filaments</span><span class="p">[</span><span class="n">filament_id</span><span class="p">]</span>
+            <span class="n">unique_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filament_id</span><span class="p">)</span>
+            <span class="n">type_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filament</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">])</span>
+            <span class="n">n_subpoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filament</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">]))</span>
+            <span class="n">subpoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filament</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">])</span>
+            <span class="n">n_agents</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">subpoints</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">subpoints</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+        <span class="c1"># HACK around a Simularium Viewer bug</span>
+        <span class="n">subpoints</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.001</span>
+
+        <span class="n">simularium_json</span> <span class="o">=</span> <span class="n">TrajectoryConverter</span><span class="p">(</span>
+            <span class="n">TrajectoryData</span><span class="p">(</span>
+                <span class="n">meta_data</span><span class="o">=</span><span class="n">MetaData</span><span class="p">(</span>
+                    <span class="n">box_size</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">box_size</span><span class="p">,</span> <span class="n">box_size</span><span class="p">,</span> <span class="n">box_size</span><span class="p">]),</span>
+                <span class="p">),</span>
+                <span class="n">agent_data</span><span class="o">=</span><span class="n">AgentData</span><span class="p">(</span>
+                    <span class="n">times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">n_agents</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n_agents</span><span class="p">]),</span>
+                    <span class="n">viz_types</span><span class="o">=</span><span class="mf">1001.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_agents</span><span class="p">)),</span>
+                    <span class="n">unique_ids</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">unique_ids</span><span class="p">]),</span>
+                    <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="n">type_names</span><span class="p">],</span>
+                    <span class="n">positions</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_agents</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+                    <span class="n">radii</span><span class="o">=</span><span class="n">actin_radius</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_agents</span><span class="p">)),</span>
+                    <span class="n">n_subpoints</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">n_subpoints</span><span class="p">]),</span>
+                    <span class="n">subpoints</span><span class="o">=</span><span class="n">subpoints</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">time_units</span><span class="o">=</span><span class="n">UnitData</span><span class="p">(</span><span class="s2">&quot;ns&quot;</span><span class="p">),</span>  <span class="c1"># nanoseconds</span>
+                <span class="n">spatial_units</span><span class="o">=</span><span class="n">UnitData</span><span class="p">(</span><span class="s2">&quot;nm&quot;</span><span class="p">),</span>  <span class="c1"># nanometers</span>
+            <span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to_JSON</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;simularium_json&quot;</span><span class="p">:</span> <span class="n">simularium_json</span><span class="p">}</span></div></div>
+
+
+<div class="viewcode-block" id="get_initial_filament_data"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.visualize_filament.get_initial_filament_data">[docs]</a><span class="k">def</span> <span class="nf">get_initial_filament_data</span><span class="p">():</span>
+    <span class="n">fibers</span> <span class="o">=</span> <span class="n">ActinTestData</span><span class="o">.</span><span class="n">linear_actin_fiber</span><span class="p">()</span>
+    <span class="n">filaments_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">fiber</span> <span class="ow">in</span> <span class="n">fibers</span><span class="p">:</span>
+        <span class="n">filaments_dict</span><span class="p">[</span><span class="n">fiber</span><span class="o">.</span><span class="n">fiber_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">fiber</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filaments_dict</span></div>
+
+
+<div class="viewcode-block" id="test_visualize_filament"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.visualize_filament.test_visualize_filament">[docs]</a><span class="k">def</span> <span class="nf">test_visualize_filament</span><span class="p">():</span>
+    <span class="n">filament_data</span> <span class="o">=</span> <span class="n">get_initial_filament_data</span><span class="p">()</span>
+    <span class="n">visualize_filament</span> <span class="o">=</span> <span class="n">VisualizeFilament</span><span class="p">()</span>
+
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;processes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;visualize_filament&quot;</span><span class="p">:</span> <span class="n">visualize_filament</span><span class="p">},</span>
+            <span class="s2">&quot;topology&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;visualize_filament&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;filaments&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;filaments&quot;</span><span class="p">,),</span>
+                    <span class="s2">&quot;simularium_json&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;simularium_json&quot;</span><span class="p">,),</span>
+                <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;initial_state&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;filaments&quot;</span><span class="p">:</span> <span class="n">filament_data</span><span class="p">,</span> <span class="s2">&quot;simularium_json&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+    <span class="n">engine</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">emitter</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="p">(</span><span class="n">output</span><span class="p">))</span>
+    <span class="n">simularium_json</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mf">0.0</span><span class="p">][</span><span class="s2">&quot;simularium_json&quot;</span><span class="p">]</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;filaments.simularium&quot;</span><span class="p">,</span> <span class="s2">&quot;w+&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+        <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">simularium_json</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved Simularium output to filaments.simularium&quot;</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test_visualize_filament</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Blair Lyons.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

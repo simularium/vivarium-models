@@ -1,0 +1,32 @@
+vivarium\_models package
+========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   vivarium_models.composites
+   vivarium_models.experiments
+   vivarium_models.library
+   vivarium_models.processes
+
+Submodules
+----------
+
+vivarium\_models.util module
+----------------------------
+
+.. automodule:: vivarium_models.util
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: vivarium_models
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vivarium_models.processes.simularium_emitter &mdash; vivarium-models 0.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> vivarium-models
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../vivarium_models.html">vivarium_models package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.composites.html">vivarium_models.composites package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.experiments.html">vivarium_models.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.library.html">vivarium_models.library package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.processes.html">vivarium_models.processes package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">vivarium-models</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../vivarium_models.html">vivarium_models</a> &raquo;</li>
+      <li>vivarium_models.processes.simularium_emitter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for vivarium_models.processes.simularium_emitter</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">from</span> <span class="nn">vivarium.core.emitter</span> <span class="kn">import</span> <span class="n">Emitter</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">simulariumio</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">TrajectoryConverter</span><span class="p">,</span>
+    <span class="n">TrajectoryData</span><span class="p">,</span>
+    <span class="n">AgentData</span><span class="p">,</span>
+    <span class="n">MetaData</span><span class="p">,</span>
+    <span class="n">UnitData</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="SimulariumEmitter"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter">[docs]</a><span class="k">class</span> <span class="nc">SimulariumEmitter</span><span class="p">(</span><span class="n">Emitter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">configuration_data</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saved_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="SimulariumEmitter.emit"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.emit">[docs]</a>    <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Emit the timeseries history portion of ``data``, which is</span>
+<span class="sd">        ``data[&#39;data&#39;] if data[&#39;table&#39;] == &#39;history&#39;`` and put it at</span>
+<span class="sd">        ``data[&#39;data&#39;][&#39;time&#39;]`` in the history.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;table&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;configuration&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">configuration_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+            <span class="k">assert</span> <span class="s2">&quot;processes&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration_data</span><span class="p">,</span> <span class="s2">&quot;please emit processes&quot;</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;table&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;history&quot;</span><span class="p">:</span>
+            <span class="n">emit_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">]</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">emit_data</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saved_data</span><span class="p">[</span><span class="n">time</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">emit_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+            <span class="p">}</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_simularium_fibers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_fibers">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_fibers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">fibers</span><span class="p">,</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shape fiber state data into Simularium fiber agents</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n_agents</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">time_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;times&quot;</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;times&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">fiber_id</span> <span class="ow">in</span> <span class="n">fibers</span><span class="p">:</span>
+            <span class="n">fiber</span> <span class="o">=</span> <span class="n">fibers</span><span class="p">[</span><span class="n">fiber_id</span><span class="p">]</span>
+            <span class="n">n_agents</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">fiber_id</span><span class="p">))</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">])</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">]))</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_agents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span><span class="p">)</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;viz_types&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1001.0</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;radii&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="n">actin_radius</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">trajectory</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_simularium_monomers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_monomers">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_monomers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">monomers</span><span class="p">,</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shape monomer state data into Simularium agents</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;times&quot;</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;times&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="n">edge_ids</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">edge_positions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">particle_id</span> <span class="ow">in</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">]:</span>
+            <span class="n">particle</span> <span class="o">=</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">particle_id</span><span class="p">]</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">particle_id</span><span class="p">))</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">])</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">])</span>
+            <span class="c1"># visualize edges between particles</span>
+            <span class="k">for</span> <span class="n">neighbor_id</span> <span class="ow">in</span> <span class="n">particle</span><span class="p">[</span><span class="s2">&quot;neighbor_ids&quot;</span><span class="p">]:</span>
+                <span class="n">neighbor_id_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">neighbor_id</span><span class="p">)</span>
+                <span class="n">edge</span> <span class="o">=</span> <span class="p">(</span><span class="n">particle_id</span><span class="p">,</span> <span class="n">neighbor_id_str</span><span class="p">)</span>
+                <span class="n">reverse_edge</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="n">neighbor_id_str</span><span class="p">,</span>
+                    <span class="n">particle_id</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="n">edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edge_ids</span> <span class="ow">and</span> <span class="n">reverse_edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">edge_ids</span><span class="p">:</span>
+                    <span class="n">edge_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+                    <span class="n">edge_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                        <span class="p">[</span>
+                            <span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">],</span>
+                            <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">neighbor_id_str</span><span class="p">][</span><span class="s2">&quot;position&quot;</span><span class="p">],</span>
+                        <span class="p">]</span>
+                    <span class="p">)</span>
+        <span class="n">n_agents</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">])</span>
+        <span class="n">n_edges</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">edge_ids</span><span class="p">)</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_agents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">+</span> <span class="n">n_edges</span><span class="p">)</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;viz_types&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1000.0</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;viz_types&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n_edges</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1001.0</span><span class="p">]</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="mi">1000</span> <span class="o">+</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_edges</span><span class="p">)]</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;edge&quot;</span> <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_edges</span><span class="p">)]</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n_edges</span> <span class="o">*</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;radii&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="n">actin_radius</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;radii&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n_edges</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">n_edges</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]]])</span>
+        <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">edge_positions</span>
+        <span class="k">return</span> <span class="n">trajectory</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.fill_df"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.fill_df">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fill_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">fill</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fill Nones in a DataFrame with a fill value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Create a dataframe of fill values</span>
+        <span class="n">fill_array</span> <span class="o">=</span> <span class="p">[[</span><span class="n">fill</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">*</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">fill_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">fill_array</span><span class="p">)</span>
+        <span class="c1"># Replace all entries with None with the fill</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span> <span class="o">=</span> <span class="n">fill_df</span>
+        <span class="k">return</span> <span class="n">df</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.jagged_3d_list_to_numpy_array"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.jagged_3d_list_to_numpy_array">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">jagged_3d_list_to_numpy_array</span><span class="p">(</span><span class="n">jagged_3d_list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shape a jagged list with 3 dimensions to a numpy array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">fill_df</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">jagged_3d_list</span><span class="p">),</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+        <span class="n">df_t</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="n">exploded</span> <span class="o">=</span> <span class="p">[</span><span class="n">df_t</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_t</span><span class="o">.</span><span class="n">columns</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">exploded</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">3</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_subpoints_numpy_array"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_subpoints_numpy_array">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_subpoints_numpy_array</span><span class="p">(</span><span class="n">trajectory</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shape a 4 dimensional jagged list for subpoints into a numpy array</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">frame_arrays</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">max_agents</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">max_subpoints</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">total_steps</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">time_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">total_steps</span><span class="p">):</span>
+            <span class="n">frame_array</span> <span class="o">=</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">jagged_3d_list_to_numpy_array</span><span class="p">(</span>
+                <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_agents</span><span class="p">:</span>
+                <span class="n">max_agents</span> <span class="o">=</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">max_subpoints</span><span class="p">:</span>
+                <span class="n">max_subpoints</span> <span class="o">=</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">frame_arrays</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">frame_array</span><span class="p">)</span>
+        <span class="n">values_per_frame</span> <span class="o">=</span> <span class="n">max_agents</span> <span class="o">*</span> <span class="n">max_subpoints</span> <span class="o">*</span> <span class="mi">3</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">total_steps</span> <span class="o">*</span> <span class="n">values_per_frame</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">time_index</span><span class="p">,</span> <span class="n">frame_array</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frame_arrays</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">max_subpoints</span><span class="p">:</span>
+                <span class="n">new_frame_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">max_subpoints</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+                <span class="n">new_frame_array</span><span class="p">[:,</span> <span class="p">:</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">frame_array</span>
+                <span class="n">frame_array</span> <span class="o">=</span> <span class="n">new_frame_array</span>
+            <span class="n">flat_array</span> <span class="o">=</span> <span class="n">frame_array</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">time_index</span> <span class="o">*</span> <span class="n">values_per_frame</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">start_index</span> <span class="p">:</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">flat_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">flat_array</span>
+        <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">total_steps</span><span class="p">,</span> <span class="n">max_agents</span><span class="p">,</span> <span class="n">max_subpoints</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_agent_data_from_jagged_lists"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_agent_data_from_jagged_lists">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_agent_data_from_jagged_lists</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">scale_factor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AgentData</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shape a dictionary of jagged lists into a Simularium AgentData object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">AgentData</span><span class="p">(</span>
+            <span class="n">times</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;times&quot;</span><span class="p">])),</span>
+            <span class="n">n_agents</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_agents&quot;</span><span class="p">]),</span>
+            <span class="n">viz_types</span><span class="o">=</span><span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">fill_df</span><span class="p">(</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;viz_types&quot;</span><span class="p">]),</span> <span class="mf">1000.0</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+            <span class="n">unique_ids</span><span class="o">=</span><span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">fill_df</span><span class="p">(</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">]),</span> <span class="mi">0</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+            <span class="n">types</span><span class="o">=</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">],</span>
+            <span class="n">positions</span><span class="o">=</span><span class="n">scale_factor</span>
+            <span class="o">*</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">jagged_3d_list_to_numpy_array</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]),</span>
+            <span class="n">radii</span><span class="o">=</span><span class="n">scale_factor</span>
+            <span class="o">*</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">fill_df</span><span class="p">(</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;radii&quot;</span><span class="p">]),</span> <span class="mf">0.0</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+            <span class="n">n_subpoints</span><span class="o">=</span><span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">fill_df</span><span class="p">(</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">]),</span> <span class="mi">0</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">),</span>
+            <span class="n">subpoints</span><span class="o">=</span><span class="n">scale_factor</span>
+            <span class="o">*</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">get_subpoints_numpy_array</span><span class="p">(</span><span class="n">trajectory</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_simularium_converter"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_converter">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_converter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">,</span> <span class="n">box_size</span><span class="p">,</span> <span class="n">scale_factor</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TrajectoryConverter</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Shape a dictionary of jagged lists into a Simularium TrajectoryData object</span>
+<span class="sd">        and provide it to a TrajectoryConverter for conversion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">spatial_units</span> <span class="o">=</span> <span class="n">UnitData</span><span class="p">(</span><span class="s2">&quot;nm&quot;</span><span class="p">)</span>
+        <span class="n">spatial_units</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">scale_factor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">TrajectoryConverter</span><span class="p">(</span>
+            <span class="n">TrajectoryData</span><span class="p">(</span>
+                <span class="n">meta_data</span><span class="o">=</span><span class="n">MetaData</span><span class="p">(</span>
+                    <span class="n">box_size</span><span class="o">=</span><span class="n">scale_factor</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">box_size</span><span class="p">,</span> <span class="n">box_size</span><span class="p">,</span> <span class="n">box_size</span><span class="p">]),</span>
+                <span class="p">),</span>
+                <span class="n">agent_data</span><span class="o">=</span><span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">get_agent_data_from_jagged_lists</span><span class="p">(</span>
+                    <span class="n">trajectory</span><span class="p">,</span> <span class="n">scale_factor</span>
+                <span class="p">),</span>
+                <span class="n">time_units</span><span class="o">=</span><span class="n">UnitData</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">),</span>
+                <span class="n">spatial_units</span><span class="o">=</span><span class="n">spatial_units</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_active_simulator"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_active_simulator">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_active_simulator</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Use choices from state to determine which simulator ran</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;readdy_active&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s2">&quot;medyan&quot;</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;readdy_active&quot;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="s2">&quot;readdy&quot;</span></div>
+
+<div class="viewcode-block" id="SimulariumEmitter.get_data"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the accumulated timeseries history of &quot;emitted&quot; data to file</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s2">&quot;readdy_actin&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration_data</span><span class="p">:</span>
+            <span class="n">actin_radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration_data</span><span class="p">[</span><span class="s2">&quot;readdy_actin&quot;</span><span class="p">][</span><span class="s2">&quot;actin_radius&quot;</span><span class="p">]</span>
+            <span class="n">box_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">configuration_data</span><span class="p">[</span><span class="s2">&quot;readdy_actin&quot;</span><span class="p">][</span><span class="s2">&quot;box_size&quot;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">actin_radius</span> <span class="o">=</span> <span class="mf">3.0</span>  <span class="c1"># TODO add to MEDYAN config</span>
+            <span class="n">box_size</span> <span class="o">=</span> <span class="mf">1000.0</span>  <span class="c1"># TODO add to MEDYAN config and use for template</span>
+        <span class="n">trajectory</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;times&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;n_agents&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;viz_types&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;unique_ids&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;type_names&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;positions&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;radii&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;n_subpoints&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;subpoints&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="p">}</span>
+        <span class="n">times</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">saved_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">times</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">vizualize_time_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">time</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">saved_data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">times</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+            <span class="n">prev_simulator</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">prev_simulator</span> <span class="o">=</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">get_active_simulator</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">saved_data</span><span class="p">[</span><span class="n">times</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]][</span><span class="s2">&quot;choices&quot;</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="n">current_simulator</span> <span class="o">=</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">get_active_simulator</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;choices&quot;</span><span class="p">])</span>
+            <span class="sd">&quot;&quot;&quot;visualize the first frame in the simulator that started first</span>
+<span class="sd">            then subsequent frames according the the simulator that ran </span>
+<span class="sd">            right before that time point&quot;&quot;&quot;</span>
+            <span class="k">if</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;medyan&quot;</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span> <span class="ow">and</span> <span class="n">current_simulator</span> <span class="o">==</span> <span class="s2">&quot;medyan&quot;</span>
+            <span class="p">):</span>
+                <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_fibers</span><span class="p">(</span>
+                    <span class="n">vizualize_time_index</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers&quot;</span><span class="p">],</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">trajectory</span>
+                <span class="p">)</span>
+                <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;readdy&quot;</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span> <span class="ow">and</span> <span class="n">current_simulator</span> <span class="o">==</span> <span class="s2">&quot;readdy&quot;</span>
+            <span class="p">):</span>
+                <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_monomers</span><span class="p">(</span>
+                    <span class="n">vizualize_time_index</span><span class="p">,</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">],</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">trajectory</span>
+                <span class="p">)</span>
+                <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">simularium_converter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_converter</span><span class="p">(</span><span class="n">trajectory</span><span class="p">,</span> <span class="n">box_size</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">simularium_converter</span><span class="o">.</span><span class="n">write_JSON</span><span class="p">(</span><span class="s2">&quot;out/actin_test&quot;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Blair Lyons.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

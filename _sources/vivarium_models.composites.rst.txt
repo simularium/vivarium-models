@@ -1,0 +1,21 @@
+vivarium\_models.composites package
+===================================
+
+Submodules
+----------
+
+vivarium\_models.composites.actin\_fiber module
+-----------------------------------------------
+
+.. automodule:: vivarium_models.composites.actin_fiber
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: vivarium_models.composites
+   :members:
+   :undoc-members:
+   :show-inheritance:
