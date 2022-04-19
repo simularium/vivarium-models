@@ -3,12 +3,13 @@ import numpy as np
 from vivarium.core.process import Process
 from vivarium.core.engine import Engine, pf
 from vivarium.core.composition import simulate_process
+from vivarium.core.control import run_library_cli
 
 from tqdm import tqdm
 from simularium_models_util.actin import ActinSimulation, ActinUtil, ActinTestData
 from simularium_models_util import ReaddyUtil
 from vivarium_models.util import create_monomer_update
-
+from vivarium_models.library.scan import Scan
 
 NAME = "ReaDDy_actin"
 
@@ -238,23 +239,26 @@ class ReaddyActinProcess(Process):
         return output
 
 
-def test_readdy_actin_process():
+def get_monomer_data():
     monomer_data = ActinTestData.linear_actin_monomers()
     monomer_data["box_center"] = np.array([3000.0, 1000.0, 1000.0])
     monomer_data["box_size"] = 500.0
+    return {'monomers': monomer_data}
+
+
+def test_readdy_actin_process():
+    monomer_data = get_monomer_data()
     readdy_actin_process = ReaddyActinProcess()
 
     engine = Engine(
-        {
+        **{
             "processes": {"readdy_actin_process": readdy_actin_process},
             "topology": {
                 "readdy_actin_process": {
                     "monomers": ("monomers",),
                 },
             },
-            "initial_state": {
-                "monomers": monomer_data,
-            },
+            "initial_state": monomer_data,
         }
     )
 
@@ -264,5 +268,43 @@ def test_readdy_actin_process():
     print(pf(output))
 
 
+def test_scan_readdy():
+    monomer_data = get_monomer_data()
+
+    parameters = {
+        '1': {
+            'parameters': {
+                'actin_concentration': 100.0,
+                'arp23_concentration': 5.0},
+            'states': monomer_data},
+        '2': {
+            'parameters': {
+                'actin_concentration': 200.0,
+                'arp23_concentration': 10.0},
+            'states': monomer_data},
+        '3': {
+            'parameters': {
+                'actin_concentration': 300.0,
+                'arp23_concentration': 20.0},
+            'states': monomer_data}}
+
+    metrics = []
+
+    scan = Scan(
+        parameters,
+        ReaddyActinProcess,
+        0.0000001,
+        metrics=metrics)
+
+    results = scan.run_scan()
+
+    import ipdb; ipdb.set_trace()
+
+
+library = {
+    '0': test_readdy_actin_process,
+    '1': test_scan_readdy}
+
+
 if __name__ == "__main__":
-    test_readdy_actin_process()
+    run_library_cli(library)
