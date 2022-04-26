@@ -288,7 +288,40 @@ def test_scan_readdy():
                 'arp23_concentration': 20.0},
             'states': monomer_data}}
 
-    metrics = []
+    def count_monomers(results):
+        outcome = list(results.values())[-1]
+        return len(outcome['monomers']['particles'])
+
+    def count_monomer_types(results):
+        outcome = list(results.values())[-1]
+        monomer_types = {}
+        
+        for particle in outcome['monomers']['particles'].values():
+            type_name = particle['type_name']
+            if type_name not in monomer_types:
+                monomer_types[type_name] = 0
+            monomer_types[type_name] += 1
+
+        return monomer_types
+        
+    def filament_lengths(results):
+        outcome = list(results.values())[-1]
+        barbed = None
+        pointed = None
+        for particle in outcome['monomers']['particles'].values():
+            if 'barbed' in particle['type_name']:
+                barbed = np.array(particle['position'])
+            elif 'pointed' in particle['type_name']:
+                pointed = np.array(particle['position'])
+
+        difference = barbed - pointed
+        length = np.linalg.norm(difference)
+        return length
+
+    metrics = {
+        'count_monomers': count_monomers,
+        'count_monomer_types': count_monomer_types,
+        'filament_lengths': filament_lengths}
 
     scan = Scan(
         parameters,
@@ -297,6 +330,7 @@ def test_scan_readdy():
         metrics=metrics)
 
     results = scan.run_scan()
+    
 
     import ipdb; ipdb.set_trace()
 

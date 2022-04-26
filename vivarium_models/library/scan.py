@@ -26,9 +26,9 @@ class Scan():
         results = {}
         for id, parameter_set in self.parameter_sets.items():
             data = self.run_simulation(parameter_set)
-            metrics = [
-                metric(data)
-                for metric in self.metrics]
+            metrics = {
+                name: metric(data)
+                for name, metric in self.metrics.items()}
             results[id] = {
                 'data': data,
                 'metrics': metrics}
