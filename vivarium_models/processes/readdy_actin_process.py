@@ -6,9 +6,15 @@ from vivarium.core.composition import simulate_process
 from vivarium.core.control import run_library_cli
 
 from tqdm import tqdm
-from simularium_models_util.actin import ActinSimulation, ActinUtil, ActinTestData
+from simularium_models_util.actin import (
+    ActinSimulation,
+    ActinUtil,
+    ActinTestData,
+    ActinAnalyzer,
+)
 from simularium_models_util import ReaddyUtil
 from vivarium_models.util import create_monomer_update
+from vivarium_models.util import create_monomer_update, format_monomer_results
 from vivarium_models.library.scan import Scan
 
 NAME = "ReaDDy_actin"
@@ -318,10 +324,79 @@ def test_scan_readdy():
         length = np.linalg.norm(difference)
         return length
 
+    def percent_filamentous_actin(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return (
+            100.0
+            * ActinAnalyzer.analyze_ratio_of_filamentous_to_total_actin(monomer_data)[0]
+        )
+
+    def percent_bound_arp23(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return (
+            100.0 * ActinAnalyzer.analyze_ratio_of_bound_to_total_arp23(monomer_data)[0]
+        )
+
+    def percent_daughter_actin(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return (
+            100.0
+            * ActinAnalyzer.analyze_ratio_of_daughter_to_total_actin(monomer_data)[0]
+        )
+
+    def mother_filament_lengths(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return ActinAnalyzer.analyze_average_over_time(
+            ActinAnalyzer.analyze_mother_filament_lengths(monomer_data)
+        )[0]
+
+    def daughter_filament_lengths(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return ActinAnalyzer.analyze_daughter_filament_lengths(monomer_data)[0]
+
+    def branch_angles(results):
+        box_size = list(results.values())[-1]["monomers"]["box_size"]
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_branch_angles(
+            monomer_data, box_size, periodic_boundary
+        )[0]
+
+    def short_helix_pitches(results):
+        monomer_data = format_monomer_results(results)
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_short_helix_pitches(
+            monomer_data, monomer_data[0]["box_size"], periodic_boundary
+        )
+
+    def long_helix_pitches(results):
+        monomer_data = format_monomer_results(results)
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_long_helix_pitches(
+            monomer_data, monomer_data[0]["box_size"], periodic_boundary
+        )
+
+    def filament_straightness(results):
+        monomer_data = format_monomer_results(results)
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_filament_straightness(
+            monomer_data, monomer_data[0]["box_size"], periodic_boundary
+        )
+
     metrics = {
         'count_monomers': count_monomers,
         'count_monomer_types': count_monomer_types,
         'filament_lengths': filament_lengths}
+        "percent_filamentous_actin": percent_filamentous_actin,
+        "percent_bound_arp23": percent_bound_arp23,
+        "percent_daughter_actin": percent_daughter_actin,
+        "mother_filament_lengths": mother_filament_lengths,
+        "daughter_filament_lengths": daughter_filament_lengths,
+        "branch_angles": branch_angles,
+        "short_helix_pitches": short_helix_pitches,
+        "long_helix_pitches": long_helix_pitches,
+        "filament_straightness": filament_straightness,
+    }
 
     scan = Scan(
         parameters,
