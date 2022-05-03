@@ -13,7 +13,6 @@ from simularium_models_util.actin import (
     ActinAnalyzer,
 )
 from simularium_models_util import ReaddyUtil
-from vivarium_models.util import create_monomer_update
 from vivarium_models.util import create_monomer_update, format_monomer_results
 from vivarium_models.library.scan import Scan
 
@@ -249,7 +248,7 @@ def get_monomer_data():
     monomer_data = ActinTestData.linear_actin_monomers()
     monomer_data["box_center"] = np.array([3000.0, 1000.0, 1000.0])
     monomer_data["box_size"] = 500.0
-    return {'monomers': monomer_data}
+    return {"monomers": monomer_data}
 
 
 def test_readdy_actin_process():
@@ -278,47 +277,45 @@ def test_scan_readdy():
     monomer_data = get_monomer_data()
 
     parameters = {
-        '1': {
-            'parameters': {
-                'actin_concentration': 100.0,
-                'arp23_concentration': 5.0},
-            'states': monomer_data},
-        '2': {
-            'parameters': {
-                'actin_concentration': 200.0,
-                'arp23_concentration': 10.0},
-            'states': monomer_data},
-        '3': {
-            'parameters': {
-                'actin_concentration': 300.0,
-                'arp23_concentration': 20.0},
-            'states': monomer_data}}
+        "1": {
+            "parameters": {"actin_concentration": 100.0, "arp23_concentration": 5.0},
+            "states": monomer_data,
+        },
+        "2": {
+            "parameters": {"actin_concentration": 200.0, "arp23_concentration": 10.0},
+            "states": monomer_data,
+        },
+        "3": {
+            "parameters": {"actin_concentration": 300.0, "arp23_concentration": 20.0},
+            "states": monomer_data,
+        },
+    }
 
     def count_monomers(results):
         outcome = list(results.values())[-1]
-        return len(outcome['monomers']['particles'])
+        return len(outcome["monomers"]["particles"])
 
     def count_monomer_types(results):
         outcome = list(results.values())[-1]
         monomer_types = {}
-        
-        for particle in outcome['monomers']['particles'].values():
-            type_name = particle['type_name']
+
+        for particle in outcome["monomers"]["particles"].values():
+            type_name = particle["type_name"]
             if type_name not in monomer_types:
                 monomer_types[type_name] = 0
             monomer_types[type_name] += 1
 
         return monomer_types
-        
+
     def filament_lengths(results):
         outcome = list(results.values())[-1]
         barbed = None
         pointed = None
-        for particle in outcome['monomers']['particles'].values():
-            if 'barbed' in particle['type_name']:
-                barbed = np.array(particle['position'])
-            elif 'pointed' in particle['type_name']:
-                pointed = np.array(particle['position'])
+        for particle in outcome["monomers"]["particles"].values():
+            if "barbed" in particle["type_name"]:
+                barbed = np.array(particle["position"])
+            elif "pointed" in particle["type_name"]:
+                pointed = np.array(particle["position"])
 
         difference = barbed - pointed
         length = np.linalg.norm(difference)
@@ -384,9 +381,9 @@ def test_scan_readdy():
         )
 
     metrics = {
-        'count_monomers': count_monomers,
-        'count_monomer_types': count_monomer_types,
-        'filament_lengths': filament_lengths}
+        "count_monomers": count_monomers,
+        "count_monomer_types": count_monomer_types,
+        "filament_lengths": filament_lengths,
         "percent_filamentous_actin": percent_filamentous_actin,
         "percent_bound_arp23": percent_bound_arp23,
         "percent_daughter_actin": percent_daughter_actin,
@@ -398,21 +395,16 @@ def test_scan_readdy():
         "filament_straightness": filament_straightness,
     }
 
-    scan = Scan(
-        parameters,
-        ReaddyActinProcess,
-        0.0000001,
-        metrics=metrics)
+    scan = Scan(parameters, ReaddyActinProcess, 0.0000001, metrics=metrics)
 
     results = scan.run_scan()
-    
 
-    import ipdb; ipdb.set_trace()
+    import ipdb
+
+    ipdb.set_trace()
 
 
-library = {
-    '0': test_readdy_actin_process,
-    '1': test_scan_readdy}
+library = {"0": test_readdy_actin_process, "1": test_scan_readdy}
 
 
 if __name__ == "__main__":
