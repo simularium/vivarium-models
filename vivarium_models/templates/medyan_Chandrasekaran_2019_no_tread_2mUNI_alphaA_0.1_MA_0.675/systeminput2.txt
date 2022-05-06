@@ -3,9 +3,9 @@
 
 NDIM:                        3
 
-NX:                          15
-NY:                          15
-NZ:                          15
+NX:                          8
+NY:                          4
+NZ:                          4 
 
 COMPARTMENTSIZEX:            500.0
 COMPARTMENTSIZEY:            500.0
@@ -66,10 +66,10 @@ CHEMISTRYFILE:               chemistryinput.txt
 
 CALGORITHM:                  NRM
 NUMTOTALSTEPS:		     	 
-RUNTIME:                     {{timestep}}
+RUNTIME:                     2000
 
 NUMSTEPSPERS:		    
-SNAPSHOTTIME:                {{snapshot_time}}
+SNAPSHOTTIME:                1.0
 MINIMIZATIONTIME: 0.02
 NEIGHBORLISTTIME: 0.02
 
@@ -115,11 +115,10 @@ DLUNBINDINGLEN:			 0.24
 ##################################################
 ################# INITIALIZATION #################
 
-FILAMENTFILE:                filaments.txt
-#NUMFILAMENTS:                0
+FILAMENTFILE:				 2micron_35R105.txt
+#NUMFILAMENTS:                50
 #FILAMENTLENGTH:              1
-#FILAMENTTYPE: 				  0
-PROJECTIONTYPE:               PREDEFINED
+#FILAMENTTYPE: 				 0
      
 
 #################################################
