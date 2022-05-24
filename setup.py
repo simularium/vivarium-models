@@ -80,6 +80,8 @@ setup(
     keywords="vivarium_models",
     name="vivarium_models",
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*"]),
+    package_data={
+        '': ['templates/*']},
     python_requires=">=3.8",
     setup_requires=setup_requirements,
     test_suite="vivarium_models/tests",
