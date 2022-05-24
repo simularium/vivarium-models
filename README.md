@@ -1,14 +1,18 @@
 # vivarium-models
 
-[![Build Status](https://github.com/allen-cell-animated/vivarium_models/workflows/Build%20Main/badge.svg)](https://github.com/allen-cell-animated/vivarium_models/actions)
-[![Documentation](https://github.com/allen-cell-animated/vivarium_models/workflows/Documentation/badge.svg)](https://allen-cell-animated.github.io/vivarium_models/)
-[![Code Coverage](https://codecov.io/gh/allen-cell-animated/vivarium_models/branch/main/graph/badge.svg)](https://codecov.io/gh/allen-cell-animated/vivarium_models)
-
 Connecting Simularium prototypes together using Vivarium
 
 ---
 
-## Installation with pyenv + conda
+# Installation
+
+First, we recommend you create an environment (with pyenv, conda, or similar).
+
+Then, to install:
+**Stable Release:** `pip install vivarium_medyan` (coming soon)<br>
+**Development Head:** `pip install git+https://github.com/vivarium-collective/vivarium-MEDYAN.git`<br>
+
+## Local editable installation with pyenv + conda
 
 To see all pyenv versions:
 
@@ -31,7 +35,7 @@ pyenv local vivarium-models
 conda env update -f env.yml
 ```
 
-# Installation with conda alone
+## Local editable installation with conda alone
 
 Install conda: https://docs.conda.io/en/latest/miniconda.html
 
@@ -39,9 +43,10 @@ Using conda, you can run
 
 ```
 conda env create -f env.yml
+conda activate vivarium-models
 ```
 
-which will create a conda environment called `vivarium-models` with all the required dependencies (including ReaDDy) installed.
+which will create and then activate a conda environment called `vivarium-models` with all the required dependencies (including ReaDDy) installed.
 
 To update:
 
@@ -49,11 +54,9 @@ To update:
 conda env update -f env.yml
 ```
 
-### MEDYAN
+### MEDYAN Installation
 
-To install MEDYAN:
-
-Download the MEDYAN source here (we are using version 4.2.0): http://medyan.org/download.html
+Download the MEDYAN source here: http://medyan.org/download.html
 
 Unzip and cd into that dir, then at the command line:
 
@@ -63,42 +66,40 @@ cd build
 make
 ```
 
-### Alternatively:
+### Cytosim Installation
 
-**Stable Release:** `pip install vivarium_models`<br>
-**Development Head:** `pip install git+https://github.com/allen-cell-animated/vivarium-models.git`
+First, clone the repo:
 
-ReaDDy models depend on ReaDDy, which requires conda. Install ReaDDy with `conda install -c readdy/label/dev readdy` after adding the conda-forge channel `conda config --add channels conda-forge`
+    git clone https://gitlab.com/f-nedelec/cytosim.git
 
-## Documentation
+Change the header to allow for 3d (in file src/math/dim.h)
 
-For full package documentation please visit [allen-cell-animated.github.io/vivarium_models](https://allen-cell-animated.github.io/vivarium_models).
+    #define DIM 3 # instead of 2
+
+Then, make the executable (avoid the GLEW functionality):
+
+    make sim
+    make report
 
 ## Development
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for information related to developing the code.
 
-## The Four Commands You Need To Know
+## Commands You Need To Know
 
-1. `pip install -e .[dev]`
+1. `black vivarium_models`
 
-    This will install your package in editable mode with all the required development
-    dependencies (i.e. `tox`).
+    This will fix lint issues.
 
 2. `make build`
 
-    This will run `tox` which will run all your tests in both Python 3.7
-    and Python 3.8 as well as linting your code.
+    This will run `tox` which will run all your tests as well as lint your code.
 
 3. `make clean`
 
-    This will clean up various Python and build generated files so that you can ensure
-    that you are working in a clean environment.
-
+    This will clean up various Python and build generated files so that you can ensure that you are working in a clean environment.
+    
 4. `make docs`
 
     This will generate and launch a web browser to view the most up-to-date
     documentation for your Python package.
-
-
-

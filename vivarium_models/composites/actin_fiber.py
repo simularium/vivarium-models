@@ -6,9 +6,10 @@ from vivarium.core.engine import Engine
 from vivarium.processes.alternator import Alternator, PeriodicEvent
 
 from vivarium_models.processes.readdy_actin_process import ReaddyActinProcess
-from vivarium_models.processes.medyan import MedyanProcess
+from vivarium_medyan import MedyanProcess
 from vivarium_models.processes.monomer_to_fiber import MonomerToFiber
 from vivarium_models.processes.fiber_to_monomer import FiberToMonomer
+from vivarium_models.data.fibers import initial_fibers
 
 READDY_TIMESTEP = 0.0000001
 ALTERNATOR_PERIODS = [10.0, READDY_TIMESTEP]
@@ -37,7 +38,6 @@ class ActinFiber(Composer):
         fiber_to_monomer = FiberToMonomer(config["fiber_to_monomer"])
         monomer_to_fiber = MonomerToFiber(config["monomer_to_fiber"])
         alternator = Alternator(config["alternator"])
-
         return {
             "periodic_event": periodic_event,
             "readdy_actin": readdy,
@@ -54,9 +54,20 @@ class ActinFiber(Composer):
                 "period_index": ("period_index",),
             },
             "readdy_actin": {"monomers": ("monomers",)},
-            "medyan": {"fibers": ("fibers",)},
-            "fiber_to_monomer": {"fibers": ("fibers",), "monomers": ("monomers",)},
-            "monomer_to_fiber": {"fibers": ("fibers",), "monomers": ("monomers",)},
+            "medyan": {
+                "fibers": ("fibers",),
+                "fibers_box_extent": ("fibers_box_extent",),
+            },
+            "fiber_to_monomer": {
+                "fibers": ("fibers",),
+                "fibers_box_extent": ("fibers_box_extent",),
+                "monomers": ("monomers",),
+            },
+            "monomer_to_fiber": {
+                "fibers": ("fibers",),
+                "fibers_box_extent": ("fibers_box_extent",),
+                "monomers": ("monomers",),
+            },
             "alternator": {
                 "alternate_trigger": ("alternate_trigger",),
                 "choices": {
@@ -74,37 +85,16 @@ class ActinFiber(Composer):
 
 
 def test_actin_fiber():
-    parser = argparse.ArgumentParser(description="Run a MEDYAN simulation")
-    parser.add_argument(
-        "medyan_executable_path",
-        help="the file path to the MEDYAN executable",
-    )
-    args = parser.parse_args()
-    initial_state = {
-        "choices": {"medyan_active": True, "readdy_active": False},
-        "fibers": {
-            "1": {
-                "type_name": "0",  # 'A',
-                "points": [np.array([-70.0, 0.0, 100.0]), np.array([10.0, 100.0, 0.0])],
-            },
-            "2": {
-                "type_name": "0",  # 'B',
-                "points": [np.array([-70.0, 100.0, 0.0]), np.array([10.0, 0.0, 100.0])],
-            },
-        },
-    }
-
+    initial_state = initial_fibers
+    initial_state["choices"] = {"medyan_active": True, "readdy_active": False}
     medyan_config = {
-        "medyan_executable": args.medyan_executable_path,  # "...../medyan/build/medyan"
-        "transform_points": [500, 500, 500],
+        "template_directory": "vivarium_models/templates/",
+        "transform_points": [2000.0, 1000.0, 1000.0],
     }
-
     actin_fiber_config = {"medyan": medyan_config}
     actin_fiber = ActinFiber(actin_fiber_config)
-
     composite = actin_fiber.generate()
     composite["initial_state"] = initial_state
-
     engine = Engine(
         processes=composite["processes"],
         topology=composite["topology"],
@@ -112,7 +102,6 @@ def test_actin_fiber():
         emitter="simularium",
         emit_processes=True,
     )
-
     engine.update(15)
     engine.emitter.get_data()
 

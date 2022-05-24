@@ -139,5 +139,6 @@ cython_debug/
 
 *.DS_Store
 .python-version
+/in
 /out
 *.simularium

@@ -3,17 +3,25 @@ import numpy as np
 from vivarium.core.process import Process
 from vivarium.core.engine import Engine, pf
 from vivarium.core.composition import simulate_process
+from vivarium.core.control import run_library_cli
 
 from tqdm import tqdm
-from simularium_models_util.actin import ActinSimulation, ActinUtil, ActinTestData
+from simularium_models_util.actin import (
+    ActinSimulation,
+    ActinUtil,
+    ActinTestData,
+    ActinAnalyzer,
+)
 from simularium_models_util import ReaddyUtil
-from vivarium_models.util import create_monomer_update
-
+from vivarium_models.util import create_monomer_update, format_monomer_results
+from vivarium_models.library.scan import Scan
 
 NAME = "ReaDDy_actin"
 
 test_monomer_data = {
     "monomers": {
+        "box_center": np.array([3000.0, 1000.0, 1000.0]),  # to be chosen by alternator
+        "box_size": 500.0,
         "topologies": {
             1: {
                 "type_name": "Arp23-Dimer",
@@ -58,7 +66,7 @@ class ReaddyActinProcess(Process):
         "total_steps": 1e3,
         "time_step": 0.0000001,
         "internal_timestep": 0.1,
-        "box_size": 1000.0,  # nm
+        "box_size": 500.0,  # nm
         "temperature_C": 22.0,  # from Pollard experiments
         "viscosity": 8.1,  # cP, viscosity in cytoplasm
         "force_constant": 250.0,
@@ -106,6 +114,8 @@ class ReaddyActinProcess(Process):
         "implicit_actin_concentration": 0,
         "nonspatial_polymerization": False,
         "verbose": False,
+        "periodic_boundary": False,
+        "obstacle_radius": 0.0,
     }
 
     def __init__(self, parameters=None):
@@ -117,6 +127,16 @@ class ReaddyActinProcess(Process):
     def ports_schema(self):
         return {
             "monomers": {
+                "box_center": {
+                    "_default": np.array([3000.0, 1000.0, 1000.0]),
+                    "_updater": "set",
+                    "_emit": True,
+                },
+                "box_size": {
+                    "_default": 500.0,
+                    "_updater": "set",
+                    "_emit": True,
+                },
                 "topologies": {
                     "*": {
                         "type_name": {
@@ -224,15 +244,26 @@ class ReaddyActinProcess(Process):
         return output
 
 
-def test_readdy_actin_process():
+def get_monomer_data():
     monomer_data = ActinTestData.linear_actin_monomers()
+    monomer_data["box_center"] = np.array([3000.0, 1000.0, 1000.0])
+    monomer_data["box_size"] = 500.0
+    return {"monomers": monomer_data}
+
+
+def test_readdy_actin_process():
+    monomer_data = get_monomer_data()
     readdy_actin_process = ReaddyActinProcess()
 
     engine = Engine(
-        {
+        **{
             "processes": {"readdy_actin_process": readdy_actin_process},
-            "topology": {"readdy_actin_process": {"monomers": ("monomers",)}},
-            "initial_state": {"monomers": monomer_data},
+            "topology": {
+                "readdy_actin_process": {
+                    "monomers": ("monomers",),
+                },
+            },
+            "initial_state": monomer_data,
         }
     )
 
@@ -242,5 +273,139 @@ def test_readdy_actin_process():
     print(pf(output))
 
 
+def test_scan_readdy():
+    monomer_data = get_monomer_data()
+
+    parameters = {
+        "1": {
+            "parameters": {"actin_concentration": 100.0, "arp23_concentration": 5.0},
+            "states": monomer_data,
+        },
+        "2": {
+            "parameters": {"actin_concentration": 200.0, "arp23_concentration": 10.0},
+            "states": monomer_data,
+        },
+        "3": {
+            "parameters": {"actin_concentration": 300.0, "arp23_concentration": 20.0},
+            "states": monomer_data,
+        },
+    }
+
+    def count_monomers(results):
+        outcome = list(results.values())[-1]
+        return len(outcome["monomers"]["particles"])
+
+    def count_monomer_types(results):
+        outcome = list(results.values())[-1]
+        monomer_types = {}
+
+        for particle in outcome["monomers"]["particles"].values():
+            type_name = particle["type_name"]
+            if type_name not in monomer_types:
+                monomer_types[type_name] = 0
+            monomer_types[type_name] += 1
+
+        return monomer_types
+
+    def filament_lengths(results):
+        outcome = list(results.values())[-1]
+        barbed = None
+        pointed = None
+        for particle in outcome["monomers"]["particles"].values():
+            if "barbed" in particle["type_name"]:
+                barbed = np.array(particle["position"])
+            elif "pointed" in particle["type_name"]:
+                pointed = np.array(particle["position"])
+
+        difference = barbed - pointed
+        length = np.linalg.norm(difference)
+        return length
+
+    def percent_filamentous_actin(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return (
+            100.0
+            * ActinAnalyzer.analyze_ratio_of_filamentous_to_total_actin(monomer_data)[0]
+        )
+
+    def percent_bound_arp23(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return (
+            100.0 * ActinAnalyzer.analyze_ratio_of_bound_to_total_arp23(monomer_data)[0]
+        )
+
+    def percent_daughter_actin(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return (
+            100.0
+            * ActinAnalyzer.analyze_ratio_of_daughter_to_total_actin(monomer_data)[0]
+        )
+
+    def mother_filament_lengths(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return ActinAnalyzer.analyze_average_over_time(
+            ActinAnalyzer.analyze_mother_filament_lengths(monomer_data)
+        )[0]
+
+    def daughter_filament_lengths(results):
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        return ActinAnalyzer.analyze_daughter_filament_lengths(monomer_data)[0]
+
+    def branch_angles(results):
+        box_size = list(results.values())[-1]["monomers"]["box_size"]
+        monomer_data = [list(results.values())[-1]["monomers"]]
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_branch_angles(
+            monomer_data, box_size, periodic_boundary
+        )[0]
+
+    def short_helix_pitches(results):
+        monomer_data = format_monomer_results(results)
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_short_helix_pitches(
+            monomer_data, monomer_data[0]["box_size"], periodic_boundary
+        )
+
+    def long_helix_pitches(results):
+        monomer_data = format_monomer_results(results)
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_long_helix_pitches(
+            monomer_data, monomer_data[0]["box_size"], periodic_boundary
+        )
+
+    def filament_straightness(results):
+        monomer_data = format_monomer_results(results)
+        periodic_boundary = False  # TODO get from parameters
+        return ActinAnalyzer.analyze_filament_straightness(
+            monomer_data, monomer_data[0]["box_size"], periodic_boundary
+        )
+
+    metrics = {
+        "count_monomers": count_monomers,
+        "count_monomer_types": count_monomer_types,
+        "filament_lengths": filament_lengths,
+        "percent_filamentous_actin": percent_filamentous_actin,
+        "percent_bound_arp23": percent_bound_arp23,
+        "percent_daughter_actin": percent_daughter_actin,
+        "mother_filament_lengths": mother_filament_lengths,
+        "daughter_filament_lengths": daughter_filament_lengths,
+        "branch_angles": branch_angles,
+        "short_helix_pitches": short_helix_pitches,
+        "long_helix_pitches": long_helix_pitches,
+        "filament_straightness": filament_straightness,
+    }
+
+    scan = Scan(parameters, ReaddyActinProcess, 0.0000001, metrics=metrics)
+
+    results = scan.run_scan()
+
+    import ipdb
+
+    ipdb.set_trace()
+
+
+library = {"0": test_readdy_actin_process, "1": test_scan_readdy}
+
+
 if __name__ == "__main__":
-    test_readdy_actin_process()
+    run_library_cli(library)
