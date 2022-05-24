@@ -12,6 +12,14 @@ vivarium\_models.composites.actin\_fiber module
    :undoc-members:
    :show-inheritance:
 
+vivarium\_models.composites.filament\_alternatives module
+---------------------------------------------------------
+
+.. automodule:: vivarium_models.composites.filament_alternatives
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

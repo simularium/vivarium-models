@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vivarium_models.composites.filament_alternatives &mdash; vivarium-models 0.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> vivarium-models
+          </a>
+              <div class="version">
+                0.0.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#stable-release">Stable release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#from-sources">From sources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">Package modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../vivarium_models.html">vivarium_models package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.composites.html">vivarium_models.composites package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.experiments.html">vivarium_models.experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.library.html">vivarium_models.library package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.processes.html">vivarium_models.processes package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#get-started">Get Started!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../contributing.html#deploying">Deploying</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">vivarium-models</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+          <li><a href="../../vivarium_models.html">vivarium_models</a> &raquo;</li>
+      <li>vivarium_models.composites.filament_alternatives</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for vivarium_models.composites.filament_alternatives</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="kn">from</span> <span class="nn">vivarium.core.composer</span> <span class="kn">import</span> <span class="n">Composer</span>
+<span class="kn">from</span> <span class="nn">vivarium.core.engine</span> <span class="kn">import</span> <span class="n">Engine</span>
+<span class="kn">from</span> <span class="nn">vivarium.processes.alternator</span> <span class="kn">import</span> <span class="n">Alternator</span><span class="p">,</span> <span class="n">PeriodicEvent</span>
+
+<span class="kn">from</span> <span class="nn">vivarium_medyan</span> <span class="kn">import</span> <span class="n">MedyanProcess</span>
+<span class="kn">from</span> <span class="nn">vivarium_cytosim</span> <span class="kn">import</span> <span class="n">CytosimProcess</span>
+
+<span class="n">ALTERNATOR_PERIODS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="FilamentAlternatives"><a class="viewcode-back" href="../../../vivarium_models.composites.html#vivarium_models.composites.filament_alternatives.FilamentAlternatives">[docs]</a><span class="k">class</span> <span class="nc">FilamentAlternatives</span><span class="p">(</span><span class="n">Composer</span><span class="p">):</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;periodic_event&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;periods&quot;</span><span class="p">:</span> <span class="n">ALTERNATOR_PERIODS</span><span class="p">},</span>
+        <span class="s2">&quot;medyan&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;medyan_active&quot;</span><span class="p">)},</span>
+        <span class="s2">&quot;cytosim&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+            <span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;cytosim_active&quot;</span><span class="p">),</span>
+            <span class="s2">&quot;confine&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;side&quot;</span><span class="p">:</span> <span class="s2">&quot;inside&quot;</span><span class="p">,</span> <span class="s2">&quot;force&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">&quot;space&quot;</span><span class="p">:</span> <span class="s2">&quot;cell&quot;</span><span class="p">},</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;alternator&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">,</span> <span class="s2">&quot;cytosim_active&quot;</span><span class="p">]},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FilamentAlternatives.generate_processes"><a class="viewcode-back" href="../../../vivarium_models.composites.html#vivarium_models.composites.filament_alternatives.FilamentAlternatives.generate_processes">[docs]</a>    <span class="k">def</span> <span class="nf">generate_processes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="n">periodic_event</span> <span class="o">=</span> <span class="n">PeriodicEvent</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;periodic_event&quot;</span><span class="p">])</span>
+        <span class="n">medyan</span> <span class="o">=</span> <span class="n">MedyanProcess</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;medyan&quot;</span><span class="p">])</span>
+        <span class="n">cytosim</span> <span class="o">=</span> <span class="n">CytosimProcess</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;cytosim&quot;</span><span class="p">])</span>
+        <span class="n">alternator</span> <span class="o">=</span> <span class="n">Alternator</span><span class="p">(</span><span class="n">config</span><span class="p">[</span><span class="s2">&quot;alternator&quot;</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;periodic_event&quot;</span><span class="p">:</span> <span class="n">periodic_event</span><span class="p">,</span>
+            <span class="s2">&quot;medyan&quot;</span><span class="p">:</span> <span class="n">medyan</span><span class="p">,</span>
+            <span class="s2">&quot;cytosim&quot;</span><span class="p">:</span> <span class="n">cytosim</span><span class="p">,</span>
+            <span class="s2">&quot;alternator&quot;</span><span class="p">:</span> <span class="n">alternator</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+<div class="viewcode-block" id="FilamentAlternatives.generate_topology"><a class="viewcode-back" href="../../../vivarium_models.composites.html#vivarium_models.composites.filament_alternatives.FilamentAlternatives.generate_topology">[docs]</a>    <span class="k">def</span> <span class="nf">generate_topology</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;periodic_event&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;event_trigger&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;alternate_trigger&quot;</span><span class="p">,),</span>
+                <span class="s2">&quot;period_index&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;period_index&quot;</span><span class="p">,),</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;medyan&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fibers&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;fibers&quot;</span><span class="p">,)},</span>
+            <span class="s2">&quot;cytosim&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;fibers&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;fibers&quot;</span><span class="p">,)},</span>
+            <span class="s2">&quot;alternator&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;alternate_trigger&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;alternate_trigger&quot;</span><span class="p">,),</span>
+                <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;medyan_active&quot;</span><span class="p">:</span> <span class="p">(</span>
+                        <span class="s2">&quot;choices&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;medyan_active&quot;</span><span class="p">,</span>
+                    <span class="p">),</span>
+                    <span class="s2">&quot;cytosim_active&quot;</span><span class="p">:</span> <span class="p">(</span>
+                        <span class="s2">&quot;choices&quot;</span><span class="p">,</span>
+                        <span class="s2">&quot;cytosim_active&quot;</span><span class="p">,</span>
+                    <span class="p">),</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+        <span class="p">}</span></div></div>
+
+
+<div class="viewcode-block" id="test_filament_alternatives"><a class="viewcode-back" href="../../../vivarium_models.composites.html#vivarium_models.composites.filament_alternatives.test_filament_alternatives">[docs]</a><span class="k">def</span> <span class="nf">test_filament_alternatives</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;Run a MEDYAN simulation&quot;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;medyan_executable_path&quot;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s2">&quot;the file path to the MEDYAN executable&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;cytosim_active&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">},</span>
+        <span class="s2">&quot;fibers&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">912.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">912.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">947.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">947.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">930.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">930.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;4&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">947.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">947.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;5&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">930.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">930.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;6&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">947.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">947.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;7&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">909.06733260</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">909.06733260</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;8&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">982.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">982.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;9&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;10&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">982.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">982.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;11&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;12&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">982.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">982.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;13&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">1090.93266740</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">965.00000000</span><span class="p">,</span> <span class="mf">1090.93266740</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;14&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">909.06733260</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">909.06733260</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;15&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1017.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1017.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;16&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;17&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1017.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1017.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;18&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;19&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1017.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1017.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;20&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1090.93266740</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1090.93266740</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;21&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">909.06733260</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">909.06733260</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;22&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1052.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1052.50000000</span><span class="p">,</span> <span class="mf">939.37822174</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;23&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;24&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1052.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1052.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;25&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;26&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1052.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1052.50000000</span><span class="p">,</span> <span class="mf">1060.62177826</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;27&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">1090.93266740</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1035.00000000</span><span class="p">,</span> <span class="mf">1090.93266740</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;28&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1070.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1070.00000000</span><span class="p">,</span> <span class="mf">969.68911087</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;29&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1087.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1087.50000000</span><span class="p">,</span> <span class="mf">1000.00000000</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;30&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Actin-Polymer&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;points&quot;</span><span class="p">:</span> <span class="p">[</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.00000000</span><span class="p">,</span> <span class="mf">1070.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3160.00000000</span><span class="p">,</span> <span class="mf">1070.00000000</span><span class="p">,</span> <span class="mf">1030.31088913</span><span class="p">]),</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="n">medyan_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;medyan_executable&quot;</span><span class="p">:</span> <span class="n">args</span><span class="o">.</span><span class="n">medyan_executable_path</span><span class="p">,</span>  <span class="c1"># &quot;...../medyan/build/medyan&quot;</span>
+        <span class="s2">&quot;transform_points&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1000</span><span class="p">],</span>
+    <span class="p">}</span>
+
+    <span class="n">filament_alternatives_config</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;medyan&quot;</span><span class="p">:</span> <span class="n">medyan_config</span><span class="p">}</span>
+    <span class="n">filament_alternatives</span> <span class="o">=</span> <span class="n">FilamentAlternatives</span><span class="p">(</span><span class="n">filament_alternatives_config</span><span class="p">)</span>
+
+    <span class="n">composite</span> <span class="o">=</span> <span class="n">filament_alternatives</span><span class="o">.</span><span class="n">generate</span><span class="p">()</span>
+    <span class="n">composite</span><span class="p">[</span><span class="s2">&quot;initial_state&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">initial_state</span>
+
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">(</span>
+        <span class="n">processes</span><span class="o">=</span><span class="n">composite</span><span class="p">[</span><span class="s2">&quot;processes&quot;</span><span class="p">],</span>
+        <span class="n">topology</span><span class="o">=</span><span class="n">composite</span><span class="p">[</span><span class="s2">&quot;topology&quot;</span><span class="p">],</span>
+        <span class="n">initial_state</span><span class="o">=</span><span class="n">composite</span><span class="p">[</span><span class="s2">&quot;initial_state&quot;</span><span class="p">],</span>
+        <span class="n">emitter</span><span class="o">=</span><span class="s2">&quot;simularium&quot;</span><span class="p">,</span>
+        <span class="n">emit_processes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># import ipdb; ipdb.set_trace()</span>
+
+    <span class="n">engine</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">engine</span><span class="o">.</span><span class="n">emitter</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">test_filament_alternatives</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Blair Lyons.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

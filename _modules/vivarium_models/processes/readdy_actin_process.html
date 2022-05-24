@@ -99,17 +99,25 @@
 <span class="kn">from</span> <span class="nn">vivarium.core.process</span> <span class="kn">import</span> <span class="n">Process</span>
 <span class="kn">from</span> <span class="nn">vivarium.core.engine</span> <span class="kn">import</span> <span class="n">Engine</span><span class="p">,</span> <span class="n">pf</span>
 <span class="kn">from</span> <span class="nn">vivarium.core.composition</span> <span class="kn">import</span> <span class="n">simulate_process</span>
+<span class="kn">from</span> <span class="nn">vivarium.core.control</span> <span class="kn">import</span> <span class="n">run_library_cli</span>
 
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">from</span> <span class="nn">simularium_models_util.actin</span> <span class="kn">import</span> <span class="n">ActinSimulation</span><span class="p">,</span> <span class="n">ActinUtil</span><span class="p">,</span> <span class="n">ActinTestData</span>
+<span class="kn">from</span> <span class="nn">simularium_models_util.actin</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">ActinSimulation</span><span class="p">,</span>
+    <span class="n">ActinUtil</span><span class="p">,</span>
+    <span class="n">ActinTestData</span><span class="p">,</span>
+    <span class="n">ActinAnalyzer</span><span class="p">,</span>
+<span class="p">)</span>
 <span class="kn">from</span> <span class="nn">simularium_models_util</span> <span class="kn">import</span> <span class="n">ReaddyUtil</span>
-<span class="kn">from</span> <span class="nn">vivarium_models.util</span> <span class="kn">import</span> <span class="n">create_monomer_update</span>
-
+<span class="kn">from</span> <span class="nn">vivarium_models.util</span> <span class="kn">import</span> <span class="n">create_monomer_update</span><span class="p">,</span> <span class="n">format_monomer_results</span>
+<span class="kn">from</span> <span class="nn">vivarium_models.library.scan</span> <span class="kn">import</span> <span class="n">Scan</span>
 
 <span class="n">NAME</span> <span class="o">=</span> <span class="s2">&quot;ReaDDy_actin&quot;</span>
 
 <span class="n">test_monomer_data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">&quot;box_center&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">]),</span>  <span class="c1"># to be chosen by alternator</span>
+        <span class="s2">&quot;box_size&quot;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>
         <span class="s2">&quot;topologies&quot;</span><span class="p">:</span> <span class="p">{</span>
             <span class="mi">1</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="s2">&quot;Arp23-Dimer&quot;</span><span class="p">,</span>
@@ -154,7 +162,7 @@
         <span class="s2">&quot;total_steps&quot;</span><span class="p">:</span> <span class="mf">1e3</span><span class="p">,</span>
         <span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="mf">0.0000001</span><span class="p">,</span>
         <span class="s2">&quot;internal_timestep&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-        <span class="s2">&quot;box_size&quot;</span><span class="p">:</span> <span class="mf">1000.0</span><span class="p">,</span>  <span class="c1"># nm</span>
+        <span class="s2">&quot;box_size&quot;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>  <span class="c1"># nm</span>
         <span class="s2">&quot;temperature_C&quot;</span><span class="p">:</span> <span class="mf">22.0</span><span class="p">,</span>  <span class="c1"># from Pollard experiments</span>
         <span class="s2">&quot;viscosity&quot;</span><span class="p">:</span> <span class="mf">8.1</span><span class="p">,</span>  <span class="c1"># cP, viscosity in cytoplasm</span>
         <span class="s2">&quot;force_constant&quot;</span><span class="p">:</span> <span class="mf">250.0</span><span class="p">,</span>
@@ -202,6 +210,8 @@
         <span class="s2">&quot;implicit_actin_concentration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="s2">&quot;nonspatial_polymerization&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;periodic_boundary&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">&quot;obstacle_radius&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="p">}</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -213,6 +223,16 @@
 <div class="viewcode-block" id="ReaddyActinProcess.ports_schema"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.ports_schema">[docs]</a>    <span class="k">def</span> <span class="nf">ports_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;box_center&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">]),</span>
+                    <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;box_size&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>
+                    <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">},</span>
                 <span class="s2">&quot;topologies&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">{</span>
                         <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -320,15 +340,26 @@
         <span class="k">return</span> <span class="n">output</span></div></div>
 
 
-<div class="viewcode-block" id="test_readdy_actin_process"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.test_readdy_actin_process">[docs]</a><span class="k">def</span> <span class="nf">test_readdy_actin_process</span><span class="p">():</span>
+<div class="viewcode-block" id="get_monomer_data"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.get_monomer_data">[docs]</a><span class="k">def</span> <span class="nf">get_monomer_data</span><span class="p">():</span>
     <span class="n">monomer_data</span> <span class="o">=</span> <span class="n">ActinTestData</span><span class="o">.</span><span class="n">linear_actin_monomers</span><span class="p">()</span>
+    <span class="n">monomer_data</span><span class="p">[</span><span class="s2">&quot;box_center&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">])</span>
+    <span class="n">monomer_data</span><span class="p">[</span><span class="s2">&quot;box_size&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">500.0</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="n">monomer_data</span><span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="test_readdy_actin_process"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.test_readdy_actin_process">[docs]</a><span class="k">def</span> <span class="nf">test_readdy_actin_process</span><span class="p">():</span>
+    <span class="n">monomer_data</span> <span class="o">=</span> <span class="n">get_monomer_data</span><span class="p">()</span>
     <span class="n">readdy_actin_process</span> <span class="o">=</span> <span class="n">ReaddyActinProcess</span><span class="p">()</span>
 
     <span class="n">engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">(</span>
-        <span class="p">{</span>
+        <span class="o">**</span><span class="p">{</span>
             <span class="s2">&quot;processes&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;readdy_actin_process&quot;</span><span class="p">:</span> <span class="n">readdy_actin_process</span><span class="p">},</span>
-            <span class="s2">&quot;topology&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;readdy_actin_process&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;monomers&quot;</span><span class="p">,)}},</span>
-            <span class="s2">&quot;initial_state&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="n">monomer_data</span><span class="p">},</span>
+            <span class="s2">&quot;topology&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;readdy_actin_process&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;monomers&quot;</span><span class="p">,),</span>
+                <span class="p">},</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;initial_state&quot;</span><span class="p">:</span> <span class="n">monomer_data</span><span class="p">,</span>
         <span class="p">}</span>
     <span class="p">)</span>
 
@@ -338,8 +369,142 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">pf</span><span class="p">(</span><span class="n">output</span><span class="p">))</span></div>
 
 
+<div class="viewcode-block" id="test_scan_readdy"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.test_scan_readdy">[docs]</a><span class="k">def</span> <span class="nf">test_scan_readdy</span><span class="p">():</span>
+    <span class="n">monomer_data</span> <span class="o">=</span> <span class="n">get_monomer_data</span><span class="p">()</span>
+
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;actin_concentration&quot;</span><span class="p">:</span> <span class="mf">100.0</span><span class="p">,</span> <span class="s2">&quot;arp23_concentration&quot;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">},</span>
+            <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="n">monomer_data</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;2&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;actin_concentration&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span> <span class="s2">&quot;arp23_concentration&quot;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">},</span>
+            <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="n">monomer_data</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;3&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;actin_concentration&quot;</span><span class="p">:</span> <span class="mf">300.0</span><span class="p">,</span> <span class="s2">&quot;arp23_concentration&quot;</span><span class="p">:</span> <span class="mf">20.0</span><span class="p">},</span>
+            <span class="s2">&quot;states&quot;</span><span class="p">:</span> <span class="n">monomer_data</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">count_monomers</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">outcome</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">outcome</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">][</span><span class="s2">&quot;particles&quot;</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">count_monomer_types</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">outcome</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">monomer_types</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">particle</span> <span class="ow">in</span> <span class="n">outcome</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">][</span><span class="s2">&quot;particles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">type_name</span> <span class="o">=</span> <span class="n">particle</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">type_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">monomer_types</span><span class="p">:</span>
+                <span class="n">monomer_types</span><span class="p">[</span><span class="n">type_name</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">monomer_types</span><span class="p">[</span><span class="n">type_name</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">monomer_types</span>
+
+    <span class="k">def</span> <span class="nf">filament_lengths</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">outcome</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">barbed</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">pointed</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">particle</span> <span class="ow">in</span> <span class="n">outcome</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">][</span><span class="s2">&quot;particles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s2">&quot;barbed&quot;</span> <span class="ow">in</span> <span class="n">particle</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">]:</span>
+                <span class="n">barbed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="s2">&quot;pointed&quot;</span> <span class="ow">in</span> <span class="n">particle</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">]:</span>
+                <span class="n">pointed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">])</span>
+
+        <span class="n">difference</span> <span class="o">=</span> <span class="n">barbed</span> <span class="o">-</span> <span class="n">pointed</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">difference</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">length</span>
+
+    <span class="k">def</span> <span class="nf">percent_filamentous_actin</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="mf">100.0</span>
+            <span class="o">*</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_ratio_of_filamentous_to_total_actin</span><span class="p">(</span><span class="n">monomer_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">percent_bound_arp23</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="mf">100.0</span> <span class="o">*</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_ratio_of_bound_to_total_arp23</span><span class="p">(</span><span class="n">monomer_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">percent_daughter_actin</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="mf">100.0</span>
+            <span class="o">*</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_ratio_of_daughter_to_total_actin</span><span class="p">(</span><span class="n">monomer_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">mother_filament_lengths</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_average_over_time</span><span class="p">(</span>
+            <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_mother_filament_lengths</span><span class="p">(</span><span class="n">monomer_data</span><span class="p">)</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">daughter_filament_lengths</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">]]</span>
+        <span class="k">return</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_daughter_filament_lengths</span><span class="p">(</span><span class="n">monomer_data</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">branch_angles</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">box_size</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">][</span><span class="s2">&quot;box_size&quot;</span><span class="p">]</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s2">&quot;monomers&quot;</span><span class="p">]]</span>
+        <span class="n">periodic_boundary</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># TODO get from parameters</span>
+        <span class="k">return</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_branch_angles</span><span class="p">(</span>
+            <span class="n">monomer_data</span><span class="p">,</span> <span class="n">box_size</span><span class="p">,</span> <span class="n">periodic_boundary</span>
+        <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">short_helix_pitches</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="n">format_monomer_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="n">periodic_boundary</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># TODO get from parameters</span>
+        <span class="k">return</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_short_helix_pitches</span><span class="p">(</span>
+            <span class="n">monomer_data</span><span class="p">,</span> <span class="n">monomer_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;box_size&quot;</span><span class="p">],</span> <span class="n">periodic_boundary</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">long_helix_pitches</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="n">format_monomer_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="n">periodic_boundary</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># TODO get from parameters</span>
+        <span class="k">return</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_long_helix_pitches</span><span class="p">(</span>
+            <span class="n">monomer_data</span><span class="p">,</span> <span class="n">monomer_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;box_size&quot;</span><span class="p">],</span> <span class="n">periodic_boundary</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">filament_straightness</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="n">monomer_data</span> <span class="o">=</span> <span class="n">format_monomer_results</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+        <span class="n">periodic_boundary</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># TODO get from parameters</span>
+        <span class="k">return</span> <span class="n">ActinAnalyzer</span><span class="o">.</span><span class="n">analyze_filament_straightness</span><span class="p">(</span>
+            <span class="n">monomer_data</span><span class="p">,</span> <span class="n">monomer_data</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;box_size&quot;</span><span class="p">],</span> <span class="n">periodic_boundary</span>
+        <span class="p">)</span>
+
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;count_monomers&quot;</span><span class="p">:</span> <span class="n">count_monomers</span><span class="p">,</span>
+        <span class="s2">&quot;count_monomer_types&quot;</span><span class="p">:</span> <span class="n">count_monomer_types</span><span class="p">,</span>
+        <span class="s2">&quot;filament_lengths&quot;</span><span class="p">:</span> <span class="n">filament_lengths</span><span class="p">,</span>
+        <span class="s2">&quot;percent_filamentous_actin&quot;</span><span class="p">:</span> <span class="n">percent_filamentous_actin</span><span class="p">,</span>
+        <span class="s2">&quot;percent_bound_arp23&quot;</span><span class="p">:</span> <span class="n">percent_bound_arp23</span><span class="p">,</span>
+        <span class="s2">&quot;percent_daughter_actin&quot;</span><span class="p">:</span> <span class="n">percent_daughter_actin</span><span class="p">,</span>
+        <span class="s2">&quot;mother_filament_lengths&quot;</span><span class="p">:</span> <span class="n">mother_filament_lengths</span><span class="p">,</span>
+        <span class="s2">&quot;daughter_filament_lengths&quot;</span><span class="p">:</span> <span class="n">daughter_filament_lengths</span><span class="p">,</span>
+        <span class="s2">&quot;branch_angles&quot;</span><span class="p">:</span> <span class="n">branch_angles</span><span class="p">,</span>
+        <span class="s2">&quot;short_helix_pitches&quot;</span><span class="p">:</span> <span class="n">short_helix_pitches</span><span class="p">,</span>
+        <span class="s2">&quot;long_helix_pitches&quot;</span><span class="p">:</span> <span class="n">long_helix_pitches</span><span class="p">,</span>
+        <span class="s2">&quot;filament_straightness&quot;</span><span class="p">:</span> <span class="n">filament_straightness</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">scan</span> <span class="o">=</span> <span class="n">Scan</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span> <span class="n">ReaddyActinProcess</span><span class="p">,</span> <span class="mf">0.0000001</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">scan</span><span class="o">.</span><span class="n">run_scan</span><span class="p">()</span>
+
+    <span class="kn">import</span> <span class="nn">ipdb</span>
+
+    <span class="n">ipdb</span><span class="o">.</span><span class="n">set_trace</span><span class="p">()</span></div>
+
+
+<span class="n">library</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;0&quot;</span><span class="p">:</span> <span class="n">test_readdy_actin_process</span><span class="p">,</span> <span class="s2">&quot;1&quot;</span><span class="p">:</span> <span class="n">test_scan_readdy</span><span class="p">}</span>
+
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">test_readdy_actin_process</span><span class="p">()</span>
+    <span class="n">run_library_cli</span><span class="p">(</span><span class="n">library</span><span class="p">)</span>
 </pre></div>
 
            </div>

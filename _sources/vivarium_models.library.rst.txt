@@ -1,6 +1,25 @@
 vivarium\_models.library package
 ================================
 
+Submodules
+----------
+
+vivarium\_models.library.scan module
+------------------------------------
+
+.. automodule:: vivarium_models.library.scan
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+vivarium\_models.library.schema module
+--------------------------------------
+
+.. automodule:: vivarium_models.library.schema
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

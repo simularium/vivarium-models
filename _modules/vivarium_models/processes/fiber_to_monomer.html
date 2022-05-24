@@ -111,6 +111,11 @@
 
 <div class="viewcode-block" id="FiberToMonomer.ports_schema"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.ports_schema">[docs]</a>    <span class="k">def</span> <span class="nf">ports_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;fibers_box_extent&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">4000.0</span><span class="p">,</span> <span class="mf">2000.0</span><span class="p">,</span> <span class="mf">2000.0</span><span class="p">]),</span>
+                <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">},</span>
             <span class="s2">&quot;fibers&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -126,6 +131,16 @@
                 <span class="p">}</span>
             <span class="p">},</span>
             <span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;box_center&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">]),</span>
+                    <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;box_size&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>
+                    <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="p">},</span>
                 <span class="s2">&quot;topologies&quot;</span><span class="p">:</span> <span class="p">{</span>
                     <span class="s2">&quot;*&quot;</span><span class="p">:</span> <span class="p">{</span>
                         <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -167,13 +182,18 @@
 
         <span class="n">fiber_data</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;fibers&quot;</span><span class="p">]</span>
         <span class="n">previous_monomers</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">]</span>
+        <span class="n">monomer_box_center</span> <span class="o">=</span> <span class="n">previous_monomers</span><span class="p">[</span><span class="s2">&quot;box_center&quot;</span><span class="p">]</span>
+        <span class="n">monomer_box_size</span> <span class="o">=</span> <span class="n">previous_monomers</span><span class="p">[</span><span class="s2">&quot;box_size&quot;</span><span class="p">]</span>
 
         <span class="n">fibers</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">FiberData</span><span class="p">(</span><span class="n">fiber_id</span><span class="p">,</span> <span class="n">fiber_data</span><span class="p">[</span><span class="n">fiber_id</span><span class="p">][</span><span class="s2">&quot;points&quot;</span><span class="p">])</span>
             <span class="k">for</span> <span class="n">fiber_id</span> <span class="ow">in</span> <span class="n">fiber_data</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fiber_data</span><span class="p">[</span><span class="n">fiber_id</span><span class="p">][</span><span class="s2">&quot;points&quot;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">1</span>
         <span class="p">]</span>
 
-        <span class="n">fiber_monomers</span> <span class="o">=</span> <span class="n">ActinGenerator</span><span class="o">.</span><span class="n">get_monomers</span><span class="p">(</span><span class="n">fibers</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">fiber_monomers</span> <span class="o">=</span> <span class="n">ActinGenerator</span><span class="o">.</span><span class="n">get_monomers</span><span class="p">(</span>
+            <span class="n">fibers</span><span class="p">,</span> <span class="n">monomer_box_center</span><span class="p">,</span> <span class="n">monomer_box_size</span><span class="p">,</span> <span class="n">use_uuids</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
         <span class="k">for</span> <span class="n">particle_id</span> <span class="ow">in</span> <span class="n">fiber_monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">]:</span>
             <span class="n">fiber_monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">particle_id</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
                 <span class="n">fiber_monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">particle_id</span><span class="p">]</span>

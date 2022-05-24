@@ -105,8 +105,143 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
 </section>
-<section id="vivarium-models-composites-actin-fiber-module">
-<h2>vivarium_models.composites.actin_fiber module<a class="headerlink" href="#vivarium-models-composites-actin-fiber-module" title="Permalink to this headline"></a></h2>
+<section id="module-vivarium_models.composites.actin_fiber">
+<span id="vivarium-models-composites-actin-fiber-module"></span><h2>vivarium_models.composites.actin_fiber module<a class="headerlink" href="#module-vivarium_models.composites.actin_fiber" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vivarium_models.composites.actin_fiber.ActinFiber">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.composites.actin_fiber.</span></span><span class="sig-name descname"><span class="pre">ActinFiber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/actin_fiber.html#ActinFiber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.actin_fiber.ActinFiber" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">vivarium.core.composer.Composer</span></code></p>
+<p>Base class for <span class="xref std std-term">composer</span> classes.</p>
+<p>Composers generate <span class="xref std std-term">composites</span>.</p>
+<p>All <span class="xref std std-term">composer</span> classes must inherit from this class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>config: Dictionary of configuration options that can</dt><dd><p>override the class defaults.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vivarium_models.composites.actin_fiber.ActinFiber.defaults">
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alternator':</span> <span class="pre">{'choices':</span> <span class="pre">['medyan_active',</span> <span class="pre">'readdy_active']},</span> <span class="pre">'fiber_to_monomer':</span> <span class="pre">{'_condition':</span> <span class="pre">('choices',</span> <span class="pre">'medyan_active')},</span> <span class="pre">'medyan':</span> <span class="pre">{'_condition':</span> <span class="pre">('choices',</span> <span class="pre">'medyan_active'),</span> <span class="pre">'time_step':</span> <span class="pre">5.0},</span> <span class="pre">'monomer_to_fiber':</span> <span class="pre">{'_condition':</span> <span class="pre">('choices',</span> <span class="pre">'readdy_active')},</span> <span class="pre">'periodic_event':</span> <span class="pre">{'periods':</span> <span class="pre">[10.0,</span> <span class="pre">1e-07]},</span> <span class="pre">'readdy_actin':</span> <span class="pre">{'_condition':</span> <span class="pre">('choices',</span> <span class="pre">'readdy_active'),</span> <span class="pre">'time_step':</span> <span class="pre">1e-07}}</span></em><a class="headerlink" href="#vivarium_models.composites.actin_fiber.ActinFiber.defaults" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vivarium_models.composites.actin_fiber.ActinFiber.generate_processes">
+<span class="sig-name descname"><span class="pre">generate_processes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/actin_fiber.html#ActinFiber.generate_processes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.actin_fiber.ActinFiber.generate_processes" title="Permalink to this definition"></a></dt>
+<dd><p>Generate processes dictionary.</p>
+<p>Every subclass must override this method. For backwards
+compatibility, <code class="xref py py-class docutils literal notranslate"><span class="pre">vivarium.core.process.Step</span></code> objects
+may be included in the returned dictionary, but this practice is
+discouraged and may be disallowed in a future release.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>config: A dictionary of configuration options. All</dt><dd><p>subclass implementation must accept this parameter, but
+some may ignore it.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Subclass implementations must return a dictionary
+mapping process names to instantiated and configured
+<code class="xref py py-class docutils literal notranslate"><span class="pre">vivarium.core.process.Process</span></code> objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vivarium_models.composites.actin_fiber.ActinFiber.generate_topology">
+<span class="sig-name descname"><span class="pre">generate_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/actin_fiber.html#ActinFiber.generate_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.actin_fiber.ActinFiber.generate_topology" title="Permalink to this definition"></a></dt>
+<dd><p>Generate topology dictionary.</p>
+<p>Every subclass must override this method.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>config: A dictionary of configuration options. All</dt><dd><p>subclass implementation must accept this parameter, but
+some may ignore it.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Subclass implementations must return a <span class="xref std std-term">topology</span>
+dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vivarium_models.composites.actin_fiber.test_actin_fiber">
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.composites.actin_fiber.</span></span><span class="sig-name descname"><span class="pre">test_actin_fiber</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/actin_fiber.html#test_actin_fiber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.actin_fiber.test_actin_fiber" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-vivarium_models.composites.filament_alternatives">
+<span id="vivarium-models-composites-filament-alternatives-module"></span><h2>vivarium_models.composites.filament_alternatives module<a class="headerlink" href="#module-vivarium_models.composites.filament_alternatives" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="vivarium_models.composites.filament_alternatives.FilamentAlternatives">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.composites.filament_alternatives.</span></span><span class="sig-name descname"><span class="pre">FilamentAlternatives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/filament_alternatives.html#FilamentAlternatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.filament_alternatives.FilamentAlternatives" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">vivarium.core.composer.Composer</span></code></p>
+<p>Base class for <span class="xref std std-term">composer</span> classes.</p>
+<p>Composers generate <span class="xref std std-term">composites</span>.</p>
+<p>All <span class="xref std std-term">composer</span> classes must inherit from this class.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>config: Dictionary of configuration options that can</dt><dd><p>override the class defaults.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="vivarium_models.composites.filament_alternatives.FilamentAlternatives.defaults">
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alternator':</span> <span class="pre">{'choices':</span> <span class="pre">['medyan_active',</span> <span class="pre">'cytosim_active']},</span> <span class="pre">'cytosim':</span> <span class="pre">{'_condition':</span> <span class="pre">('choices',</span> <span class="pre">'cytosim_active'),</span> <span class="pre">'confine':</span> <span class="pre">{'force':</span> <span class="pre">100,</span> <span class="pre">'side':</span> <span class="pre">'inside',</span> <span class="pre">'space':</span> <span class="pre">'cell'},</span> <span class="pre">'time_step':</span> <span class="pre">1.0},</span> <span class="pre">'medyan':</span> <span class="pre">{'_condition':</span> <span class="pre">('choices',</span> <span class="pre">'medyan_active'),</span> <span class="pre">'time_step':</span> <span class="pre">1.0},</span> <span class="pre">'periodic_event':</span> <span class="pre">{'periods':</span> <span class="pre">[2.0,</span> <span class="pre">2.0]}}</span></em><a class="headerlink" href="#vivarium_models.composites.filament_alternatives.FilamentAlternatives.defaults" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vivarium_models.composites.filament_alternatives.FilamentAlternatives.generate_processes">
+<span class="sig-name descname"><span class="pre">generate_processes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/filament_alternatives.html#FilamentAlternatives.generate_processes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.filament_alternatives.FilamentAlternatives.generate_processes" title="Permalink to this definition"></a></dt>
+<dd><p>Generate processes dictionary.</p>
+<p>Every subclass must override this method. For backwards
+compatibility, <code class="xref py py-class docutils literal notranslate"><span class="pre">vivarium.core.process.Step</span></code> objects
+may be included in the returned dictionary, but this practice is
+discouraged and may be disallowed in a future release.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>config: A dictionary of configuration options. All</dt><dd><p>subclass implementation must accept this parameter, but
+some may ignore it.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Subclass implementations must return a dictionary
+mapping process names to instantiated and configured
+<code class="xref py py-class docutils literal notranslate"><span class="pre">vivarium.core.process.Process</span></code> objects.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="vivarium_models.composites.filament_alternatives.FilamentAlternatives.generate_topology">
+<span class="sig-name descname"><span class="pre">generate_topology</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/filament_alternatives.html#FilamentAlternatives.generate_topology"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.filament_alternatives.FilamentAlternatives.generate_topology" title="Permalink to this definition"></a></dt>
+<dd><p>Generate topology dictionary.</p>
+<p>Every subclass must override this method.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>config: A dictionary of configuration options. All</dt><dd><p>subclass implementation must accept this parameter, but
+some may ignore it.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>Subclass implementations must return a <span class="xref std std-term">topology</span>
+dictionary.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="vivarium_models.composites.filament_alternatives.test_filament_alternatives">
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.composites.filament_alternatives.</span></span><span class="sig-name descname"><span class="pre">test_filament_alternatives</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/composites/filament_alternatives.html#test_filament_alternatives"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.composites.filament_alternatives.test_filament_alternatives" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </section>
 <section id="module-vivarium_models.composites">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vivarium_models.composites" title="Permalink to this headline"></a></h2>
