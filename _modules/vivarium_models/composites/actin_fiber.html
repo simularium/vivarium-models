@@ -13,6 +13,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -94,10 +95,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for vivarium_models.composites.actin_fiber</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
-
-<span class="kn">from</span> <span class="nn">vivarium.core.composer</span> <span class="kn">import</span> <span class="n">Composer</span>
+<span></span><span class="kn">from</span> <span class="nn">vivarium.core.composer</span> <span class="kn">import</span> <span class="n">Composer</span>
 <span class="kn">from</span> <span class="nn">vivarium.core.engine</span> <span class="kn">import</span> <span class="n">Engine</span>
 <span class="kn">from</span> <span class="nn">vivarium.processes.alternator</span> <span class="kn">import</span> <span class="n">Alternator</span><span class="p">,</span> <span class="n">PeriodicEvent</span>
 
@@ -105,10 +103,10 @@
 <span class="kn">from</span> <span class="nn">vivarium_medyan</span> <span class="kn">import</span> <span class="n">MedyanProcess</span>
 <span class="kn">from</span> <span class="nn">vivarium_models.processes.monomer_to_fiber</span> <span class="kn">import</span> <span class="n">MonomerToFiber</span>
 <span class="kn">from</span> <span class="nn">vivarium_models.processes.fiber_to_monomer</span> <span class="kn">import</span> <span class="n">FiberToMonomer</span>
-<span class="kn">from</span> <span class="nn">vivarium_models.data.fibers</span> <span class="kn">import</span> <span class="n">initial_fibers</span>
+<span class="kn">from</span> <span class="nn">vivarium_models.data.fibers</span> <span class="kn">import</span> <span class="n">centered_initial_fibers</span>
 
 <span class="n">READDY_TIMESTEP</span> <span class="o">=</span> <span class="mf">0.0000001</span>
-<span class="n">ALTERNATOR_PERIODS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">READDY_TIMESTEP</span><span class="p">]</span>
+<span class="n">ALTERNATOR_PERIODS</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">READDY_TIMESTEP</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="ActinFiber"><a class="viewcode-back" href="../../../vivarium_models.composites.html#vivarium_models.composites.actin_fiber.ActinFiber">[docs]</a><span class="k">class</span> <span class="nc">ActinFiber</span><span class="p">(</span><span class="n">Composer</span><span class="p">):</span>
@@ -118,7 +116,7 @@
             <span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="n">READDY_TIMESTEP</span><span class="p">,</span>
             <span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;readdy_active&quot;</span><span class="p">),</span>
         <span class="p">},</span>
-        <span class="s2">&quot;medyan&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="mf">5.0</span><span class="p">,</span> <span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;medyan_active&quot;</span><span class="p">)},</span>
+        <span class="s2">&quot;medyan&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;medyan_active&quot;</span><span class="p">)},</span>
         <span class="s2">&quot;fiber_to_monomer&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;medyan_active&quot;</span><span class="p">)},</span>
         <span class="s2">&quot;monomer_to_fiber&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;_condition&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;choices&quot;</span><span class="p">,</span> <span class="s2">&quot;readdy_active&quot;</span><span class="p">)},</span>
         <span class="s2">&quot;alternator&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;choices&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">,</span> <span class="s2">&quot;readdy_active&quot;</span><span class="p">]},</span>
@@ -181,7 +179,7 @@
 
 
 <div class="viewcode-block" id="test_actin_fiber"><a class="viewcode-back" href="../../../vivarium_models.composites.html#vivarium_models.composites.actin_fiber.test_actin_fiber">[docs]</a><span class="k">def</span> <span class="nf">test_actin_fiber</span><span class="p">():</span>
-    <span class="n">initial_state</span> <span class="o">=</span> <span class="n">initial_fibers</span>
+    <span class="n">initial_state</span> <span class="o">=</span> <span class="n">centered_initial_fibers</span><span class="p">()</span>
     <span class="n">initial_state</span><span class="p">[</span><span class="s2">&quot;choices&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;readdy_active&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
     <span class="n">medyan_config</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;template_directory&quot;</span><span class="p">:</span> <span class="s2">&quot;vivarium_models/templates/&quot;</span><span class="p">,</span>
@@ -198,7 +196,7 @@
         <span class="n">emitter</span><span class="o">=</span><span class="s2">&quot;simularium&quot;</span><span class="p">,</span>
         <span class="n">emit_processes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">engine</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">engine</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
     <span class="n">engine</span><span class="o">.</span><span class="n">emitter</span><span class="o">.</span><span class="n">get_data</span><span class="p">()</span></div>
 
 

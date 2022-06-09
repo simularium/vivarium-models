@@ -13,6 +13,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -131,9 +132,7 @@
                 <span class="n">key</span><span class="p">:</span> <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">emit_data</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
             <span class="p">}</span></div>
 
-<div class="viewcode-block" id="SimulariumEmitter.get_simularium_fibers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_fibers">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_fibers</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">fibers</span><span class="p">,</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">position_offset</span><span class="p">,</span> <span class="n">trajectory</span>
-    <span class="p">):</span>
+<div class="viewcode-block" id="SimulariumEmitter.get_simularium_fibers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_fibers">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_fibers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">fibers</span><span class="p">,</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shape fiber state data into Simularium fiber agents</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -146,23 +145,18 @@
         <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
         <span class="k">for</span> <span class="n">fiber_id</span> <span class="ow">in</span> <span class="n">fibers</span><span class="p">:</span>
             <span class="n">fiber</span> <span class="o">=</span> <span class="n">fibers</span><span class="p">[</span><span class="n">fiber_id</span><span class="p">]</span>
-            <span class="n">fiber_points</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">point</span><span class="p">)</span> <span class="o">+</span> <span class="n">position_offset</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">]</span>
-            <span class="p">]</span>
             <span class="n">n_agents</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">fiber_id</span><span class="p">))</span>
             <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">])</span>
-            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fiber_points</span><span class="p">))</span>
-            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fiber_points</span><span class="p">)</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">]))</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;subpoints&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fiber</span><span class="p">[</span><span class="s2">&quot;points&quot;</span><span class="p">])</span>
         <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;n_agents&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span><span class="p">)</span>
         <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;viz_types&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="mf">1001.0</span><span class="p">])</span>
         <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]])</span>
         <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;radii&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n_agents</span> <span class="o">*</span> <span class="p">[</span><span class="n">actin_radius</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">trajectory</span></div>
 
-<div class="viewcode-block" id="SimulariumEmitter.get_simularium_monomers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_monomers">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_monomers</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">monomers</span><span class="p">,</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">position_offset</span><span class="p">,</span> <span class="n">trajectory</span>
-    <span class="p">):</span>
+<div class="viewcode-block" id="SimulariumEmitter.get_simularium_monomers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_monomers">[docs]</a>    <span class="k">def</span> <span class="nf">get_simularium_monomers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">monomers</span><span class="p">,</span> <span class="n">actin_radius</span><span class="p">,</span> <span class="n">trajectory</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shape monomer state data into Simularium agents</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -177,9 +171,7 @@
             <span class="n">particle</span> <span class="o">=</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">particle_id</span><span class="p">]</span>
             <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">particle_id</span><span class="p">))</span>
             <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;type_names&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;type_name&quot;</span><span class="p">])</span>
-            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">position_offset</span>
-            <span class="p">)</span>
+            <span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;positions&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]))</span>
             <span class="c1"># visualize edges between particles</span>
             <span class="k">for</span> <span class="n">neighbor_id</span> <span class="ow">in</span> <span class="n">particle</span><span class="p">[</span><span class="s2">&quot;neighbor_ids&quot;</span><span class="p">]:</span>
                 <span class="n">neighbor_id_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">neighbor_id</span><span class="p">)</span>
@@ -192,9 +184,10 @@
                     <span class="n">edge_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
                     <span class="n">edge_positions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
                         <span class="p">[</span>
-                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="n">position_offset</span><span class="p">,</span>
-                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">neighbor_id_str</span><span class="p">][</span><span class="s2">&quot;position&quot;</span><span class="p">])</span>
-                            <span class="o">+</span> <span class="n">position_offset</span><span class="p">,</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">particle</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]),</span>
+                            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                                <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">][</span><span class="n">neighbor_id_str</span><span class="p">][</span><span class="s2">&quot;position&quot;</span><span class="p">]</span>
+                            <span class="p">),</span>
                         <span class="p">]</span>
                     <span class="p">)</span>
         <span class="n">n_agents</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">trajectory</span><span class="p">[</span><span class="s2">&quot;unique_ids&quot;</span><span class="p">][</span><span class="n">time_index</span><span class="p">])</span>
@@ -321,10 +314,16 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Use choices from state to determine which simulator ran</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;readdy_active&quot;</span><span class="p">]:</span>
+        <span class="n">medyan_active</span> <span class="o">=</span> <span class="s2">&quot;medyan_active&quot;</span> <span class="ow">in</span> <span class="n">choices</span> <span class="ow">and</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">]</span>
+        <span class="n">readdy_active</span> <span class="o">=</span> <span class="s2">&quot;readdy_active&quot;</span> <span class="ow">in</span> <span class="n">choices</span> <span class="ow">and</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;readdy_active&quot;</span><span class="p">]</span>
+        <span class="n">cytosim_active</span> <span class="o">=</span> <span class="s2">&quot;cytosim_active&quot;</span> <span class="ow">in</span> <span class="n">choices</span> <span class="ow">and</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;cytosim_active&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">medyan_active</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">readdy_active</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cytosim_active</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;medyan&quot;</span>
-        <span class="k">elif</span> <span class="ow">not</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;medyan_active&quot;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">choices</span><span class="p">[</span><span class="s2">&quot;readdy_active&quot;</span><span class="p">]:</span>
-            <span class="k">return</span> <span class="s2">&quot;readdy&quot;</span></div>
+        <span class="k">elif</span> <span class="n">readdy_active</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">medyan_active</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cytosim_active</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;readdy&quot;</span>
+        <span class="k">elif</span> <span class="n">cytosim_active</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">medyan_active</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">readdy_active</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;cytosim&quot;</span></div>
 
 <div class="viewcode-block" id="SimulariumEmitter.get_data"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_data">[docs]</a>    <span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -363,52 +362,47 @@
             <span class="sd">&quot;&quot;&quot;visualize the first frame in the simulator that started first</span>
 <span class="sd">            then subsequent frames according the the simulator that ran </span>
 <span class="sd">            right before that time point&quot;&quot;&quot;</span>
-            <span class="k">if</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;medyan&quot;</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  visualize medyan&quot;</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">box_dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">box_dimensions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers_box_extent&quot;</span><span class="p">])</span>
-                <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_fibers</span><span class="p">(</span>
-                    <span class="n">vizualize_time_index</span><span class="p">,</span>
-                    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers&quot;</span><span class="p">],</span>
-                    <span class="n">actin_radius</span><span class="p">,</span>
-                    <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">box_dimensions</span><span class="p">,</span>
-                    <span class="n">trajectory</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;readdy&quot;</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  visualize readdy&quot;</span><span class="p">)</span>
-                <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_monomers</span><span class="p">(</span>
-                    <span class="n">vizualize_time_index</span><span class="p">,</span>
-                    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">],</span>
-                    <span class="n">actin_radius</span><span class="p">,</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">][</span><span class="s2">&quot;box_center&quot;</span><span class="p">])</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">box_dimensions</span><span class="p">,</span>
-                    <span class="n">trajectory</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">prev_simulator</span> <span class="o">!=</span> <span class="n">current_simulator</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">current_simulator</span> <span class="o">==</span> <span class="s2">&quot;medyan&quot;</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  visualize medyan&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">current_simulator</span> <span class="o">==</span> <span class="s2">&quot;medyan&quot;</span> <span class="ow">or</span> <span class="n">current_simulator</span> <span class="o">==</span> <span class="s2">&quot;cytosim&quot;</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  visualize current </span><span class="si">{</span><span class="n">current_simulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">box_dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">box_dimensions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers_box_extent&quot;</span><span class="p">])</span>
                     <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_fibers</span><span class="p">(</span>
                         <span class="n">vizualize_time_index</span><span class="p">,</span>
                         <span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers&quot;</span><span class="p">],</span>
                         <span class="n">actin_radius</span><span class="p">,</span>
-                        <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">box_dimensions</span><span class="p">,</span>
                         <span class="n">trajectory</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">current_simulator</span> <span class="o">==</span> <span class="s2">&quot;readdy&quot;</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  visualize readdy&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  visualize current readdy&quot;</span><span class="p">)</span>
                     <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_monomers</span><span class="p">(</span>
                         <span class="n">vizualize_time_index</span><span class="p">,</span>
                         <span class="n">state</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">],</span>
                         <span class="n">actin_radius</span><span class="p">,</span>
-                        <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">][</span><span class="s2">&quot;box_center&quot;</span><span class="p">])</span>
-                        <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">box_dimensions</span><span class="p">,</span>
                         <span class="n">trajectory</span><span class="p">,</span>
                     <span class="p">)</span>
                     <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;medyan&quot;</span> <span class="ow">or</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;cytosim&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  visualize previous </span><span class="si">{</span><span class="n">prev_simulator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">box_dimensions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">box_dimensions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers_box_extent&quot;</span><span class="p">])</span>
+                <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_fibers</span><span class="p">(</span>
+                    <span class="n">vizualize_time_index</span><span class="p">,</span>
+                    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;fibers&quot;</span><span class="p">],</span>
+                    <span class="n">actin_radius</span><span class="p">,</span>
+                    <span class="n">trajectory</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">prev_simulator</span> <span class="o">==</span> <span class="s2">&quot;readdy&quot;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  visualize readdy&quot;</span><span class="p">)</span>
+                <span class="n">trajectory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_simularium_monomers</span><span class="p">(</span>
+                    <span class="n">vizualize_time_index</span><span class="p">,</span>
+                    <span class="n">state</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">],</span>
+                    <span class="n">actin_radius</span><span class="p">,</span>
+                    <span class="n">trajectory</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">vizualize_time_index</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="n">simularium_converter</span> <span class="o">=</span> <span class="n">SimulariumEmitter</span><span class="o">.</span><span class="n">get_simularium_converter</span><span class="p">(</span>
             <span class="n">trajectory</span><span class="p">,</span> <span class="n">box_dimensions</span><span class="p">,</span> <span class="mf">0.1</span>
         <span class="p">)</span>

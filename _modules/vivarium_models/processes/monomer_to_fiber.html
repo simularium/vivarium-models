@@ -13,6 +13,7 @@
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/jquery.js"></script>
         <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -132,7 +133,7 @@
             <span class="p">},</span>
             <span class="s2">&quot;monomers&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;box_center&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">3000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">]),</span>
+                    <span class="s2">&quot;_default&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1000.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]),</span>
                     <span class="s2">&quot;_updater&quot;</span><span class="p">:</span> <span class="s2">&quot;set&quot;</span><span class="p">,</span>
                     <span class="s2">&quot;_emit&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
                 <span class="p">},</span>
@@ -181,13 +182,11 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;in monomer to fiber deriver next update&quot;</span><span class="p">)</span>
 
         <span class="n">monomers</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;monomers&quot;</span><span class="p">]</span>
-        <span class="n">monomer_box_center</span> <span class="o">=</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;box_center&quot;</span><span class="p">]</span>
         <span class="n">monomer_box_size</span> <span class="o">=</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;box_size&quot;</span><span class="p">]</span>
         <span class="n">previous_fibers</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="s2">&quot;fibers&quot;</span><span class="p">]</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;box_size = </span><span class="si">{</span><span class="n">monomer_box_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">monomer_fibers</span> <span class="o">=</span> <span class="n">MonomerToFiber</span><span class="o">.</span><span class="n">generate_fibers_from_monomers</span><span class="p">(</span>
-            <span class="n">monomers</span><span class="p">,</span> <span class="n">monomer_box_center</span><span class="p">,</span> <span class="n">monomer_box_size</span>
+            <span class="n">monomers</span><span class="p">,</span> <span class="n">monomer_box_size</span>
         <span class="p">)</span>
 
         <span class="n">fiber_update</span> <span class="o">=</span> <span class="n">agents_update</span><span class="p">(</span><span class="n">previous_fibers</span><span class="p">,</span> <span class="n">monomer_fibers</span><span class="p">)</span>
@@ -209,7 +208,7 @@
 
 <div class="viewcode-block" id="MonomerToFiber.get_actin_monomer_positions"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_actin_monomer_positions">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_actin_monomer_positions</span><span class="p">(</span>
-        <span class="n">start_actin_id</span><span class="p">,</span> <span class="n">particles</span><span class="p">,</span> <span class="n">box_center</span><span class="p">,</span> <span class="n">prev_actin_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span>
+        <span class="n">start_actin_id</span><span class="p">,</span> <span class="n">particles</span><span class="p">,</span> <span class="n">prev_actin_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get monomer positions for an actin chain starting</span>
@@ -218,14 +217,14 @@
         <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">start_actin</span> <span class="o">=</span> <span class="n">particles</span><span class="p">[</span><span class="n">start_actin_id</span><span class="p">]</span>
-        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_actin</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">box_center</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">start_actin</span><span class="p">[</span><span class="s2">&quot;position&quot;</span><span class="p">])</span>
         <span class="n">next_actin_id</span> <span class="o">=</span> <span class="n">MonomerToFiber</span><span class="o">.</span><span class="n">get_next_actin_id</span><span class="p">(</span>
             <span class="n">prev_actin_id</span><span class="p">,</span> <span class="n">start_actin</span><span class="p">[</span><span class="s2">&quot;neighbor_ids&quot;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">next_actin_id</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">return</span> <span class="n">MonomerToFiber</span><span class="o">.</span><span class="n">get_actin_monomer_positions</span><span class="p">(</span>
-            <span class="n">next_actin_id</span><span class="p">,</span> <span class="n">particles</span><span class="p">,</span> <span class="n">box_center</span><span class="p">,</span> <span class="n">start_actin_id</span><span class="p">,</span> <span class="n">result</span>
+            <span class="n">next_actin_id</span><span class="p">,</span> <span class="n">particles</span><span class="p">,</span> <span class="n">start_actin_id</span><span class="p">,</span> <span class="n">result</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="MonomerToFiber.get_fiber_end_point"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber_end_point">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -245,12 +244,12 @@
         <span class="k">return</span> <span class="n">axis_pos1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">axis_pos2</span> <span class="o">-</span> <span class="n">axis_pos1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MonomerToFiber.get_fiber"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_fiber</span><span class="p">(</span><span class="n">topology_id</span><span class="p">,</span> <span class="n">pointed_actin_id</span><span class="p">,</span> <span class="n">monomers</span><span class="p">,</span> <span class="n">box_center</span><span class="p">,</span> <span class="n">box_size</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_fiber</span><span class="p">(</span><span class="n">topology_id</span><span class="p">,</span> <span class="n">pointed_actin_id</span><span class="p">,</span> <span class="n">monomers</span><span class="p">,</span> <span class="n">box_size</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get data for a fiber from a chain of particles</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="n">MonomerToFiber</span><span class="o">.</span><span class="n">get_actin_monomer_positions</span><span class="p">(</span>
-            <span class="n">pointed_actin_id</span><span class="p">,</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">],</span> <span class="n">box_center</span>
+            <span class="n">pointed_actin_id</span><span class="p">,</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;particles&quot;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">{</span>
             <span class="s2">&quot;type_name&quot;</span><span class="p">:</span> <span class="n">monomers</span><span class="p">[</span><span class="s2">&quot;topologies&quot;</span><span class="p">][</span><span class="n">topology_id</span><span class="p">][</span><span class="s2">&quot;type_name&quot;</span><span class="p">],</span>
@@ -261,7 +260,7 @@
         <span class="p">}</span></div>
 
 <div class="viewcode-block" id="MonomerToFiber.generate_fibers_from_monomers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.generate_fibers_from_monomers">[docs]</a>    <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">generate_fibers_from_monomers</span><span class="p">(</span><span class="n">monomers</span><span class="p">,</span> <span class="n">box_center</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="mf">500.0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate_fibers_from_monomers</span><span class="p">(</span><span class="n">monomers</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="mf">500.0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transform monomer data into fiber data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -277,7 +276,6 @@
                 <span class="n">topology_id</span><span class="p">,</span>
                 <span class="n">pointed_actin_ids</span><span class="p">[</span><span class="n">topology_id</span><span class="p">],</span>
                 <span class="n">monomers</span><span class="p">,</span>
-                <span class="n">box_center</span><span class="p">,</span>
                 <span class="n">box_size</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span></div></div>
