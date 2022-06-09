@@ -1,9 +1,5 @@
 # vivarium-models
 
-[![Build Status](https://github.com/simularium/vivarium_models/workflows/Build%20Main/badge.svg)](https://github.com/simularium/vivarium_models/actions)
-[![Documentation](https://github.com/simularium/vivarium_models/workflows/Documentation/badge.svg)](https://simularium.github.io/vivarium_models/)
-[![Code Coverage](https://codecov.io/gh/simularium/vivarium_models/branch/main/graph/badge.svg)](https://codecov.io/gh/simularium/vivarium_models)
-
 Connecting Simularium prototypes together using Vivarium
 
 ---
