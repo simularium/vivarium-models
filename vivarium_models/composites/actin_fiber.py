@@ -1,6 +1,3 @@
-import numpy as np
-import argparse
-
 from vivarium.core.composer import Composer
 from vivarium.core.engine import Engine
 from vivarium.processes.alternator import Alternator, PeriodicEvent
@@ -9,10 +6,10 @@ from vivarium_models.processes.readdy_actin_process import ReaddyActinProcess
 from vivarium_medyan import MedyanProcess
 from vivarium_models.processes.monomer_to_fiber import MonomerToFiber
 from vivarium_models.processes.fiber_to_monomer import FiberToMonomer
-from vivarium_models.data.fibers import initial_fibers
+from vivarium_models.data.fibers import centered_initial_fibers
 
 READDY_TIMESTEP = 0.0000001
-ALTERNATOR_PERIODS = [10.0, READDY_TIMESTEP]
+ALTERNATOR_PERIODS = [2.0, READDY_TIMESTEP]
 
 
 class ActinFiber(Composer):
@@ -22,7 +19,7 @@ class ActinFiber(Composer):
             "time_step": READDY_TIMESTEP,
             "_condition": ("choices", "readdy_active"),
         },
-        "medyan": {"time_step": 5.0, "_condition": ("choices", "medyan_active")},
+        "medyan": {"time_step": 2.0, "_condition": ("choices", "medyan_active")},
         "fiber_to_monomer": {"_condition": ("choices", "medyan_active")},
         "monomer_to_fiber": {"_condition": ("choices", "readdy_active")},
         "alternator": {"choices": ["medyan_active", "readdy_active"]},
@@ -85,7 +82,7 @@ class ActinFiber(Composer):
 
 
 def test_actin_fiber():
-    initial_state = initial_fibers
+    initial_state = centered_initial_fibers()
     initial_state["choices"] = {"medyan_active": True, "readdy_active": False}
     medyan_config = {
         "template_directory": "vivarium_models/templates/",
@@ -102,7 +99,7 @@ def test_actin_fiber():
         emitter="simularium",
         emit_processes=True,
     )
-    engine.update(15)
+    engine.update(5)
     engine.emitter.get_data()
 
 

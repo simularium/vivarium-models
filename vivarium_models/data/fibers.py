@@ -215,3 +215,14 @@ initial_fibers = {
         },
     },
 }
+
+
+def centered_initial_fibers():
+    result = initial_fibers
+    for fiber_id in initial_fibers["fibers"]:
+        fiber_points = initial_fibers["fibers"][fiber_id]["points"]
+        for point_index in range(len(fiber_points)):
+            result["fibers"][fiber_id]["points"][point_index] = (
+                fiber_points[point_index] - 0.5 * initial_fibers["fibers_box_extent"]
+            )
+    return result

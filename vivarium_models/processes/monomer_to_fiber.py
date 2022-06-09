@@ -36,7 +36,7 @@ class MonomerToFiber(Deriver):
             },
             "monomers": {
                 "box_center": {
-                    "_default": np.array([3000.0, 1000.0, 1000.0]),
+                    "_default": np.array([1000.0, 0.0, 0.0]),
                     "_updater": "set",
                     "_emit": True,
                 },
@@ -85,13 +85,11 @@ class MonomerToFiber(Deriver):
         print("in monomer to fiber deriver next update")
 
         monomers = states["monomers"]
-        monomer_box_center = monomers["box_center"]
         monomer_box_size = monomers["box_size"]
         previous_fibers = states["fibers"]
 
-        print(f"box_size = {monomer_box_size}")
         monomer_fibers = MonomerToFiber.generate_fibers_from_monomers(
-            monomers, monomer_box_center, monomer_box_size
+            monomers, monomer_box_size
         )
 
         fiber_update = agents_update(previous_fibers, monomer_fibers)
@@ -113,7 +111,7 @@ class MonomerToFiber(Deriver):
 
     @staticmethod
     def get_actin_monomer_positions(
-        start_actin_id, particles, box_center, prev_actin_id=-1, result=None
+        start_actin_id, particles, prev_actin_id=-1, result=None
     ):
         """
         Get monomer positions for an actin chain starting
@@ -122,14 +120,14 @@ class MonomerToFiber(Deriver):
         if result is None:
             result = []
         start_actin = particles[start_actin_id]
-        result.append(start_actin["position"] + box_center)
+        result.append(start_actin["position"])
         next_actin_id = MonomerToFiber.get_next_actin_id(
             prev_actin_id, start_actin["neighbor_ids"]
         )
         if next_actin_id < 0:
             return result
         return MonomerToFiber.get_actin_monomer_positions(
-            next_actin_id, particles, box_center, start_actin_id, result
+            next_actin_id, particles, start_actin_id, result
         )
 
     @staticmethod
@@ -149,12 +147,12 @@ class MonomerToFiber(Deriver):
         return axis_pos1 - 1.5 * (axis_pos2 - axis_pos1)
 
     @staticmethod
-    def get_fiber(topology_id, pointed_actin_id, monomers, box_center, box_size):
+    def get_fiber(topology_id, pointed_actin_id, monomers, box_size):
         """
         Get data for a fiber from a chain of particles
         """
         positions = MonomerToFiber.get_actin_monomer_positions(
-            pointed_actin_id, monomers["particles"], box_center
+            pointed_actin_id, monomers["particles"]
         )
         return {
             "type_name": monomers["topologies"][topology_id]["type_name"],
@@ -165,7 +163,7 @@ class MonomerToFiber(Deriver):
         }
 
     @staticmethod
-    def generate_fibers_from_monomers(monomers, box_center, box_size=500.0):
+    def generate_fibers_from_monomers(monomers, box_size=500.0):
         """
         Transform monomer data into fiber data
         """
@@ -181,7 +179,6 @@ class MonomerToFiber(Deriver):
                 topology_id,
                 pointed_actin_ids[topology_id],
                 monomers,
-                box_center,
                 box_size,
             )
         return result

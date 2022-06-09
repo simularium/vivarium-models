@@ -1,4 +1,4 @@
-from vivarium.core.engine import Engine, pf
+from vivarium.core.engine import Engine
 
 
 class Scan:

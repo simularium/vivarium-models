@@ -36,7 +36,7 @@ class FiberToMonomer(Deriver):
             },
             "monomers": {
                 "box_center": {
-                    "_default": np.array([3000.0, 1000.0, 1000.0]),
+                    "_default": np.array([1000.0, 0.0, 0.0]),
                     "_updater": "set",
                     "_emit": True,
                 },
