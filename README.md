@@ -1,18 +1,23 @@
 # vivarium-models
 
+[![Build Status](https://github.com/simularium/vivarium_models/workflows/Build%20Main/badge.svg)](https://github.com/simularium/vivarium_models/actions)
+[![Documentation](https://github.com/simularium/vivarium_models/workflows/Documentation/badge.svg)](https://simularium.github.io/vivarium_models/)
+[![Code Coverage](https://codecov.io/gh/simularium/vivarium_models/branch/main/graph/badge.svg)](https://codecov.io/gh/simularium/vivarium_models)
+
 Connecting Simularium prototypes together using Vivarium
 
 ---
 
 # Installation
 
-First, we recommend you create an environment (with pyenv, conda, or similar).
+## Docker
 
-Then, to install:
-**Stable Release:** `pip install vivarium_medyan` (coming soon)<br>
-**Development Head:** `pip install git+https://github.com/vivarium-collective/vivarium-MEDYAN.git`<br>
+First, install Docker (https://docs.docker.com/engine/install/). Using Docker, you can avoid building and installing the simulation engine dependencies.
 
-## Local editable installation with pyenv + conda
+If using a package manager, like homebrew for mac, use `brew install --cask docker`
+then open the Docker app in Applications/ and give it permissions.
+
+## Installation with pyenv + conda
 
 To see all pyenv versions:
 
@@ -35,7 +40,7 @@ pyenv local vivarium-models
 conda env update -f env.yml
 ```
 
-## Local editable installation with conda alone
+## Installation with conda alone
 
 Install conda: https://docs.conda.io/en/latest/miniconda.html
 
@@ -54,32 +59,16 @@ To update:
 conda env update -f env.yml
 ```
 
-### MEDYAN Installation
+## Alternatively:
 
-Download the MEDYAN source here: http://medyan.org/download.html
+**Stable Release:** `pip install vivarium_models` (coming soon)<br>
+**Development Head:** `pip install git+https://github.com/simularium/vivarium-models.git`
 
-Unzip and cd into that dir, then at the command line:
+ReaDDy models depend on ReaDDy, which requires conda. Install ReaDDy with `conda install -c readdy/label/dev readdy` after adding the conda-forge channel `conda config --add channels conda-forge`
 
-```
-./conf.sh
-cd build
-make
-```
+## Documentation
 
-### Cytosim Installation
-
-First, clone the repo:
-
-    git clone https://gitlab.com/f-nedelec/cytosim.git
-
-Change the header to allow for 3d (in file src/math/dim.h)
-
-    #define DIM 3 # instead of 2
-
-Then, make the executable (avoid the GLEW functionality):
-
-    make sim
-    make report
+For full package documentation please visit [simularium.github.io/vivarium_models](https://simularium.github.io/vivarium_models).
 
 ## Development
 
