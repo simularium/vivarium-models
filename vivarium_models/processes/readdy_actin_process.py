@@ -2,7 +2,6 @@ import numpy as np
 
 from vivarium.core.process import Process
 from vivarium.core.engine import Engine, pf
-from vivarium.core.composition import simulate_process
 from vivarium.core.control import run_library_cli
 
 from tqdm import tqdm
@@ -20,7 +19,7 @@ NAME = "ReaDDy_actin"
 
 test_monomer_data = {
     "monomers": {
-        "box_center": np.array([3000.0, 1000.0, 1000.0]),  # to be chosen by alternator
+        "box_center": np.array([1000.0, 0.0, 0.0]),
         "box_size": 500.0,
         "topologies": {
             1: {
@@ -35,17 +34,17 @@ test_monomer_data = {
         "particles": {
             0: {
                 "type_name": "actin#free_ATP",
-                "position": np.array([2, 0, 0]),
+                "position": np.array([1002, 0, 0]),
                 "neighbor_ids": [],
             },
             1: {
                 "type_name": "arp2",
-                "position": np.array([0, 0, 0]),
+                "position": np.array([1000, 0, 0]),
                 "neighbor_ids": [2],
             },
             2: {
                 "type_name": "arp3#ATP",
-                "position": np.array([0, 0, 4]),
+                "position": np.array([1000, 0, 4]),
                 "neighbor_ids": [1],
             },
         },
@@ -128,7 +127,7 @@ class ReaddyActinProcess(Process):
         return {
             "monomers": {
                 "box_center": {
-                    "_default": np.array([3000.0, 1000.0, 1000.0]),
+                    "_default": np.array([1000.0, 0.0, 0.0]),
                     "_updater": "set",
                     "_emit": True,
                 },
@@ -221,8 +220,17 @@ class ReaddyActinProcess(Process):
         readdy_monomers = ReaddyUtil.get_current_monomers(
             self.readdy_simulation.current_topologies
         )
+        transformed_monomers = ReaddyActinProcess._transform_monomers(
+            readdy_monomers, states["monomers"]["box_center"]
+        )
 
-        return create_monomer_update(states["monomers"], readdy_monomers)
+        return create_monomer_update(states["monomers"], transformed_monomers)
+
+    @staticmethod
+    def _transform_monomers(monomers, box_center):
+        for particle_id in monomers["particles"]:
+            monomers["particles"][particle_id]["position"] += box_center
+        return monomers
 
     # functions to configure and run the process
     def run_readdy_actin_process():
@@ -232,21 +240,25 @@ class ReaddyActinProcess(Process):
         Returns:
             The simulation output.
         """
-        # initialize the process
-        readdy_actin_process = ReaddyActinProcess({})
-
-        # run the simulation
-        sim_settings = {
-            "total_time": 0.000000005,  # 50 steps
-            "initial_state": test_monomer_data,
-        }
-        output = simulate_process(readdy_actin_process, sim_settings)
+        engine = Engine(
+            **{
+                "processes": {"readdy_actin_process": ReaddyActinProcess()},
+                "topology": {
+                    "readdy_actin_process": {
+                        "monomers": ("monomers",),
+                    },
+                },
+                "initial_state": test_monomer_data,
+            }
+        )
+        engine.update(0.000000005)  # 50 steps
+        output = engine.emitter.get_data()
         return output
 
 
 def get_monomer_data():
     monomer_data = ActinTestData.linear_actin_monomers()
-    monomer_data["box_center"] = np.array([3000.0, 1000.0, 1000.0])
+    monomer_data["box_center"] = np.zeros(3)
     monomer_data["box_size"] = 500.0
     return {"monomers": monomer_data}
 
@@ -396,12 +408,8 @@ def test_scan_readdy():
     }
 
     scan = Scan(parameters, ReaddyActinProcess, 0.0000001, metrics=metrics)
-
     results = scan.run_scan()
-
-    import ipdb
-
-    ipdb.set_trace()
+    print(results)
 
 
 library = {"0": test_readdy_actin_process, "1": test_scan_readdy}

@@ -141,4 +141,5 @@ cython_debug/
 .python-version
 /in
 /out
+/working
 *.simularium
