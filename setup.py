@@ -81,7 +81,7 @@ setup(
     name="vivarium_models",
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*"]),
     package_data={
-        '': ['templates/*']},
+        '': ['templates/*', 'templates/medyan_Chandrasekaran_2019_no_tread_2mUNI_alphaA_0.1_MA_0.675/*']},
     python_requires=">=3.8",
     setup_requires=setup_requirements,
     test_suite="vivarium_models/tests",
