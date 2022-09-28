@@ -13,6 +13,20 @@ First, install Docker (https://docs.docker.com/engine/install/). Using Docker, y
 If using a package manager, like homebrew for mac, use `brew install --cask docker`
 then open the Docker app in Applications/ and give it permissions.
 
+## Docker to Docker (WIP)
+
+To run `vivarium_models` in a docker container and spin up and communicate with docker containers running the simulation engines (e.g. Cytosim and MEDYAN):
+1. build docker image:
+```bash
+docker build -t vivarium-models:latest ./
+```
+2. run docker image:
+```bash
+docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v [absolute_path_to_vivarium_models/templates/]:/home/vivarium_models/templates/ --name models-test vivarium-models:latest
+```
+
+This is work in progress, currently erroring on `docker.from_env().containers.run()` in the Cytosim process (ln 115) with an Internal Server Error. Likely the volume mounts for the Cytosim container need work.
+
 ## Installation with pyenv + conda
 
 To see all pyenv versions:

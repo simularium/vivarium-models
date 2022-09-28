@@ -9,7 +9,7 @@ SHELL ["conda", "run", "-n", "vivarium-models", "/bin/bash", "-c"]
 # RUN ["/bin/bash", "-c", "conda", "activate", "vivarium-models"]
 # RUN ["conda", "env", "list"]
 
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "vivarium-models", "python", "-m", "vivarium_models.composites.actin_fiber"]
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "vivarium-models", "python", "-m", "vivarium_models.composites.filament_alternatives"]
 
 # RUN conda activate vivarium-models
 # RUN conda init bash
