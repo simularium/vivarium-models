@@ -2,7 +2,7 @@ import numpy as np
 
 from vivarium.core.process import Deriver
 from vivarium.core.engine import Engine, pf
-from simularium_models_util.actin import ActinUtil, ActinTestData
+from simularium_readdy_models.actin import ActinUtil, ActinTestData
 
 from ..util import agents_update
 
