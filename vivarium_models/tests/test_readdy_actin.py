@@ -5,7 +5,7 @@
 Tests for actin ReaDDy models
 """
 
-from vivarium_models import ReaddyActinProcess
+# from vivarium_models import ReaddyActinProcess
 
 
 def test_readdy_actin_process():
