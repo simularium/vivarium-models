@@ -1,38 +1,77 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" />
+  <meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>vivarium_models.processes package &mdash; vivarium-models 0.0.0 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
-    <script src="_static/js/theme.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Contributing" href="contributing.html" />
     <link rel="prev" title="vivarium_models.library package" href="vivarium_models.library.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
+
+          
             <a href="index.html" class="icon icon-home"> vivarium-models
+          
+
+          
           </a>
+
+          
+            
+            
               <div class="version">
                 0.0.0
               </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -40,7 +79,18 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
@@ -59,8 +109,16 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="vivarium_models.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="vivarium_models.html#module-vivarium_models">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vivarium_models.html#vivarium_models.util.agents_update"><code class="docutils literal notranslate"><span class="pre">agents_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="vivarium_models.html#vivarium_models.util.create_monomer_update"><code class="docutils literal notranslate"><span class="pre">create_monomer_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="vivarium_models.html#vivarium_models.util.format_monomer_results"><code class="docutils literal notranslate"><span class="pre">format_monomer_results()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="vivarium_models.html#module-vivarium_models">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="vivarium_models.html#vivarium_models.get_module_version"><code class="docutils literal notranslate"><span class="pre">get_module_version()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -72,54 +130,103 @@
 </li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="index.html">vivarium-models</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
+    
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
           <li><a href="modules.html">vivarium_models</a> &raquo;</li>
+        
           <li><a href="vivarium_models.html">vivarium_models package</a> &raquo;</li>
+        
       <li>vivarium_models.processes package</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
+          
             <a href="_sources/vivarium_models.processes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
       </li>
-  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
-        <a href="vivarium_models.library.html" class="btn btn-neutral float-left" title="vivarium_models.library package" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    
+  </ul>
+
+  
+  <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
+      
         <a href="contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+      
+      
+        <a href="vivarium_models.library.html" class="btn btn-neutral float-left" title="vivarium_models.library package" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
   </div>
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <section id="vivarium-models-processes-package">
-<h1>vivarium_models.processes package<a class="headerlink" href="#vivarium-models-processes-package" title="Permalink to this heading"></a></h1>
+<h1>vivarium_models.processes package<a class="headerlink" href="#vivarium-models-processes-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-vivarium_models.processes.fiber_to_monomer">
-<span id="vivarium-models-processes-fiber-to-monomer-module"></span><h2>vivarium_models.processes.fiber_to_monomer module<a class="headerlink" href="#module-vivarium_models.processes.fiber_to_monomer" title="Permalink to this heading"></a></h2>
+<span id="vivarium-models-processes-fiber-to-monomer-module"></span><h2>vivarium_models.processes.fiber_to_monomer module<a class="headerlink" href="#module-vivarium_models.processes.fiber_to_monomer" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="vivarium_models.processes.fiber_to_monomer.FiberToMonomer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.fiber_to_monomer.</span></span><span class="sig-name descname"><span class="pre">FiberToMonomer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#FiberToMonomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.fiber_to_monomer.</span></span><span class="sig-name descname"><span class="pre">FiberToMonomer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#FiberToMonomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vivarium_models.processes.fiber_to_monomer.FiberToMonomer.defaults">
-<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.defaults" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.defaults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.fiber_to_monomer.FiberToMonomer.next_update">
-<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#FiberToMonomer.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.next_update" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#FiberToMonomer.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.next_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the next update to the simulation state.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -138,7 +245,7 @@ each subclass to return an update.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.fiber_to_monomer.FiberToMonomer.ports_schema">
-<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#FiberToMonomer.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.ports_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#FiberToMonomer.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.FiberToMonomer.ports_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schemas for each port.</p>
 <p>This must be overridden by any subclasses.</p>
 <p>Use the glob ‘*’ schema to declare expected sub-store structure,
@@ -188,48 +295,48 @@ assigned properties through schema_keys declared in
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.fiber_to_monomer.get_initial_fiber_data">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.fiber_to_monomer.</span></span><span class="sig-name descname"><span class="pre">get_initial_fiber_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#get_initial_fiber_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.get_initial_fiber_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.fiber_to_monomer.</span></span><span class="sig-name descname"><span class="pre">get_initial_fiber_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#get_initial_fiber_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.get_initial_fiber_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.fiber_to_monomer.test_fiber_to_monomer">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.fiber_to_monomer.</span></span><span class="sig-name descname"><span class="pre">test_fiber_to_monomer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#test_fiber_to_monomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.test_fiber_to_monomer" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.fiber_to_monomer.</span></span><span class="sig-name descname"><span class="pre">test_fiber_to_monomer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/fiber_to_monomer.html#test_fiber_to_monomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.fiber_to_monomer.test_fiber_to_monomer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-vivarium_models.processes.monomer_to_fiber">
-<span id="vivarium-models-processes-monomer-to-fiber-module"></span><h2>vivarium_models.processes.monomer_to_fiber module<a class="headerlink" href="#module-vivarium_models.processes.monomer_to_fiber" title="Permalink to this heading"></a></h2>
+<span id="vivarium-models-processes-monomer-to-fiber-module"></span><h2>vivarium_models.processes.monomer_to_fiber module<a class="headerlink" href="#module-vivarium_models.processes.monomer_to_fiber" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.monomer_to_fiber.</span></span><span class="sig-name descname"><span class="pre">MonomerToFiber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.monomer_to_fiber.</span></span><span class="sig-name descname"><span class="pre">MonomerToFiber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.defaults">
-<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.defaults" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.defaults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.generate_fibers_from_monomers">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_fibers_from_monomers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.generate_fibers_from_monomers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.generate_fibers_from_monomers" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_fibers_from_monomers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.generate_fibers_from_monomers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.generate_fibers_from_monomers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Transform monomer data into fiber data</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_actin_monomer_positions">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_actin_monomer_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_actin_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_actin_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_actin_monomer_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_actin_monomer_positions" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_actin_monomer_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_actin_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">particles</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prev_actin_id</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_actin_monomer_positions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_actin_monomer_positions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get monomer positions for an actin chain starting
 at the pointed end’s start_actin_id</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_fiber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topology_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed_actin_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_fiber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_fiber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">topology_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pointed_actin_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_fiber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get data for a fiber from a chain of particles</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber_end_point">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_fiber_end_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end_direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_fiber_end_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber_end_point" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_fiber_end_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">end_direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_size</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_fiber_end_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber_end_point" title="Permalink to this definition">¶</a></dt>
 <dd><p>Since we can only calculate axis position
 given a neighbor in each direction,
 use the positions of the first and second actin from the end
@@ -238,14 +345,14 @@ to extrapolate the end axis position</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_next_actin_id">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_next_actin_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prev_actin_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_next_actin_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_next_actin_id" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_next_actin_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prev_actin_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbor_ids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.get_next_actin_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_next_actin_id" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the ID of the neighbor other than
 the neighbor with the prev_actin_id</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.next_update">
-<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.next_update" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.next_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the next update to the simulation state.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -264,7 +371,7 @@ each subclass to return an update.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.MonomerToFiber.ports_schema">
-<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.ports_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#MonomerToFiber.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.ports_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schemas for each port.</p>
 <p>This must be overridden by any subclasses.</p>
 <p>Use the glob ‘*’ schema to declare expected sub-store structure,
@@ -314,26 +421,26 @@ assigned properties through schema_keys declared in
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.monomer_to_fiber.test_fiber_to_monomer">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.monomer_to_fiber.</span></span><span class="sig-name descname"><span class="pre">test_fiber_to_monomer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#test_fiber_to_monomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.test_fiber_to_monomer" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.monomer_to_fiber.</span></span><span class="sig-name descname"><span class="pre">test_fiber_to_monomer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/monomer_to_fiber.html#test_fiber_to_monomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.monomer_to_fiber.test_fiber_to_monomer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-vivarium_models.processes.readdy_actin_process">
-<span id="vivarium-models-processes-readdy-actin-process-module"></span><h2>vivarium_models.processes.readdy_actin_process module<a class="headerlink" href="#module-vivarium_models.processes.readdy_actin_process" title="Permalink to this heading"></a></h2>
+<span id="vivarium-models-processes-readdy-actin-process-module"></span><h2>vivarium_models.processes.readdy_actin_process module<a class="headerlink" href="#module-vivarium_models.processes.readdy_actin_process" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">ReaddyActinProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">ReaddyActinProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Process</span></code></p>
 <p>This process uses ReaDDy to model the dynamics
 of branched actin networks made of spatially explicit monomers</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.defaults">
-<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'actin_concentration':</span> <span class="pre">200.0,</span> <span class="pre">'actin_radius':</span> <span class="pre">2.0,</span> <span class="pre">'arp23_concentration':</span> <span class="pre">10.0,</span> <span class="pre">'arp23_radius':</span> <span class="pre">2.0,</span> <span class="pre">'arp_bind_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'arp_bind_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'arp_unbind_ADP_rate':</span> <span class="pre">8e-14,</span> <span class="pre">'arp_unbind_ATP_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'barbed_growth_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'barbed_growth_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'barbed_growth_branch_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'barbed_growth_branch_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'barbed_shrink_ADP_rate':</span> <span class="pre">8e-14,</span> <span class="pre">'barbed_shrink_ATP_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'box_size':</span> <span class="pre">500.0,</span> <span class="pre">'cap_bind_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'cap_concentration':</span> <span class="pre">0.0,</span> <span class="pre">'cap_radius':</span> <span class="pre">3.0,</span> <span class="pre">'cap_unbind_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'debranching_ADP_rate':</span> <span class="pre">8e-14,</span> <span class="pre">'debranching_ATP_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'dimerize_rate':</span> <span class="pre">0.021,</span> <span class="pre">'dimerize_reverse_rate':</span> <span class="pre">0.14,</span> <span class="pre">'fiber_length':</span> <span class="pre">0.0,</span> <span class="pre">'force_constant':</span> <span class="pre">250.0,</span> <span class="pre">'hydrolysis_actin_rate':</span> <span class="pre">3.5e-15,</span> <span class="pre">'hydrolysis_arp_rate':</span> <span class="pre">3.5e-15,</span> <span class="pre">'implicit_actin_concentration':</span> <span class="pre">0,</span> <span class="pre">'internal_timestep':</span> <span class="pre">0.1,</span> <span class="pre">'n_cpu':</span> <span class="pre">4,</span> <span class="pre">'n_fibers':</span> <span class="pre">0,</span> <span class="pre">'name':</span> <span class="pre">'actin',</span> <span class="pre">'nonspatial_polymerization':</span> <span class="pre">False,</span> <span class="pre">'nucleate_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'nucleate_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'nucleotide_exchange_actin_rate':</span> <span class="pre">1e-10,</span> <span class="pre">'nucleotide_exchange_arp_rate':</span> <span class="pre">1e-10,</span> <span class="pre">'obstacle_radius':</span> <span class="pre">0.0,</span> <span class="pre">'periodic_boundary':</span> <span class="pre">False,</span> <span class="pre">'pointed_growth_ADP_rate':</span> <span class="pre">30000.0,</span> <span class="pre">'pointed_growth_ATP_rate':</span> <span class="pre">240000.0,</span> <span class="pre">'pointed_shrink_ADP_rate':</span> <span class="pre">3e-15,</span> <span class="pre">'pointed_shrink_ATP_rate':</span> <span class="pre">8e-15,</span> <span class="pre">'reaction_distance':</span> <span class="pre">1.0,</span> <span class="pre">'temperature_C':</span> <span class="pre">22.0,</span> <span class="pre">'time_step':</span> <span class="pre">1e-07,</span> <span class="pre">'total_steps':</span> <span class="pre">1000.0,</span> <span class="pre">'trimerize_rate':</span> <span class="pre">0.021,</span> <span class="pre">'trimerize_reverse_rate':</span> <span class="pre">0.14,</span> <span class="pre">'use_box_actin':</span> <span class="pre">False,</span> <span class="pre">'use_box_arp':</span> <span class="pre">False,</span> <span class="pre">'use_box_cap':</span> <span class="pre">False,</span> <span class="pre">'verbose':</span> <span class="pre">False,</span> <span class="pre">'viscosity':</span> <span class="pre">8.1}</span></em><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.defaults" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'accurate_force_constants':</span> <span class="pre">True,</span> <span class="pre">'actin_actin_angle_potentials':</span> <span class="pre">True,</span> <span class="pre">'actin_actin_dihedral_potentials':</span> <span class="pre">True,</span> <span class="pre">'actin_actin_repulsion_potentials':</span> <span class="pre">True,</span> <span class="pre">'actin_concentration':</span> <span class="pre">200.0,</span> <span class="pre">'angles_force_multiplier':</span> <span class="pre">4.0,</span> <span class="pre">'arp23_concentration':</span> <span class="pre">10.0,</span> <span class="pre">'arp_bind_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'arp_bind_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'arp_unbind_ADP_rate':</span> <span class="pre">8e-14,</span> <span class="pre">'arp_unbind_ATP_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'barbed_growth_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'barbed_growth_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'barbed_growth_branch_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'barbed_growth_branch_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'barbed_shrink_ADP_rate':</span> <span class="pre">8e-14,</span> <span class="pre">'barbed_shrink_ATP_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'bonds_force_multiplier':</span> <span class="pre">0.1,</span> <span class="pre">'box_size':</span> <span class="pre">array([500.,</span> <span class="pre">500.,</span> <span class="pre">500.]),</span> <span class="pre">'branched_seed':</span> <span class="pre">False,</span> <span class="pre">'cap_bind_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'cap_concentration':</span> <span class="pre">0.0,</span> <span class="pre">'cap_unbind_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'debranching_ADP_rate':</span> <span class="pre">8e-14,</span> <span class="pre">'debranching_ATP_rate':</span> <span class="pre">1.4e-14,</span> <span class="pre">'dihedrals_force_multiplier':</span> <span class="pre">1.0,</span> <span class="pre">'dimerize_rate':</span> <span class="pre">0.021,</span> <span class="pre">'dimerize_reverse_rate':</span> <span class="pre">0.14,</span> <span class="pre">'displace_pointed_end_radial':</span> <span class="pre">False,</span> <span class="pre">'displace_pointed_end_tangent':</span> <span class="pre">False,</span> <span class="pre">'displace_stride':</span> <span class="pre">1,</span> <span class="pre">'hydrolysis_actin_rate':</span> <span class="pre">3.5e-15,</span> <span class="pre">'hydrolysis_arp_rate':</span> <span class="pre">3.5e-15,</span> <span class="pre">'internal_timestep':</span> <span class="pre">0.1,</span> <span class="pre">'longitudinal_bonds':</span> <span class="pre">True,</span> <span class="pre">'n_cpu':</span> <span class="pre">4,</span> <span class="pre">'n_fixed_monomers_barbed':</span> <span class="pre">0,</span> <span class="pre">'n_fixed_monomers_pointed':</span> <span class="pre">0,</span> <span class="pre">'name':</span> <span class="pre">'actin',</span> <span class="pre">'nucleate_ADP_rate':</span> <span class="pre">700000.0,</span> <span class="pre">'nucleate_ATP_rate':</span> <span class="pre">2100000.0,</span> <span class="pre">'nucleotide_exchange_actin_rate':</span> <span class="pre">1e-10,</span> <span class="pre">'nucleotide_exchange_arp_rate':</span> <span class="pre">1e-10,</span> <span class="pre">'obstacle_radius':</span> <span class="pre">35.0,</span> <span class="pre">'only_linear_actin_constraints':</span> <span class="pre">False,</span> <span class="pre">'orthogonal_seed':</span> <span class="pre">False,</span> <span class="pre">'periodic_boundary':</span> <span class="pre">True,</span> <span class="pre">'plot_bend_twist':</span> <span class="pre">False,</span> <span class="pre">'plot_filament_structure':</span> <span class="pre">False,</span> <span class="pre">'plot_polymerization':</span> <span class="pre">False,</span> <span class="pre">'pointed_growth_ADP_rate':</span> <span class="pre">30000.0,</span> <span class="pre">'pointed_growth_ATP_rate':</span> <span class="pre">240000.0,</span> <span class="pre">'pointed_shrink_ADP_rate':</span> <span class="pre">3e-15,</span> <span class="pre">'pointed_shrink_ATP_rate':</span> <span class="pre">8e-15,</span> <span class="pre">'radial_displacement_angle_deg':</span> <span class="pre">0.0,</span> <span class="pre">'radial_displacement_radius_nm':</span> <span class="pre">0.0,</span> <span class="pre">'reaction_distance':</span> <span class="pre">1.0,</span> <span class="pre">'reactions':</span> <span class="pre">True,</span> <span class="pre">'seed_fiber_length':</span> <span class="pre">0.0,</span> <span class="pre">'seed_n_fibers':</span> <span class="pre">0,</span> <span class="pre">'tangent_displacement_nm':</span> <span class="pre">0.0,</span> <span class="pre">'time_step':</span> <span class="pre">1e-07,</span> <span class="pre">'total_steps':</span> <span class="pre">1000.0,</span> <span class="pre">'trimerize_rate':</span> <span class="pre">0.021,</span> <span class="pre">'trimerize_reverse_rate':</span> <span class="pre">0.14,</span> <span class="pre">'use_box_actin':</span> <span class="pre">False,</span> <span class="pre">'use_box_arp':</span> <span class="pre">False,</span> <span class="pre">'use_box_cap':</span> <span class="pre">False,</span> <span class="pre">'verbose':</span> <span class="pre">False,</span> <span class="pre">'visualize_edges':</span> <span class="pre">False,</span> <span class="pre">'visualize_normals':</span> <span class="pre">False}</span></em><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.defaults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.initial_state">
-<span class="sig-name descname"><span class="pre">initial_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.initial_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.initial_state" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initial_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.initial_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.initial_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get initial state in embedded path dictionary.</p>
 <p>Every subclass may override this method.</p>
 <dl class="simple">
@@ -351,12 +458,12 @@ mapping state paths to initial values.</p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.name">
-<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ReaDDy_actin'</span></em><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.name" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ReaDDy_actin'</span></em><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.next_update">
-<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.next_update" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.next_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the next update to the simulation state.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -375,7 +482,7 @@ each subclass to return an update.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.ports_schema">
-<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.ports_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.ports_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schemas for each port.</p>
 <p>This must be overridden by any subclasses.</p>
 <p>Use the glob ‘*’ schema to declare expected sub-store structure,
@@ -423,7 +530,7 @@ assigned properties through schema_keys declared in
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.run_readdy_actin_process">
-<span class="sig-name descname"><span class="pre">run_readdy_actin_process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.run_readdy_actin_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.run_readdy_actin_process" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run_readdy_actin_process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.run_readdy_actin_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.run_readdy_actin_process" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a simulation of the process.</p>
 <dl class="simple">
 <dt>Returns:</dt><dd><p>The simulation output.</p>
@@ -433,7 +540,7 @@ assigned properties through schema_keys declared in
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.simulate_readdy">
-<span class="sig-name descname"><span class="pre">simulate_readdy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.simulate_readdy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.simulate_readdy" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">simulate_readdy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#ReaddyActinProcess.simulate_readdy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.simulate_readdy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulate in ReaDDy for the given timestep</p>
 </dd></dl>
 
@@ -441,25 +548,25 @@ assigned properties through schema_keys declared in
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.get_monomer_data">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">get_monomer_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#get_monomer_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.get_monomer_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">get_monomer_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#get_monomer_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.get_monomer_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.test_readdy_actin_process">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">test_readdy_actin_process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#test_readdy_actin_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.test_readdy_actin_process" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">test_readdy_actin_process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#test_readdy_actin_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.test_readdy_actin_process" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.readdy_actin_process.test_scan_readdy">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">test_scan_readdy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#test_scan_readdy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.test_scan_readdy" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.readdy_actin_process.</span></span><span class="sig-name descname"><span class="pre">test_scan_readdy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/readdy_actin_process.html#test_scan_readdy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.readdy_actin_process.test_scan_readdy" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-vivarium_models.processes.simularium_emitter">
-<span id="vivarium-models-processes-simularium-emitter-module"></span><h2>vivarium_models.processes.simularium_emitter module<a class="headerlink" href="#module-vivarium_models.processes.simularium_emitter" title="Permalink to this heading"></a></h2>
+<span id="vivarium-models-processes-simularium-emitter-module"></span><h2>vivarium_models.processes.simularium_emitter module<a class="headerlink" href="#module-vivarium_models.processes.simularium_emitter" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.simularium_emitter.</span></span><span class="sig-name descname"><span class="pre">SimulariumEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.simularium_emitter.</span></span><span class="sig-name descname"><span class="pre">SimulariumEmitter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Emitter</span></code></p>
 <p>Base class for emitters.</p>
 <p>This emitter simply emits to STDOUT.</p>
@@ -469,7 +576,7 @@ assigned properties through schema_keys declared in
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.emit">
-<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.emit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.emit" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">emit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.emit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.emit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Emit the timeseries history portion of <code class="docutils literal notranslate"><span class="pre">data</span></code>, which is
 <code class="docutils literal notranslate"><span class="pre">data['data']</span> <span class="pre">if</span> <span class="pre">data['table']</span> <span class="pre">==</span> <span class="pre">'history'</span></code> and put it at
 <code class="docutils literal notranslate"><span class="pre">data['data']['time']</span></code> in the history.</p>
@@ -477,56 +584,56 @@ assigned properties through schema_keys declared in
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.fill_df">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fill_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.fill_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.fill_df" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fill_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.fill_df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.fill_df" title="Permalink to this definition">¶</a></dt>
 <dd><p>Fill Nones in a DataFrame with a fill value</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_active_simulator">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_active_simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_active_simulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_active_simulator" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_active_simulator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choices</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_active_simulator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_active_simulator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use choices from state to determine which simulator ran</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_agent_data_from_jagged_lists">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_agent_data_from_jagged_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AgentData</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_agent_data_from_jagged_lists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_agent_data_from_jagged_lists" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_agent_data_from_jagged_lists</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">AgentData</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_agent_data_from_jagged_lists"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_agent_data_from_jagged_lists" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shape a dictionary of jagged lists into a Simularium AgentData object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_data">
-<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_data" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_data" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the accumulated timeseries history of “emitted” data to file</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_converter">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_simularium_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TrajectoryConverter</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_simularium_converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_converter" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_simularium_converter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_dimensions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale_factor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">TrajectoryConverter</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_simularium_converter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_converter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shape a dictionary of jagged lists into a Simularium TrajectoryData object
 and provide it to a TrajectoryConverter for conversion</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_fibers">
-<span class="sig-name descname"><span class="pre">get_simularium_fibers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fibers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actin_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_simularium_fibers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_fibers" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_simularium_fibers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fibers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actin_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_simularium_fibers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_fibers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shape fiber state data into Simularium fiber agents</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_monomers">
-<span class="sig-name descname"><span class="pre">get_simularium_monomers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actin_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_simularium_monomers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_monomers" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_simularium_monomers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monomers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actin_radius</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_simularium_monomers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_simularium_monomers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shape monomer state data into Simularium agents</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_subpoints_numpy_array">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_subpoints_numpy_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_subpoints_numpy_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_subpoints_numpy_array" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_subpoints_numpy_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">trajectory</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.get_subpoints_numpy_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.get_subpoints_numpy_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shape a 4 dimensional jagged list for subpoints into a numpy array</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.simularium_emitter.SimulariumEmitter.jagged_3d_list_to_numpy_array">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jagged_3d_list_to_numpy_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jagged_3d_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.jagged_3d_list_to_numpy_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.jagged_3d_list_to_numpy_array" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">jagged_3d_list_to_numpy_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jagged_3d_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/simularium_emitter.html#SimulariumEmitter.jagged_3d_list_to_numpy_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.simularium_emitter.SimulariumEmitter.jagged_3d_list_to_numpy_array" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shape a jagged list with 3 dimensions to a numpy array</p>
 </dd></dl>
 
@@ -534,19 +641,19 @@ and provide it to a TrajectoryConverter for conversion</p>
 
 </section>
 <section id="module-vivarium_models.processes.visualize_filament">
-<span id="vivarium-models-processes-visualize-filament-module"></span><h2>vivarium_models.processes.visualize_filament module<a class="headerlink" href="#module-vivarium_models.processes.visualize_filament" title="Permalink to this heading"></a></h2>
+<span id="vivarium-models-processes-visualize-filament-module"></span><h2>vivarium_models.processes.visualize_filament module<a class="headerlink" href="#module-vivarium_models.processes.visualize_filament" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_filament.VisualizeFilament">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_filament.</span></span><span class="sig-name descname"><span class="pre">VisualizeFilament</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#VisualizeFilament"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_filament.</span></span><span class="sig-name descname"><span class="pre">VisualizeFilament</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#VisualizeFilament"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_filament.VisualizeFilament.defaults">
-<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament.defaults" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament.defaults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_filament.VisualizeFilament.next_update">
-<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#VisualizeFilament.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament.next_update" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#VisualizeFilament.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament.next_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the next update to the simulation state.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -565,7 +672,7 @@ each subclass to return an update.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_filament.VisualizeFilament.ports_schema">
-<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#VisualizeFilament.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament.ports_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#VisualizeFilament.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.VisualizeFilament.ports_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schemas for each port.</p>
 <p>This must be overridden by any subclasses.</p>
 <p>Use the glob ‘*’ schema to declare expected sub-store structure,
@@ -615,29 +722,29 @@ assigned properties through schema_keys declared in
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_filament.get_initial_filament_data">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_filament.</span></span><span class="sig-name descname"><span class="pre">get_initial_filament_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#get_initial_filament_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.get_initial_filament_data" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_filament.</span></span><span class="sig-name descname"><span class="pre">get_initial_filament_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#get_initial_filament_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.get_initial_filament_data" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_filament.test_visualize_filament">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_filament.</span></span><span class="sig-name descname"><span class="pre">test_visualize_filament</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#test_visualize_filament"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.test_visualize_filament" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_filament.</span></span><span class="sig-name descname"><span class="pre">test_visualize_filament</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_filament.html#test_visualize_filament"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_filament.test_visualize_filament" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-vivarium_models.processes.visualize_monomer">
-<span id="vivarium-models-processes-visualize-monomer-module"></span><h2>vivarium_models.processes.visualize_monomer module<a class="headerlink" href="#module-vivarium_models.processes.visualize_monomer" title="Permalink to this heading"></a></h2>
+<span id="vivarium-models-processes-visualize-monomer-module"></span><h2>vivarium_models.processes.visualize_monomer module<a class="headerlink" href="#module-vivarium_models.processes.visualize_monomer" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_monomer.VisualizeMonomer">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_monomer.</span></span><span class="sig-name descname"><span class="pre">VisualizeMonomer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#VisualizeMonomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_monomer.</span></span><span class="sig-name descname"><span class="pre">VisualizeMonomer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#VisualizeMonomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Step</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_monomer.VisualizeMonomer.defaults">
-<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer.defaults" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">defaults</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer.defaults" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_monomer.VisualizeMonomer.next_update">
-<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#VisualizeMonomer.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer.next_update" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">next_update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timestep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">states</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#VisualizeMonomer.next_update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer.next_update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the next update to the simulation state.</p>
 <dl class="simple">
 <dt>Args:</dt><dd><dl class="simple">
@@ -656,7 +763,7 @@ each subclass to return an update.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_monomer.VisualizeMonomer.ports_schema">
-<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#VisualizeMonomer.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer.ports_schema" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">ports_schema</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#VisualizeMonomer.ports_schema"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.VisualizeMonomer.ports_schema" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the schemas for each port.</p>
 <p>This must be overridden by any subclasses.</p>
 <p>Use the glob ‘*’ schema to declare expected sub-store structure,
@@ -706,41 +813,57 @@ assigned properties through schema_keys declared in
 
 <dl class="py function">
 <dt class="sig sig-object py" id="vivarium_models.processes.visualize_monomer.test_visualize_monomer">
-<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_monomer.</span></span><span class="sig-name descname"><span class="pre">test_visualize_monomer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#test_visualize_monomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.test_visualize_monomer" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">vivarium_models.processes.visualize_monomer.</span></span><span class="sig-name descname"><span class="pre">test_visualize_monomer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/vivarium_models/processes/visualize_monomer.html#test_visualize_monomer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#vivarium_models.processes.visualize_monomer.test_visualize_monomer" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </section>
 <section id="module-vivarium_models.processes">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vivarium_models.processes" title="Permalink to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-vivarium_models.processes" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
 
            </div>
+           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021, Blair Lyons.</p>
-  </div>
+    <p>
+        &#169; Copyright 2021, Blair Lyons.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

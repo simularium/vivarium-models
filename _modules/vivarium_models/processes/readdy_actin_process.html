@@ -1,35 +1,74 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>vivarium_models.processes.readdy_actin_process &mdash; vivarium-models 0.0.0 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/js/theme.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
+
+          
             <a href="../../../index.html" class="icon icon-home"> vivarium-models
+          
+
+          
           </a>
+
+          
+            
+            
               <div class="version">
                 0.0.0
               </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -37,7 +76,18 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
@@ -56,8 +106,16 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.util.agents_update"><code class="docutils literal notranslate"><span class="pre">agents_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.util.create_monomer_update"><code class="docutils literal notranslate"><span class="pre">create_monomer_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.util.format_monomer_results"><code class="docutils literal notranslate"><span class="pre">format_monomer_results()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.get_module_version"><code class="docutils literal notranslate"><span class="pre">get_module_version()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -69,31 +127,71 @@
 </li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">vivarium-models</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
+    
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
           <li><a href="../../vivarium_models.html">vivarium_models</a> &raquo;</li>
+        
       <li>vivarium_models.processes.readdy_actin_process</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <h1>Source code for vivarium_models.processes.readdy_actin_process</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
@@ -102,13 +200,13 @@
 <span class="kn">from</span> <span class="nn">vivarium.core.control</span> <span class="kn">import</span> <span class="n">run_library_cli</span>
 
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">from</span> <span class="nn">simularium_models_util.actin</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">simularium_readdy_models.actin</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">ActinSimulation</span><span class="p">,</span>
     <span class="n">ActinUtil</span><span class="p">,</span>
     <span class="n">ActinTestData</span><span class="p">,</span>
     <span class="n">ActinAnalyzer</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">simularium_models_util</span> <span class="kn">import</span> <span class="n">ReaddyUtil</span>
+<span class="kn">from</span> <span class="nn">simularium_readdy_models</span> <span class="kn">import</span> <span class="n">ReaddyUtil</span>
 <span class="kn">from</span> <span class="nn">vivarium_models.util</span> <span class="kn">import</span> <span class="n">create_monomer_update</span><span class="p">,</span> <span class="n">format_monomer_results</span>
 <span class="kn">from</span> <span class="nn">vivarium_models.library.scan</span> <span class="kn">import</span> <span class="n">Scan</span>
 
@@ -150,69 +248,14 @@
 
 
 <div class="viewcode-block" id="ReaddyActinProcess"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess">[docs]</a><span class="k">class</span> <span class="nc">ReaddyActinProcess</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This process uses ReaDDy to model the dynamics</span>
 <span class="sd">    of branched actin networks made of spatially explicit monomers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">name</span> <span class="o">=</span> <span class="n">NAME</span>
 
-    <span class="n">defaults</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;actin&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;total_steps&quot;</span><span class="p">:</span> <span class="mf">1e3</span><span class="p">,</span>
-        <span class="s2">&quot;time_step&quot;</span><span class="p">:</span> <span class="mf">0.0000001</span><span class="p">,</span>
-        <span class="s2">&quot;internal_timestep&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
-        <span class="s2">&quot;box_size&quot;</span><span class="p">:</span> <span class="mf">500.0</span><span class="p">,</span>  <span class="c1"># nm</span>
-        <span class="s2">&quot;temperature_C&quot;</span><span class="p">:</span> <span class="mf">22.0</span><span class="p">,</span>  <span class="c1"># from Pollard experiments</span>
-        <span class="s2">&quot;viscosity&quot;</span><span class="p">:</span> <span class="mf">8.1</span><span class="p">,</span>  <span class="c1"># cP, viscosity in cytoplasm</span>
-        <span class="s2">&quot;force_constant&quot;</span><span class="p">:</span> <span class="mf">250.0</span><span class="p">,</span>
-        <span class="s2">&quot;reaction_distance&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># nm</span>
-        <span class="s2">&quot;n_cpu&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
-        <span class="s2">&quot;actin_concentration&quot;</span><span class="p">:</span> <span class="mf">200.0</span><span class="p">,</span>  <span class="c1"># uM</span>
-        <span class="s2">&quot;arp23_concentration&quot;</span><span class="p">:</span> <span class="mf">10.0</span><span class="p">,</span>  <span class="c1"># uM</span>
-        <span class="s2">&quot;cap_concentration&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="c1"># uM</span>
-        <span class="s2">&quot;n_fibers&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;fiber_length&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="s2">&quot;actin_radius&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>  <span class="c1"># nm</span>
-        <span class="s2">&quot;arp23_radius&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>  <span class="c1"># nm</span>
-        <span class="s2">&quot;cap_radius&quot;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>  <span class="c1"># nm</span>
-        <span class="s2">&quot;dimerize_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e-2</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;dimerize_reverse_rate&quot;</span><span class="p">:</span> <span class="mf">1.4e-1</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;trimerize_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e-2</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;trimerize_reverse_rate&quot;</span><span class="p">:</span> <span class="mf">1.4e-1</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;pointed_growth_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">2.4e5</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;pointed_growth_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">3.0e4</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;pointed_shrink_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">8.0e-15</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;pointed_shrink_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">3.0e-15</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;barbed_growth_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e6</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;barbed_growth_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">7.0e5</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;nucleate_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e6</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;nucleate_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">7.0e5</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;barbed_shrink_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">1.4e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;barbed_shrink_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">8.0e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;arp_bind_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e6</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;arp_bind_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">7.0e5</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;arp_unbind_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">1.4e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;arp_unbind_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">8.0e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;barbed_growth_branch_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e6</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;barbed_growth_branch_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">7.0e5</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;debranching_ATP_rate&quot;</span><span class="p">:</span> <span class="mf">1.4e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;debranching_ADP_rate&quot;</span><span class="p">:</span> <span class="mf">8.0e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;cap_bind_rate&quot;</span><span class="p">:</span> <span class="mf">2.1e6</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;cap_unbind_rate&quot;</span><span class="p">:</span> <span class="mf">1.4e-14</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;hydrolysis_actin_rate&quot;</span><span class="p">:</span> <span class="mf">3.5e-15</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;hydrolysis_arp_rate&quot;</span><span class="p">:</span> <span class="mf">3.5e-15</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;nucleotide_exchange_actin_rate&quot;</span><span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;nucleotide_exchange_arp_rate&quot;</span><span class="p">:</span> <span class="mf">1e-10</span><span class="p">,</span>  <span class="c1"># 1/ns</span>
-        <span class="s2">&quot;use_box_actin&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;use_box_arp&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;use_box_cap&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;implicit_actin_concentration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s2">&quot;nonspatial_polymerization&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;verbose&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;periodic_boundary&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="s2">&quot;obstacle_radius&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
-    <span class="p">}</span>
+    <span class="n">defaults</span> <span class="o">=</span> <span class="n">ActinUtil</span><span class="o">.</span><span class="n">DEFAULT_PARAMETERS</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ReaddyActinProcess</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
@@ -274,7 +317,7 @@
         <span class="k">return</span> <span class="n">test_monomer_data</span></div>
 
 <div class="viewcode-block" id="ReaddyActinProcess.simulate_readdy"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.simulate_readdy">[docs]</a>    <span class="k">def</span> <span class="nf">simulate_readdy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simulate in ReaDDy for the given timestep</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -307,7 +350,7 @@
                 <span class="n">calculate_forces</span><span class="p">()</span>
                 <span class="n">observe</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">readdy_simulation</span><span class="o">.</span><span class="n">_run_custom_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">readdy_simulation</span><span class="o">.</span><span class="n">_run_custom_loop</span><span class="p">(</span><span class="n">loop</span><span class="p">,</span> <span class="n">show_summary</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ReaddyActinProcess.next_update"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.next_update">[docs]</a>    <span class="k">def</span> <span class="nf">next_update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timestep</span><span class="p">,</span> <span class="n">states</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;in readdy actin process next update&quot;</span><span class="p">)</span>
@@ -331,7 +374,7 @@
 
     <span class="c1"># functions to configure and run the process</span>
 <div class="viewcode-block" id="ReaddyActinProcess.run_readdy_actin_process"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.readdy_actin_process.ReaddyActinProcess.run_readdy_actin_process">[docs]</a>    <span class="k">def</span> <span class="nf">run_readdy_actin_process</span><span class="p">():</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run a simulation of the process.</span>
 
 <span class="sd">        Returns:</span>
@@ -517,30 +560,46 @@
 </pre></div>
 
            </div>
+           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021, Blair Lyons.</p>
-  </div>
+    <p>
+        &#169; Copyright 2021, Blair Lyons.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

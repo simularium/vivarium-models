@@ -1,35 +1,74 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>vivarium_models.processes.monomer_to_fiber &mdash; vivarium-models 0.0.0 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
         <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
-        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/js/theme.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 </head>
 
-<body class="wy-body-for-nav"> 
+<body class="wy-body-for-nav">
+
+   
   <div class="wy-grid-for-nav">
+    
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
+          
+
+          
             <a href="../../../index.html" class="icon icon-home"> vivarium-models
+          
+
+          
           </a>
+
+          
+            
+            
               <div class="version">
                 0.0.0
               </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -37,7 +76,18 @@
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
-        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../index.html">Overview</a></li>
@@ -56,8 +106,16 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models.util">vivarium_models.util module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.util.agents_update"><code class="docutils literal notranslate"><span class="pre">agents_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.util.create_monomer_update"><code class="docutils literal notranslate"><span class="pre">create_monomer_update()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.util.format_monomer_results"><code class="docutils literal notranslate"><span class="pre">format_monomer_results()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../vivarium_models.html#module-vivarium_models">Module contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../vivarium_models.html#vivarium_models.get_module_version"><code class="docutils literal notranslate"><span class="pre">get_module_version()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -69,37 +127,77 @@
 </li>
 </ul>
 
+            
+          
         </div>
+        
       </div>
     </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
           <a href="../../../index.html">vivarium-models</a>
+        
       </nav>
 
+
       <div class="wy-nav-content">
+        
         <div class="rst-content">
-          <div role="navigation" aria-label="Page navigation">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
   <ul class="wy-breadcrumbs">
+    
       <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
           <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
           <li><a href="../../vivarium_models.html">vivarium_models</a> &raquo;</li>
+        
       <li>vivarium_models.processes.monomer_to_fiber</li>
+    
+    
       <li class="wy-breadcrumbs-aside">
+        
       </li>
+    
   </ul>
+
+  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
-             
+            
   <h1>Source code for vivarium_models.processes.monomer_to_fiber</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">vivarium.core.process</span> <span class="kn">import</span> <span class="n">Deriver</span>
 <span class="kn">from</span> <span class="nn">vivarium.core.engine</span> <span class="kn">import</span> <span class="n">Engine</span><span class="p">,</span> <span class="n">pf</span>
-<span class="kn">from</span> <span class="nn">simularium_models_util.actin</span> <span class="kn">import</span> <span class="n">ActinUtil</span><span class="p">,</span> <span class="n">ActinTestData</span>
+<span class="kn">from</span> <span class="nn">simularium_readdy_models.actin</span> <span class="kn">import</span> <span class="n">ActinUtil</span><span class="p">,</span> <span class="n">ActinTestData</span>
 
 <span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">agents_update</span>
 
@@ -195,7 +293,7 @@
 
 <div class="viewcode-block" id="MonomerToFiber.get_next_actin_id"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_next_actin_id">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_next_actin_id</span><span class="p">(</span><span class="n">prev_actin_id</span><span class="p">,</span> <span class="n">neighbor_ids</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the ID of the neighbor other than</span>
 <span class="sd">        the neighbor with the prev_actin_id</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -210,7 +308,7 @@
     <span class="k">def</span> <span class="nf">get_actin_monomer_positions</span><span class="p">(</span>
         <span class="n">start_actin_id</span><span class="p">,</span> <span class="n">particles</span><span class="p">,</span> <span class="n">prev_actin_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">result</span><span class="o">=</span><span class="kc">None</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get monomer positions for an actin chain starting</span>
 <span class="sd">        at the pointed end&#39;s start_actin_id</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -229,7 +327,7 @@
 
 <div class="viewcode-block" id="MonomerToFiber.get_fiber_end_point"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber_end_point">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_fiber_end_point</span><span class="p">(</span><span class="n">end_direction</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">box_size</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Since we can only calculate axis position</span>
 <span class="sd">        given a neighbor in each direction,</span>
 <span class="sd">        use the positions of the first and second actin from the end</span>
@@ -245,7 +343,7 @@
 
 <div class="viewcode-block" id="MonomerToFiber.get_fiber"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.get_fiber">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_fiber</span><span class="p">(</span><span class="n">topology_id</span><span class="p">,</span> <span class="n">pointed_actin_id</span><span class="p">,</span> <span class="n">monomers</span><span class="p">,</span> <span class="n">box_size</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get data for a fiber from a chain of particles</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">positions</span> <span class="o">=</span> <span class="n">MonomerToFiber</span><span class="o">.</span><span class="n">get_actin_monomer_positions</span><span class="p">(</span>
@@ -261,7 +359,7 @@
 
 <div class="viewcode-block" id="MonomerToFiber.generate_fibers_from_monomers"><a class="viewcode-back" href="../../../vivarium_models.processes.html#vivarium_models.processes.monomer_to_fiber.MonomerToFiber.generate_fibers_from_monomers">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">generate_fibers_from_monomers</span><span class="p">(</span><span class="n">monomers</span><span class="p">,</span> <span class="n">box_size</span><span class="o">=</span><span class="mf">500.0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transform monomer data into fiber data</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pointed_actin_ids</span> <span class="o">=</span> <span class="p">{}</span>
@@ -309,30 +407,46 @@
 </pre></div>
 
            </div>
+           
           </div>
           <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2021, Blair Lyons.</p>
-  </div>
+    <p>
+        &#169; Copyright 2021, Blair Lyons.
 
-  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
     <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    provided by <a href="https://readthedocs.org">Read the Docs</a>.
-   
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
         </div>
       </div>
+
     </section>
+
   </div>
-  <script>
+  
+
+  <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
