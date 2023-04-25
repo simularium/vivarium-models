@@ -5,13 +5,13 @@ from vivarium.core.engine import Engine, pf
 from vivarium.core.control import run_library_cli
 
 from tqdm import tqdm
-from simularium_models_util.actin import (
+from simularium_readdy_models.actin import (
     ActinSimulation,
     ActinUtil,
     ActinTestData,
     ActinAnalyzer,
 )
-from simularium_models_util import ReaddyUtil
+from simularium_readdy_models import ReaddyUtil
 from vivarium_models.util import create_monomer_update, format_monomer_results
 from vivarium_models.library.scan import Scan
 
@@ -60,62 +60,7 @@ class ReaddyActinProcess(Process):
 
     name = NAME
 
-    defaults = {
-        "name": "actin",
-        "total_steps": 1e3,
-        "time_step": 0.0000001,
-        "internal_timestep": 0.1,
-        "box_size": 500.0,  # nm
-        "temperature_C": 22.0,  # from Pollard experiments
-        "viscosity": 8.1,  # cP, viscosity in cytoplasm
-        "force_constant": 250.0,
-        "reaction_distance": 1.0,  # nm
-        "n_cpu": 4,
-        "actin_concentration": 200.0,  # uM
-        "arp23_concentration": 10.0,  # uM
-        "cap_concentration": 0.0,  # uM
-        "n_fibers": 0,
-        "fiber_length": 0.0,
-        "actin_radius": 2.0,  # nm
-        "arp23_radius": 2.0,  # nm
-        "cap_radius": 3.0,  # nm
-        "dimerize_rate": 2.1e-2,  # 1/ns
-        "dimerize_reverse_rate": 1.4e-1,  # 1/ns
-        "trimerize_rate": 2.1e-2,  # 1/ns
-        "trimerize_reverse_rate": 1.4e-1,  # 1/ns
-        "pointed_growth_ATP_rate": 2.4e5,  # 1/ns
-        "pointed_growth_ADP_rate": 3.0e4,  # 1/ns
-        "pointed_shrink_ATP_rate": 8.0e-15,  # 1/ns
-        "pointed_shrink_ADP_rate": 3.0e-15,  # 1/ns
-        "barbed_growth_ATP_rate": 2.1e6,  # 1/ns
-        "barbed_growth_ADP_rate": 7.0e5,  # 1/ns
-        "nucleate_ATP_rate": 2.1e6,  # 1/ns
-        "nucleate_ADP_rate": 7.0e5,  # 1/ns
-        "barbed_shrink_ATP_rate": 1.4e-14,  # 1/ns
-        "barbed_shrink_ADP_rate": 8.0e-14,  # 1/ns
-        "arp_bind_ATP_rate": 2.1e6,  # 1/ns
-        "arp_bind_ADP_rate": 7.0e5,  # 1/ns
-        "arp_unbind_ATP_rate": 1.4e-14,  # 1/ns
-        "arp_unbind_ADP_rate": 8.0e-14,  # 1/ns
-        "barbed_growth_branch_ATP_rate": 2.1e6,  # 1/ns
-        "barbed_growth_branch_ADP_rate": 7.0e5,  # 1/ns
-        "debranching_ATP_rate": 1.4e-14,  # 1/ns
-        "debranching_ADP_rate": 8.0e-14,  # 1/ns
-        "cap_bind_rate": 2.1e6,  # 1/ns
-        "cap_unbind_rate": 1.4e-14,  # 1/ns
-        "hydrolysis_actin_rate": 3.5e-15,  # 1/ns
-        "hydrolysis_arp_rate": 3.5e-15,  # 1/ns
-        "nucleotide_exchange_actin_rate": 1e-10,  # 1/ns
-        "nucleotide_exchange_arp_rate": 1e-10,  # 1/ns
-        "use_box_actin": False,
-        "use_box_arp": False,
-        "use_box_cap": False,
-        "implicit_actin_concentration": 0,
-        "nonspatial_polymerization": False,
-        "verbose": False,
-        "periodic_boundary": False,
-        "obstacle_radius": 0.0,
-    }
+    defaults = ActinUtil.DEFAULT_PARAMETERS
 
     def __init__(self, parameters=None):
         super(ReaddyActinProcess, self).__init__(parameters)
@@ -210,7 +155,7 @@ class ReaddyActinProcess(Process):
                 calculate_forces()
                 observe(t)
 
-        self.readdy_simulation._run_custom_loop(loop)
+        self.readdy_simulation._run_custom_loop(loop, show_summary=False)
 
     def next_update(self, timestep, states):
         print("in readdy actin process next update")

@@ -3,7 +3,7 @@ import numpy as np
 from vivarium.core.process import Deriver
 from vivarium.core.engine import Engine, pf
 
-from simularium_models_util.actin import ActinGenerator, ActinTestData, FiberData
+from simularium_readdy_models.actin import ActinGenerator, ActinTestData, FiberData
 from ..util import create_monomer_update
 
 

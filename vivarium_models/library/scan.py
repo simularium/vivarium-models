@@ -3,7 +3,6 @@ from vivarium.core.engine import Engine
 
 class Scan:
     def __init__(self, parameter_sets, simulator_class, total_time, metrics=()):
-
         self.parameter_sets = parameter_sets
         self.simulator_class = simulator_class
         self.total_time = total_time
