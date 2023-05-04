@@ -1,6 +1,55 @@
 import numpy as np
 
 
+monomer_ports_schema = {
+    "monomers": {
+        "box_center": {
+            "_default": np.array([1000.0, 0.0, 0.0]),
+            "_updater": "set",
+            "_emit": True,
+        },
+        "box_size": {
+            "_default": 500.0,
+            "_updater": "set",
+            "_emit": True,
+        },
+        "topologies": {
+            "*": {
+                "type_name": {
+                    "_default": "",
+                    "_updater": "set",
+                    "_emit": True,
+                },
+                "particle_ids": {
+                    "_default": [],
+                    "_updater": "set",
+                    "_emit": True,
+                },
+            }
+        },
+        "particles": {
+            "*": {
+                "type_name": {
+                    "_default": "",
+                    "_updater": "set",
+                    "_emit": True,
+                },
+                "position": {
+                    "_default": np.zeros(3),
+                    "_updater": "set",
+                    "_emit": True,
+                },
+                "neighbor_ids": {
+                    "_default": [],
+                    "_updater": "set",
+                    "_emit": True,
+                },
+            }
+        },
+    }
+}
+
+
 def agents_update(existing, projected):
     update = {"_add": [], "_delete": []}
 

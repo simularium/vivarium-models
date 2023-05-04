@@ -12,7 +12,7 @@ from simularium_readdy_models.actin import (
     ActinAnalyzer,
 )
 from simularium_readdy_models import ReaddyUtil
-from vivarium_models.util import create_monomer_update, format_monomer_results
+from vivarium_models.util import create_monomer_update, format_monomer_results, monomer_ports_schema
 from vivarium_models.library.scan import Scan
 
 NAME = "ReaDDy_actin"
@@ -69,53 +69,7 @@ class ReaddyActinProcess(Process):
         self.readdy_simulation = actin_simulation.simulation
 
     def ports_schema(self):
-        return {
-            "monomers": {
-                "box_center": {
-                    "_default": np.array([1000.0, 0.0, 0.0]),
-                    "_updater": "set",
-                    "_emit": True,
-                },
-                "box_size": {
-                    "_default": 500.0,
-                    "_updater": "set",
-                    "_emit": True,
-                },
-                "topologies": {
-                    "*": {
-                        "type_name": {
-                            "_default": "",
-                            "_updater": "set",
-                            "_emit": True,
-                        },
-                        "particle_ids": {
-                            "_default": [],
-                            "_updater": "set",
-                            "_emit": True,
-                        },
-                    }
-                },
-                "particles": {
-                    "*": {
-                        "type_name": {
-                            "_default": "",
-                            "_updater": "set",
-                            "_emit": True,
-                        },
-                        "position": {
-                            "_default": np.zeros(3),
-                            "_updater": "set",
-                            "_emit": True,
-                        },
-                        "neighbor_ids": {
-                            "_default": [],
-                            "_updater": "set",
-                            "_emit": True,
-                        },
-                    }
-                },
-            }
-        }
+        return monomer_ports_schema
 
     def initial_state(self, config=None):
         # TODO: make this more general
