@@ -44,6 +44,11 @@ monomer_ports_schema = {
                     "_updater": "set",
                     "_emit": True,
                 },
+                "radius": {
+                    "_default": 1.0,
+                    "_updater": "set",
+                    "_emit": True,
+                },
             }
         },
     }
