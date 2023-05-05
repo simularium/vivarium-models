@@ -9,7 +9,6 @@ import numpy as np
 import readdy
 from tqdm import tqdm
 
-from subcell_analysis.readdy import ReaddyUtil
 from vivarium_models.util import create_monomer_update, monomer_ports_schema
 
 NAME = "ReaDDy_simple"
@@ -29,13 +28,19 @@ class ReaddySimpleProcess(Process):
         "viscosity" : 8.1,  # cP
         "periodic_boundary" : False,
         "force_constant" : 250.,
-        "internal_timestep" : 0.1,  # ns
+        "internal_timestep" : 1000.,  # ns
+        "time_step" : 10000.,  # ns
     }
 
 
     def __init__(self, parameters=None):
         super(ReaddySimpleProcess, self).__init__(parameters)
         self.create_system()
+        
+
+    @staticmethod
+    def radius_for_ix(ix: int):
+        return 10. + 5. * ix
         
 
     def calculate_diffusionCoefficient(self, radius):
@@ -71,17 +76,24 @@ class ReaddySimpleProcess(Process):
         # add particle species
         letters = list(string.ascii_uppercase)
         for p_ix in range(self.parameters["n_particles"]):
-            diffCoeff = self.calculate_diffusionCoefficient(1. + 0.5 * p_ix)  # nm^2/s
-            self.readdy_system.add_topology_species(letters[p_ix], diffCoeff)
+            particle_type = letters[p_ix]
+            radius = ReaddySimpleProcess.radius_for_ix(p_ix)
+            diffCoeff = self.calculate_diffusionCoefficient(radius)  # nm^2/s
+            self.readdy_system.add_topology_species(particle_type, diffCoeff)
             
         # add repulsion potentials for excluded volume
         for p_ix1 in range(self.parameters["n_particles"]):
             for p_ix2 in range(p_ix1 + 1, self.parameters["n_particles"]):
+                particle_type1 = letters[p_ix1] 
+                particle_type2 = letters[p_ix2]
                 self.readdy_system.potentials.add_harmonic_repulsion(
-                    particle_type1=letters[p_ix1], 
-                    particle_type2=letters[p_ix2], 
+                    particle_type1=particle_type1, 
+                    particle_type2=particle_type2, 
                     force_constant=self.parameters["force_constant"], 
-                    interaction_distance=1.5 + 0.5 * (p_ix1 + p_ix2),
+                    interaction_distance=(
+                        ReaddySimpleProcess.radius_for_ix(p_ix1)
+                        + ReaddySimpleProcess.radius_for_ix(p_ix2) - 0.5
+                    ),
                 )
         
         # add box potential if no periodic boundary
@@ -151,10 +163,13 @@ class ReaddySimpleProcess(Process):
             "topologies": {},
             "particles": {},
         }
+        letters = list(string.ascii_uppercase)
         for particle in self.readdy_simulation.current_particles:
+            p_ix = letters.index(particle.type)
             result["particles"][str(particle.id)] = {
                 "type_name" : particle.type,
                 "position" : particle.pos,
+                "radius" : ReaddySimpleProcess.radius_for_ix(p_ix),
             }
         return result
 
@@ -185,6 +200,7 @@ def random_initial_state(parameters):
         result["particles"][str(p_ix)] = {
             "type_name" : letters[p_ix],
             "position" : random_positions[p_ix],
+            "radius" : ReaddySimpleProcess.radius_for_ix(p_ix),
         }
     return {"monomers" : result}
 
@@ -201,11 +217,15 @@ def run_readdy_simple_process():
     composite = readdy_process.generate()
     initial_state = random_initial_state(readdy_process.parameters)
     
-    sim = Engine(composite=composite, initial_state=initial_state)
+    sim = Engine(
+        composite=composite, 
+        initial_state=initial_state,
+        emitter="simularium",
+    )
     
-    sim.update(10)  # ns
+    sim.update(200000.)  # ns
     
-    output = sim.emitter.get_timeseries()
+    output = sim.emitter.get_data()
     return output
 
 

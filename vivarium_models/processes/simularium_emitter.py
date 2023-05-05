@@ -10,6 +10,8 @@ from simulariumio import (
     AgentData,
     MetaData,
     UnitData,
+    DisplayData,
+    DISPLAY_TYPE,
 )
 
 
@@ -35,11 +37,12 @@ class SimulariumEmitter(Emitter):
                 key: value for key, value in emit_data.items() if key not in ["time"]
             }
 
-    def get_simularium_fibers(self, time, fibers, actin_radius, trajectory):
+    def get_simularium_fibers(self, time, fibers, trajectory):
         """
         Shape fiber state data into Simularium fiber agents
         """
         n_agents = 0
+        actin_radius = 3.0
         time_index = len(trajectory["times"])
         trajectory["times"].append(time)
         trajectory["unique_ids"].append([])
@@ -59,7 +62,7 @@ class SimulariumEmitter(Emitter):
         trajectory["radii"].append(n_agents * [actin_radius])
         return trajectory
 
-    def get_simularium_monomers(self, time, monomers, actin_radius, trajectory):
+    def get_simularium_monomers(self, time, monomers, trajectory):
         """
         Shape monomer state data into Simularium agents
         """
@@ -68,13 +71,21 @@ class SimulariumEmitter(Emitter):
         trajectory["unique_ids"].append([])
         trajectory["type_names"].append([])
         trajectory["positions"].append([])
+        trajectory["radii"].append([])
         edge_ids = []
         edge_positions = []
         for particle_id in monomers["particles"]:
             particle = monomers["particles"][particle_id]
             trajectory["unique_ids"][time_index].append(int(particle_id))
             trajectory["type_names"][time_index].append(particle["type_name"])
+            # HACK needed until simulariumio default display data fix
+            if particle["type_name"] not in trajectory["display_data"]:
+                trajectory["display_data"][particle["type_name"]] = DisplayData(
+                    name=particle["type_name"],
+                    display_type=DISPLAY_TYPE.SPHERE,
+                )
             trajectory["positions"][time_index].append(np.array(particle["position"]))
+            trajectory["radii"][time_index].append(particle["radius"])
             # visualize edges between particles
             for neighbor_id in particle["neighbor_ids"]:
                 neighbor_id_str = str(neighbor_id)
@@ -101,7 +112,6 @@ class SimulariumEmitter(Emitter):
         trajectory["unique_ids"][time_index] += [1000 + i for i in range(n_edges)]
         trajectory["type_names"][time_index] += ["edge" for edge in range(n_edges)]
         trajectory["positions"][time_index] += n_edges * [[0.0, 0.0, 0.0]]
-        trajectory["radii"].append(n_agents * [actin_radius])
         trajectory["radii"][time_index] += n_edges * [1.0]
         trajectory["n_subpoints"].append(n_agents * [0])
         trajectory["n_subpoints"][time_index] += n_edges * [2]
@@ -187,6 +197,7 @@ class SimulariumEmitter(Emitter):
             ).to_numpy(dtype=int),
             subpoints=scale_factor
             * SimulariumEmitter.get_subpoints_numpy_array(trajectory),
+            display_data=trajectory["display_data"],
         )
 
     @staticmethod
@@ -212,30 +223,10 @@ class SimulariumEmitter(Emitter):
             )
         )
 
-    @staticmethod
-    def get_active_simulator(choices) -> str:
-        """
-        Use choices from state to determine which simulator ran
-        """
-        medyan_active = "medyan_active" in choices and choices["medyan_active"]
-        readdy_active = "readdy_active" in choices and choices["readdy_active"]
-        cytosim_active = "cytosim_active" in choices and choices["cytosim_active"]
-
-        if medyan_active and not readdy_active and not cytosim_active:
-            return "medyan"
-        elif readdy_active and not medyan_active and not cytosim_active:
-            return "readdy"
-        elif cytosim_active and not medyan_active and not readdy_active:
-            return "cytosim"
-
     def get_data(self) -> dict:
         """
         Save the accumulated timeseries history of "emitted" data to file
         """
-        if "readdy_actin" in self.configuration_data:
-            actin_radius = self.configuration_data["readdy_actin"]["actin_radius"]
-        else:
-            actin_radius = 3.0  # TODO add to MEDYAN config
         box_dimensions = None
         trajectory = {
             "times": [],
@@ -247,66 +238,19 @@ class SimulariumEmitter(Emitter):
             "radii": [],
             "n_subpoints": [],
             "subpoints": [],
+            "display_data": {},
         }
         times = list(self.saved_data.keys())
         times.sort()
-        vizualize_time_index = 0
         for time, state in self.saved_data.items():
-            print(f"time = {time}")
-            index = times.index(time)
-            prev_simulator = "none"
-            if index > 0:
-                prev_simulator = SimulariumEmitter.get_active_simulator(
-                    self.saved_data[times[index - 1]]["choices"]
-                )
-            current_simulator = SimulariumEmitter.get_active_simulator(state["choices"])
-            print(f"prev_simulator = {prev_simulator}")
-            print(f"current_simulator = {current_simulator}")
-            """visualize the first frame in the simulator that started first
-            then subsequent frames according the the simulator that ran 
-            right before that time point"""
-            if prev_simulator == "none":
-                if current_simulator == "medyan" or current_simulator == "cytosim":
-                    print(f"  visualize current {current_simulator}")
-                    if box_dimensions is None:
-                        box_dimensions = np.array(state["fibers_box_extent"])
-                    trajectory = self.get_simularium_fibers(
-                        vizualize_time_index,
-                        state["fibers"],
-                        actin_radius,
-                        trajectory,
-                    )
-                    vizualize_time_index += 1
-                if current_simulator == "readdy":
-                    print("  visualize current readdy")
-                    trajectory = self.get_simularium_monomers(
-                        vizualize_time_index,
-                        state["monomers"],
-                        actin_radius,
-                        trajectory,
-                    )
-                    vizualize_time_index += 1
-            elif prev_simulator == "medyan" or prev_simulator == "cytosim":
-                print(f"  visualize previous {prev_simulator}")
-                if box_dimensions is None:
-                    box_dimensions = np.array(state["fibers_box_extent"])
-                trajectory = self.get_simularium_fibers(
-                    vizualize_time_index,
-                    state["fibers"],
-                    actin_radius,
-                    trajectory,
-                )
-                vizualize_time_index += 1
-            elif prev_simulator == "readdy":
-                print("  visualize readdy")
-                trajectory = self.get_simularium_monomers(
-                    vizualize_time_index,
-                    state["monomers"],
-                    actin_radius,
-                    trajectory,
-                )
-                vizualize_time_index += 1
+            if box_dimensions is None:
+                box_dimensions = np.array([state["monomers"]["box_size"]] * 3)
+            trajectory = self.get_simularium_monomers(
+                time,
+                state["monomers"],
+                trajectory,
+            )
         simularium_converter = SimulariumEmitter.get_simularium_converter(
             trajectory, box_dimensions, 0.1
         )
-        simularium_converter.save("out/actin_test")
+        simularium_converter.save("out/test")        
