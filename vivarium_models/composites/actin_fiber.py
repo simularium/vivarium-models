@@ -81,7 +81,7 @@ class ActinFiber(Composer):
         }
 
 
-def test_actin_fiber():
+def run_actin_fiber():
     initial_state = centered_initial_fibers()
     initial_state["choices"] = {"medyan_active": True, "readdy_active": False}
     medyan_config = {
@@ -100,8 +100,8 @@ def test_actin_fiber():
         emit_processes=True,
     )
     engine.update(5)
-    engine.emitter.get_data()
+    return engine.emitter.get_data()
 
 
 if __name__ == "__main__":
-    test_actin_fiber()
+    run_actin_fiber()

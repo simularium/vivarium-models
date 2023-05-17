@@ -48,13 +48,8 @@ class AnchorMover(Step):
         anchor_moved = anchor + np.array(self.parameters["movement_vector"])
         points[self.parameters["point_index"]] = anchor_moved
 
-        return {
-            "fibers": {
-                self.parameters["fiber_id"]: {
-                    "points": points
-                }
-            }
-        }
+        return {"fibers": {self.parameters["fiber_id"]: {"points": points}}}
+
 
 class AnchorMoverCytosim(CytosimProcess):
     new_defaults = {
@@ -76,13 +71,12 @@ class AnchorMoverCytosim(CytosimProcess):
         update = super().next_update(timestep, state)
         return update
 
+
 class BucklingSqueeze(Composer):
     defaults = {
-        "periodic_event": {
-            "periods": [1.0]
-        },
+        "periodic_event": {"periods": [1.0]},
         "cytosim_anchor_mover_squeeze": {
-            'model_name': 'buckling_squeeze',
+            "model_name": "buckling_squeeze",
             "movement_vector": [5, 0, 0],
             "fiber_id": "1",
         },
@@ -102,13 +96,15 @@ class BucklingSqueeze(Composer):
         periodic_event = PeriodicEvent(config["periodic_event"])
         # cytosim_squeeze = CytosimProcess(config['cytosim_squeeze'])
         # anchor_mover = AnchorMover(config["anchor_mover"])
-        cytosim_anchor_mover_squeeze = AnchorMoverCytosim(config["cytosim_anchor_mover_squeeze"])
+        cytosim_anchor_mover_squeeze = AnchorMoverCytosim(
+            config["cytosim_anchor_mover_squeeze"]
+        )
 
         return {
             "periodic_event": periodic_event,
             # 'cytosim_squeeze': cytosim_squeeze,
             # "anchor_mover": anchor_mover,
-            "cytosim_anchor_mover_squeeze": cytosim_anchor_mover_squeeze
+            "cytosim_anchor_mover_squeeze": cytosim_anchor_mover_squeeze,
         }
 
     def generate_topology(self, config):
@@ -131,16 +127,17 @@ class BucklingSqueeze(Composer):
         }
 
 
-def test_buckling_squeeze():
+def run_buckling_squeeze():
     initial_state = single_fiber()
-    initial_state['choices'] = 'N/A'
+    initial_state["choices"] = "N/A"
     cytosim_config = {
-        'actin_segmentation': 0.005,
+        "actin_segmentation": 0.005,
         "timestep": 5,
-        "template_directory": "vivarium_models/templates/"}
+        "template_directory": "vivarium_models/templates/",
+    }
     buckling_squeeze_config = {
         # "cytosim_squeeze": cytosim_config
-         "cytosim_anchor_mover_squeeze": cytosim_config
+        "cytosim_anchor_mover_squeeze": cytosim_config
     }
     buckling_squeeze = BucklingSqueeze(buckling_squeeze_config)
     composite = buckling_squeeze.generate()
@@ -153,11 +150,8 @@ def test_buckling_squeeze():
         emit_processes=True,
     )
     engine.update(100)
-
-    output = engine.emitter.get_data()
-    # import ipdb; ipdb.set_trace()
-
+    return engine.emitter.get_data()
 
 
 if __name__ == "__main__":
-    test_buckling_squeeze()
+    run_buckling_squeeze()

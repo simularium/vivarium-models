@@ -1,7 +1,7 @@
 import numpy as np
 
 from vivarium.core.process import Deriver
-from vivarium.core.engine import Engine, pf
+from vivarium.core.engine import Engine
 
 from simularium_readdy_models.actin import ActinGenerator, ActinTestData, FiberData
 from ..util import create_monomer_update
@@ -114,7 +114,7 @@ def get_initial_fiber_data():
     return fibers_dict
 
 
-def test_fiber_to_monomer():
+def run_fiber_to_monomer():
     fiber_data = get_initial_fiber_data()
     fiber_to_monomer = FiberToMonomer()
 
@@ -132,10 +132,8 @@ def test_fiber_to_monomer():
     )
 
     engine.update(1.0)
-
-    output = engine.emitter.get_data()
-    print(pf(output))
+    return engine.emitter.get_data()
 
 
 if __name__ == "__main__":
-    test_fiber_to_monomer()
+    run_fiber_to_monomer()
