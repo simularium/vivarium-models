@@ -61,7 +61,7 @@ class FilamentAlternatives(Composer):
         }
 
 
-def test_filament_alternatives():
+def run_filament_alternatives():
     initial_state = centered_initial_fibers()
     initial_state["choices"] = {"medyan_active": False, "cytosim_active": True}
     medyan_config = {
@@ -87,8 +87,8 @@ def test_filament_alternatives():
         emit_processes=True,
     )
     engine.update(6)
-    engine.emitter.get_data()
+    return engine.emitter.get_data()
 
 
 if __name__ == "__main__":
-    test_filament_alternatives()
+    run_filament_alternatives()

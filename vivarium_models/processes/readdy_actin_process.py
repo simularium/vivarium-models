@@ -1,7 +1,7 @@
 import numpy as np
 
 from vivarium.core.process import Process
-from vivarium.core.engine import Engine, pf
+from vivarium.core.engine import Engine
 from vivarium.core.control import run_library_cli
 
 from tqdm import tqdm
@@ -12,7 +12,8 @@ from simularium_readdy_models.actin import (
     ActinAnalyzer,
 )
 from simularium_readdy_models import ReaddyUtil
-from vivarium_models.util import create_monomer_update, format_monomer_results, monomer_ports_schema
+from vivarium_readdy import create_monomer_update, monomer_ports_schema
+from ..util import format_monomer_results
 from vivarium_models.library.scan import Scan
 
 NAME = "ReaDDy_actin"
@@ -162,7 +163,7 @@ def get_monomer_data():
     return {"monomers": monomer_data}
 
 
-def test_readdy_actin_process():
+def run_readdy_actin_process():
     monomer_data = get_monomer_data()
     readdy_actin_process = ReaddyActinProcess()
 
@@ -179,12 +180,10 @@ def test_readdy_actin_process():
     )
 
     engine.update(0.0000001)  # 1e3 steps
-
-    output = engine.emitter.get_data()
-    print(pf(output))
+    return engine.emitter.get_data()
 
 
-def test_scan_readdy():
+def run_scan_readdy():
     monomer_data = get_monomer_data()
 
     parameters = {
@@ -308,10 +307,10 @@ def test_scan_readdy():
 
     scan = Scan(parameters, ReaddyActinProcess, 0.0000001, metrics=metrics)
     results = scan.run_scan()
-    print(results)
+    return results
 
 
-library = {"0": test_readdy_actin_process, "1": test_scan_readdy}
+library = {"0": run_readdy_actin_process, "1": run_scan_readdy}
 
 
 if __name__ == "__main__":

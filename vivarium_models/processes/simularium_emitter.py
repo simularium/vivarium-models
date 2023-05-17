@@ -1,4 +1,4 @@
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from vivarium.core.emitter import Emitter
 
@@ -19,7 +19,7 @@ class SimulariumEmitter(Emitter):
     def __init__(self, config: Dict[str, str]) -> None:
         super().__init__(config)
         self.configuration_data = None
-        self.saved_data: Dict[float, Dict[str, Any]] = {}
+        self.saved_data: List[Dict[str, Any]] = []
 
     def emit(self, data: Dict[str, Any]) -> None:
         """
@@ -31,11 +31,7 @@ class SimulariumEmitter(Emitter):
             self.configuration_data = data["data"]
             assert "processes" in self.configuration_data, "please emit processes"
         if data["table"] == "history":
-            emit_data = data["data"]
-            time = emit_data["time"]
-            self.saved_data[time] = {
-                key: value for key, value in emit_data.items() if key not in ["time"]
-            }
+            self.saved_data.append(data["data"])
 
     def get_simularium_fibers(self, time, fibers, trajectory):
         """
@@ -177,7 +173,7 @@ class SimulariumEmitter(Emitter):
         Shape a dictionary of jagged lists into a Simularium AgentData object
         """
         return AgentData(
-            times=np.arange(len(trajectory["times"])),
+            times=trajectory["times"],
             n_agents=np.array(trajectory["n_agents"]),
             viz_types=SimulariumEmitter.fill_df(
                 pd.DataFrame(trajectory["viz_types"]), 1000.0
@@ -202,13 +198,12 @@ class SimulariumEmitter(Emitter):
 
     @staticmethod
     def get_simularium_converter(
-        trajectory, box_dimensions, scale_factor
+        trajectory, box_dimensions, scale_factor, time_units, spatial_units
     ) -> TrajectoryConverter:
         """
         Shape a dictionary of jagged lists into a Simularium TrajectoryData object
         and provide it to a TrajectoryConverter for conversion
         """
-        spatial_units = UnitData("nm")
         spatial_units.multiply(1 / scale_factor)
         return TrajectoryConverter(
             TrajectoryData(
@@ -218,7 +213,7 @@ class SimulariumEmitter(Emitter):
                 agent_data=SimulariumEmitter.get_agent_data_from_jagged_lists(
                     trajectory, scale_factor
                 ),
-                time_units=UnitData("count"),
+                time_units=time_units,
                 spatial_units=spatial_units,
             )
         )
@@ -227,7 +222,9 @@ class SimulariumEmitter(Emitter):
         """
         Save the accumulated timeseries history of "emitted" data to file
         """
-        box_dimensions = None
+        box_size = None
+        time_units = None
+        spatial_units = None
         trajectory = {
             "times": [],
             "n_agents": [],
@@ -240,17 +237,20 @@ class SimulariumEmitter(Emitter):
             "subpoints": [],
             "display_data": {},
         }
-        times = list(self.saved_data.keys())
-        times.sort()
-        for time, state in self.saved_data.items():
-            if box_dimensions is None:
-                box_dimensions = np.array([state["monomers"]["box_size"]] * 3)
+        for state in self.saved_data:
+            if box_size is None:
+                box_size = state["monomers"]["box_size"]
+            if time_units is None:
+                time_units = state["time_units"]
+            if spatial_units is None:
+                spatial_units = state["spatial_units"]
             trajectory = self.get_simularium_monomers(
-                time,
+                state["time"],
                 state["monomers"],
                 trajectory,
             )
         simularium_converter = SimulariumEmitter.get_simularium_converter(
-            trajectory, box_dimensions, 0.1
+            trajectory, box_size, 0.1, UnitData(time_units), UnitData(spatial_units)
         )
-        simularium_converter.save("out/test")        
+        simularium_converter.save("out/test")
+        return {"simularium_converter": simularium_converter}

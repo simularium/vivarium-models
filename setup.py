@@ -41,8 +41,9 @@ requirements = [
     "vivarium-core",
     "vivarium_medyan @ git+https://github.com/vivarium-collective/vivarium-MEDYAN.git",
     "vivarium_cytosim @ git+https://github.com/vivarium-collective/vivarium-cytosim.git",
+    "vivarium_readdy @ git+https://github.com/vivarium-collective/vivarium-ReaDDy.git@monomers-ports",
     "simularium_readdy_models @ git+https://github.com/simularium/readdy-models.git",
-    "simulariumio>=1.5.0",
+    "simulariumio",
 ]
 
 extra_requirements = {

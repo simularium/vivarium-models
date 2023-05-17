@@ -228,13 +228,14 @@ def centered_initial_fibers():
             )
     return result
 
+
 def map_fibers(f, initial_fibers):
     result = copy.deepcopy(initial_fibers)
     for fiber_id in initial_fibers["fibers"]:
         fiber_points = initial_fibers["fibers"][fiber_id]["points"]
         for point_index in range(len(fiber_points)):
-            result["fibers"][fiber_id]["points"][point_index] = (
-                f(fiber_points[point_index], initial_fibers["fibers_box_extent"])
+            result["fibers"][fiber_id]["points"][point_index] = f(
+                fiber_points[point_index], initial_fibers["fibers_box_extent"]
             )
     return result
 
@@ -243,7 +244,7 @@ def single_fiber():
     fiber = {
         "fibers_box_extent": np.array([4000.0, 2000.0, 2000.0]),
         "fibers": {
-            '1': {
+            "1": {
                 "type_name": "Actin-Polymer",
                 "points": [
                     np.array([-0.250, 0.000, 0.000]),
@@ -297,14 +298,15 @@ def single_fiber():
                     np.array([0.230, 0.000, 0.000]),
                     np.array([0.240, 0.000, 0.000]),
                     np.array([0.250, 0.000, 0.000]),
-                ]}}}
+                ],
+            }
+        },
+    }
 
-    scaled = map_fibers(
-        lambda fiber_points, box_extent: fiber_points * 1000,
-        fiber)
+    scaled = map_fibers(lambda fiber_points, box_extent: fiber_points * 1000, fiber)
 
     return scaled
 
-if __name__ == '__main__':
-    fiber = single_fiber()
-    import ipdb; ipdb.set_trace()
+
+if __name__ == "__main__":
+    single_fiber()
