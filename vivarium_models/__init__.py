@@ -14,7 +14,8 @@ def get_module_version():
 
 
 from .processes import ReaddyActinProcess  # noqa: F401
-from vivarium.core.registry import emitter_registry  # noqa: F401
 from .processes.simularium_emitter import SimulariumEmitter  # noqa: F401
+
+from vivarium.core.registry import emitter_registry
 
 emitter_registry.register("simularium", SimulariumEmitter)
