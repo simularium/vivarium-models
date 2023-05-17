@@ -1,4 +1,5 @@
 import numpy as np
+import copy
 
 initial_fibers = {
     "fibers_box_extent": np.array([4000.0, 2000.0, 2000.0]),
@@ -226,3 +227,84 @@ def centered_initial_fibers():
                 fiber_points[point_index] - 0.5 * initial_fibers["fibers_box_extent"]
             )
     return result
+
+def map_fibers(f, initial_fibers):
+    result = copy.deepcopy(initial_fibers)
+    for fiber_id in initial_fibers["fibers"]:
+        fiber_points = initial_fibers["fibers"][fiber_id]["points"]
+        for point_index in range(len(fiber_points)):
+            result["fibers"][fiber_id]["points"][point_index] = (
+                f(fiber_points[point_index], initial_fibers["fibers_box_extent"])
+            )
+    return result
+
+
+def single_fiber():
+    fiber = {
+        "fibers_box_extent": np.array([4000.0, 2000.0, 2000.0]),
+        "fibers": {
+            '1': {
+                "type_name": "Actin-Polymer",
+                "points": [
+                    np.array([-0.250, 0.000, 0.000]),
+                    np.array([-0.240, 0.000, 0.000]),
+                    np.array([-0.230, 0.000, 0.000]),
+                    np.array([-0.220, 0.000, 0.000]),
+                    np.array([-0.210, 0.000, 0.000]),
+                    np.array([-0.200, 0.000, 0.000]),
+                    np.array([-0.190, 0.000, 0.000]),
+                    np.array([-0.180, 0.000, 0.000]),
+                    np.array([-0.170, 0.000, 0.000]),
+                    np.array([-0.160, 0.000, 0.000]),
+                    np.array([-0.150, 0.000, 0.000]),
+                    np.array([-0.140, 0.000, 0.000]),
+                    np.array([-0.130, 0.000, 0.000]),
+                    np.array([-0.120, 0.000, 0.000]),
+                    np.array([-0.110, 0.000, 0.000]),
+                    np.array([-0.100, 0.000, 0.000]),
+                    np.array([-0.090, 0.000, 0.000]),
+                    np.array([-0.080, 0.000, 0.000]),
+                    np.array([-0.070, 0.000, 0.000]),
+                    np.array([-0.060, 0.000, 0.000]),
+                    np.array([-0.050, 0.000, 0.000]),
+                    np.array([-0.040, 0.000, 0.000]),
+                    np.array([-0.030, 0.000, 0.000]),
+                    np.array([-0.020, 0.000, 0.000]),
+                    np.array([-0.010, 0.000, 0.000]),
+                    np.array([0.000, 0.000, 0.000]),
+                    np.array([0.010, 0.000, 0.000]),
+                    np.array([0.020, 0.000, 0.000]),
+                    np.array([0.030, 0.000, 0.000]),
+                    np.array([0.040, 0.000, 0.000]),
+                    np.array([0.050, 0.000, 0.000]),
+                    np.array([0.060, 0.000, 0.000]),
+                    np.array([0.070, 0.000, 0.000]),
+                    np.array([0.080, 0.000, 0.000]),
+                    np.array([0.090, 0.000, 0.000]),
+                    np.array([0.100, 0.000, 0.000]),
+                    np.array([0.110, 0.000, 0.000]),
+                    np.array([0.120, 0.000, 0.000]),
+                    np.array([0.130, 0.000, 0.000]),
+                    np.array([0.140, 0.000, 0.000]),
+                    np.array([0.150, 0.000, 0.000]),
+                    np.array([0.160, 0.000, 0.000]),
+                    np.array([0.170, 0.000, 0.000]),
+                    np.array([0.180, 0.000, 0.000]),
+                    np.array([0.190, 0.000, 0.000]),
+                    np.array([0.200, 0.000, 0.000]),
+                    np.array([0.210, 0.000, 0.000]),
+                    np.array([0.220, 0.000, 0.000]),
+                    np.array([0.230, 0.000, 0.000]),
+                    np.array([0.240, 0.000, 0.000]),
+                    np.array([0.250, 0.000, 0.000]),
+                ]}}}
+
+    scaled = map_fibers(
+        lambda fiber_points, box_extent: fiber_points * 1000,
+        fiber)
+
+    return scaled
+
+if __name__ == '__main__':
+    fiber = single_fiber()
+    import ipdb; ipdb.set_trace()

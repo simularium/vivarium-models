@@ -309,4 +309,4 @@ class SimulariumEmitter(Emitter):
         simularium_converter = SimulariumEmitter.get_simularium_converter(
             trajectory, box_dimensions, 0.1
         )
-        simularium_converter.write_JSON("out/actin_test")
+        simularium_converter.save("out/actin_test")
