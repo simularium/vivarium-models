@@ -3,7 +3,6 @@ from typing import Any, Dict
 from vivarium.core.emitter import Emitter
 
 import numpy as np
-import pandas as pd
 from simulariumio import (
     TrajectoryConverter,
     TrajectoryData,
